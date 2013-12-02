@@ -1,8 +1,9 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\KinectScripts\AvatarController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Toon Character Pack\Scripts\BotControlScript.cs">
     <Files>
-      <File FileName="Assets\KinectScripts\AvatarController.cs" Line="107" Column="23" />
+      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="85" Column="13" />
+      <File FileName="Assets\HelloWorld1.cs" Line="19" Column="42" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

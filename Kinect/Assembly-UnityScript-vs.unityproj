@@ -45,6 +45,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\HelloWorld.js" />
+     <Compile Include="Assets\Toon Character Pack\Scripts\ClearRagdolls.js" />
+     <Compile Include="Assets\Toon Character Pack\Scripts\DecaptitatedHead.js" />
+     <Compile Include="Assets\Toon Character Pack\Scripts\GameObjectSpawner_Characters.js" />
+     <Compile Include="Assets\Toon Character Pack\Scripts\ToonCharacterController.js" />
+     <None Include="Assets\Toon Character Pack\Shaders\Toony-Transparent.shader" />
+     <None Include="Assets\Toon Character Pack\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Toon Character Pack\Shaders\Projector Multiply.shader" />
+     <None Include="Assets\Toon Character Pack\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Toon Character Pack\Shaders\Toony-LightedOutline.shader" />
+     <None Include="Assets\Toon Character Pack\Shaders\Toony-Lighted.shader" />
+     <None Include="Assets\Toon Character Pack\_Toon Character Pack.txt" />
+     <None Include="Assets\Toon Character Pack\Shaders\Unlit-Alpha.shader" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

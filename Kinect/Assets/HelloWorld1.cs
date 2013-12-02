@@ -37,12 +37,11 @@ public class HelloWorld1 : MonoBehaviour {
 		
 		float Triggers = Input.GetAxis("Triggers");
 		
-		x = x*Time.deltaTime*speed;
-		y = y*Time.deltaTime*speed;
 		
-	player.transform.position += new Vector3(x*0.1f,0.0f,0.0f);
+
+	  //player.rigidbody.velocity = new Vector3(-x*1.0f,0,-y*1.0f);
 	
-		if (ButtonA != false)
+		/*if (ButtonA != false)
 			Debug.Log("ButtonA is " + ButtonA);
 		if (ButtonB != false)
 			Debug.Log("ButtonB is " + ButtonB);
@@ -76,6 +75,6 @@ public class HelloWorld1 : MonoBehaviour {
 			Debug.Log("Triggers is " + Triggers);
 		
 	//	transform.Translate(x,y,0.0f);
-		//Debug.Log(x + "  hi  " + y + "  hi  " + ButtonA);
+		//Debug.Log(x + "  hi  " + y + "  hi  " + ButtonA);*/
 	}
 }
