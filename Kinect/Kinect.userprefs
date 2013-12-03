@@ -1,10 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\KinectScripts\AvatarController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Toon Character Pack\Scripts\BotControlScript.cs">
     <Files>
-      <File FileName="Assets\KinectScripts\AvatarController.cs" Line="107" Column="73" />
-      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="1" Column="1" />
-      <File FileName="Assets\HelloWorld1.cs" Line="1" Column="1" />
+      <File FileName="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" Line="278" Column="71" />
+      <File FileName="Assets\KinectScripts\KinectManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\KinectScripts\AvatarController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="109" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

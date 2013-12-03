@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-
+using System.Runtime.InteropServices;
 public class HelloWorld1 : MonoBehaviour {
 
 	public GameObject player;
@@ -41,7 +41,7 @@ public class HelloWorld1 : MonoBehaviour {
 
 	  //player.rigidbody.velocity = new Vector3(-x*1.0f,0,-y*1.0f);
 	
-		/*if (ButtonA != false)
+		if (ButtonA != false)
 			Debug.Log("ButtonA is " + ButtonA);
 		if (ButtonB != false)
 			Debug.Log("ButtonB is " + ButtonB);
@@ -71,8 +71,8 @@ public class HelloWorld1 : MonoBehaviour {
 		if (JoystickRightVertical != 0)
 			Debug.Log("JoystickRightVertical is " + JoystickRightVertical);
 		
-		if (Triggers != 0)
-			Debug.Log("Triggers is " + Triggers);
+		/*if (Triggers != 0)
+			Debug.Log("Triggers is " + Triggers);*/
 		
 	//	transform.Translate(x,y,0.0f);
 		//Debug.Log(x + "  hi  " + y + "  hi  " + ButtonA);*/

@@ -1,12 +1,77 @@
 using UnityEngine;
 using System.Collections;
+using System.Runtime.InteropServices;
 
 // Require these components when using this script
 [RequireComponent(typeof (Animator))]
 [RequireComponent(typeof (CapsuleCollider))]
 [RequireComponent(typeof (Rigidbody))]
+
+
 public class BotControlScript : MonoBehaviour
 {
+	[DllImport ("UniWii")]
+	private static extern void wiimote_start();
+
+	[DllImport ("UniWii")]
+	private static extern void wiimote_stop();
+
+	[DllImport ("UniWii")]
+	private static extern int wiimote_count();
+
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getAccX(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getAccY(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getAccZ(int which);
+
+	[DllImport ("UniWii")]
+	private static extern float wiimote_getIrX(int which);
+	[DllImport ("UniWii")]
+	private static extern float wiimote_getIrY(int which);
+	[DllImport ("UniWii")]
+	private static extern float wiimote_getRoll(int which);
+	[DllImport ("UniWii")]
+	private static extern float wiimote_getPitch(int which);
+	[DllImport ("UniWii")]
+	private static extern float wiimote_getYaw(int which);
+
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonA(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonB(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonUp(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonLeft(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonRight(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonDown(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButton1(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButton2(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonPlus(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonMinus(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonHome(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getNunchuckStickX(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getNunchuckStickY(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getNunchuckAccX(int which);
+	[DllImport ("UniWii")]
+	private static extern byte wiimote_getNunchuckAccZ(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonNunchuckC(int which);
+	[DllImport ("UniWii")]
+	private static extern bool wiimote_getButtonNunchuckZ(int which);
+	
 	
 	public float animSpeed = 1.5f;				// a public setting for overall animator animation speed
 	public float lookSmoother = 3f;				// a smoothing setting for camera motion
@@ -37,9 +102,10 @@ public class BotControlScript : MonoBehaviour
 		col = gameObject.GetComponent<CapsuleCollider>();				
 		if(anim.layerCount ==2)
 			anim.SetLayerWeight(1, 1);
-		
+		wiimote_start();
 		 KinectController = GetComponent<AvatarController>();
 		AnimationController = GetComponent<Animator>();
+		
 		
 	}
 	
@@ -47,21 +113,40 @@ public class BotControlScript : MonoBehaviour
 	void FixedUpdate ()
 	{
 		float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
+		
+		if(h==0)h= (wiimote_getNunchuckStickX(0)-127)/127.0f;
 		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
 		
 		
-		if(h>0.3f)
+		if(h>0.3f||wiimote_getButtonRight(0))
 		{
 			offset.transform.rotation = Quaternion.Euler(0,90,0);
-			anim.SetFloat("Speed", (h-0.3f)*0.7f);
+			
+			if(h>0.3f)
+			{
+				anim.SetFloat("Speed", (h-0.3f)*0.7f);
+			}
+			else if(wiimote_getButtonRight(0))
+			{
+				anim.SetFloat("Speed", 0.7f);
+			}
 			
 			AnimationController.enabled = true;
 			KinectController.enabled = false;
 		}
-		else if(h<-0.3f)
+		else if(h<-0.3f||wiimote_getButtonLeft(0))
 		{
 			offset.transform.rotation = Quaternion.Euler(0,-90,0);
+			
+			if(h<-0.3f)
+			{
 			anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
+			}
+			else if(wiimote_getButtonLeft(0))
+			{
+				anim.SetFloat("Speed", 0.7f);
+			}
+				
 			
 			AnimationController.enabled = true;
 			KinectController.enabled = false;
@@ -75,7 +160,7 @@ public class BotControlScript : MonoBehaviour
 			KinectController.enabled = true;
 		}
 		
-		if(Input.GetButton("ButtonA"))
+		if(Input.GetButton("ButtonA")||wiimote_getButtonA(0))
 		{
 			anim.SetBool("Jump", true);
 			
@@ -84,6 +169,8 @@ public class BotControlScript : MonoBehaviour
 			
 			
 		}
+
+		
 		
 								// set our animator's float parameter 'Speed' equal to the vertical input axis				
 		anim.SetFloat("Direction", 0); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		

@@ -56,6 +56,7 @@
      <Compile Include="Assets\KinectScripts\Filters\TrackingStateFilter.cs" />
      <Compile Include="Assets\KinectScripts\KinectManager.cs" />
      <Compile Include="Assets\KinectScripts\KinectWrapper.cs" />
+     <Compile Include="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />
@@ -66,7 +67,11 @@
      <None Include="Assets\Toon Character Pack\Shaders\Toony-LightedOutline.shader" />
      <None Include="Assets\Toon Character Pack\Shaders\Toony-Lighted.shader" />
      <None Include="Assets\Toon Character Pack\_Toon Character Pack.txt" />
+     <None Include="Assets\Packages\UniWii\Visuals\3D Assets\wiimote_redux.txt" />
      <None Include="Assets\Toon Character Pack\Shaders\Unlit-Alpha.shader" />
+ <Reference Include="UniWii">
+ <HintPath>Assets\Plugins\UniWii.dll</HintPath>
+ </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
