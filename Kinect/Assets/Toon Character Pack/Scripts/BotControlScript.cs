@@ -25,6 +25,10 @@ public class BotControlScript : MonoBehaviour
 	static int rollState = Animator.StringToHash("Base Layer.Roll");
 	static int waveState = Animator.StringToHash("Layer2.Wave");
 	
+	public GameObject offset;
+	
+	AvatarController KinectController;
+	Animator AnimationController;
 
 	void Start ()
 	{
@@ -33,6 +37,10 @@ public class BotControlScript : MonoBehaviour
 		col = gameObject.GetComponent<CapsuleCollider>();				
 		if(anim.layerCount ==2)
 			anim.SetLayerWeight(1, 1);
+		
+		 KinectController = GetComponent<AvatarController>();
+		AnimationController = GetComponent<Animator>();
+		
 	}
 	
 	
@@ -44,23 +52,37 @@ public class BotControlScript : MonoBehaviour
 		
 		if(h>0.3f)
 		{
-			gameObject.transform.rotation = Quaternion.Euler(0,90,0);
-			anim.SetFloat("Speed", (h-0.3f)*0.7f);	
+			offset.transform.rotation = Quaternion.Euler(0,90,0);
+			anim.SetFloat("Speed", (h-0.3f)*0.7f);
+			
+			AnimationController.enabled = true;
+			KinectController.enabled = false;
 		}
 		else if(h<-0.3f)
 		{
-			gameObject.transform.rotation = Quaternion.Euler(0,-90,0);
+			offset.transform.rotation = Quaternion.Euler(0,-90,0);
 			anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
+			
+			AnimationController.enabled = true;
+			KinectController.enabled = false;
 		}
 		else
 		{
-			gameObject.transform.rotation = Quaternion.Euler(0,180,0);
+			offset.transform.rotation = Quaternion.Euler(0,180,0);
 			anim.SetFloat("Speed", 0);	
+			
+					AnimationController.enabled = false;
+			KinectController.enabled = true;
 		}
 		
 		if(Input.GetButton("ButtonA"))
 		{
 			anim.SetBool("Jump", true);
+			
+				AnimationController.enabled = true;
+			KinectController.enabled = false;
+			
+			
 		}
 		
 								// set our animator's float parameter 'Speed' equal to the vertical input axis				
