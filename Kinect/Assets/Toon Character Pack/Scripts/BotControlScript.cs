@@ -10,6 +10,8 @@ using System.Runtime.InteropServices;
 
 public class BotControlScript : MonoBehaviour
 {
+	int moveSpeed = 5;
+	
 	[DllImport ("UniWii")]
 	private static extern void wiimote_start();
 
@@ -152,14 +154,14 @@ public class BotControlScript : MonoBehaviour
 			if(h>0.3f)
 			{
 				anim.SetFloat("Speed", (h-0.3f)*0.7f);
-					rigidbody.velocity = new Vector3(0.7f*4,rigidbody.velocity.y,0);
+					rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
 					moving = true;
 				
 			}
 			else if(wiimote_getButtonRight(0))
 			{
 				anim.SetFloat("Speed", 0.7f);
-					rigidbody.velocity = new Vector3(0.7f*4,rigidbody.velocity.y,0);
+					rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
 					moving = true;
 			}
 			
@@ -173,13 +175,13 @@ public class BotControlScript : MonoBehaviour
 			if(h<-0.3f)
 			{
 			anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
-					rigidbody.velocity = new Vector3(-0.7f*4,rigidbody.velocity.y,0);
+					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
 					moving =true;
 			}
 			else if(wiimote_getButtonLeft(0))
 			{
 				anim.SetFloat("Speed", 0.7f);
-					rigidbody.velocity = new Vector3(-0.7f*4,rigidbody.velocity.y,0);
+					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
 					moving = true;
 			}
 				

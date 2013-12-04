@@ -44,6 +44,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\CameraManager.cs" />
+     <Compile Include="Assets\Campfire Pack\Script\SwitchView.cs" />
+     <Compile Include="Assets\CharacterPoseConnect.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
