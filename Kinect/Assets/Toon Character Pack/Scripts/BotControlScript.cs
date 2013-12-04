@@ -90,7 +90,11 @@ public class BotControlScript : MonoBehaviour
 	static int rollState = Animator.StringToHash("Base Layer.Roll");
 	static int waveState = Animator.StringToHash("Layer2.Wave");
 	
+	bool jumping = false;
+	
 	public GameObject offset;
+	
+	 
 	
 	AvatarController KinectController;
 	Animator AnimationController;
@@ -106,17 +110,40 @@ public class BotControlScript : MonoBehaviour
 		 KinectController = GetComponent<AvatarController>();
 		AnimationController = GetComponent<Animator>();
 		
+		rigidbody.isKinematic = false;
+		rigidbody.useGravity = true;
 		
 	}
 	
+	bool grounded = false;
+	
+	void OnCollisionEnter (Collision col)
+    {
+		if(col.collider.name == "Terrain")
+		{
+			
+			grounded = true;
+			anim.SetBool("Grounded", grounded);
+			
+			jumping = false;
+			Debug.Log("Grounded");
+		}
+	}
 	
 	void FixedUpdate ()
 	{
 		float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
 		
-		if(h==0)h= (wiimote_getNunchuckStickX(0)-127)/127.0f;
+		bool moving = false;
+		
+		if(h==0)h= (wiimote_getNunchuckStickX(0))/127.0f;
 		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
 		
+		Debug.Log(""+wiimote_getNunchuckStickX(0));
+		
+		if(!jumping)
+		{
+			
 		
 		if(h>0.3f||wiimote_getButtonRight(0))
 		{
@@ -125,14 +152,19 @@ public class BotControlScript : MonoBehaviour
 			if(h>0.3f)
 			{
 				anim.SetFloat("Speed", (h-0.3f)*0.7f);
+					rigidbody.velocity = new Vector3(0.7f*4,rigidbody.velocity.y,0);
+					moving = true;
+				
 			}
 			else if(wiimote_getButtonRight(0))
 			{
 				anim.SetFloat("Speed", 0.7f);
+					rigidbody.velocity = new Vector3(0.7f*4,rigidbody.velocity.y,0);
+					moving = true;
 			}
 			
-			AnimationController.enabled = true;
-			KinectController.enabled = false;
+
+			
 		}
 		else if(h<-0.3f||wiimote_getButtonLeft(0))
 		{
@@ -141,37 +173,65 @@ public class BotControlScript : MonoBehaviour
 			if(h<-0.3f)
 			{
 			anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
+					rigidbody.velocity = new Vector3(-0.7f*4,rigidbody.velocity.y,0);
+					moving =true;
 			}
 			else if(wiimote_getButtonLeft(0))
 			{
 				anim.SetFloat("Speed", 0.7f);
+					rigidbody.velocity = new Vector3(-0.7f*4,rigidbody.velocity.y,0);
+					moving = true;
 			}
 				
 			
-			AnimationController.enabled = true;
-			KinectController.enabled = false;
+
 		}
 		else
 		{
 			offset.transform.rotation = Quaternion.Euler(0,180,0);
 			anim.SetFloat("Speed", 0);	
 			
-					AnimationController.enabled = false;
-			KinectController.enabled = true;
+
 		}
 		
-		if(Input.GetButton("ButtonA")||wiimote_getButtonA(0))
+		if(Input.GetButton("ButtonA")||wiimote_getButtonB(0)||jumping)
 		{
 			anim.SetBool("Jump", true);
 			
-				AnimationController.enabled = true;
-			KinectController.enabled = false;
+
 			
+				jumping = true;
+			Debug.Log("Jumping");
+			rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
 			
 		}
+			
+			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
+			
+			if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
+			{
+				
+				
+				AnimationController.enabled = false;
+				KinectController.enabled = true;
+						Debug.Log("Animation!!!");
+				
+				rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
+				
+			}
+			else
+			{
+				AnimationController.enabled = true;
+				KinectController.enabled = false;
+				
+			}
+			
+		
+			
+		}
+		
+		//Debug.Log("Gounded"+anim.GetBool("Grounded"));
 
-		
-		
 								// set our animator's float parameter 'Speed' equal to the vertical input axis				
 		anim.SetFloat("Direction", 0); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		
 		
@@ -190,12 +250,24 @@ public class BotControlScript : MonoBehaviour
 		
 		// if we are currently in a state called Locomotion, then allow Jump input (Space) to set the Jump bool parameter in the Animator to true
 		if (currentBaseState.nameHash == locoState)
-		{
+		{	
 			if(Input.GetButtonDown("Jump"))
 			{
 				anim.SetBool("Jump", true);
+				//anim.SetBool("Grounded", false);
+				
+				grounded = false;
+				anim.SetBool("Grounded", grounded);
+		
+			}
+			
+			if(!anim.IsInTransition(0))
+			{
+				
 			}
 		}
+		
+
 		
 		// if we are in the jumping state... 
 		else if(currentBaseState.nameHash == jumpState)
@@ -205,7 +277,15 @@ public class BotControlScript : MonoBehaviour
 			{				
 				// reset the Jump bool so we can jump again, and so that the state does not loop 
 				anim.SetBool("Jump", false);
+				
+				
+				grounded = false;
+				anim.SetBool("Grounded", grounded);
+				
 			}
+			//anim.SetBool("Grounded", false);
+				
+			
 			
 			/*
 			// Raycast down from the center of the character.. 
