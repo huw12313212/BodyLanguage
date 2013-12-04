@@ -232,6 +232,7 @@ public class BotControlScript : MonoBehaviour
 		}
 		else
 		{
+				if(offset!=null)
 			offset.transform.rotation = Quaternion.Euler(0,180,0);
 			anim.SetFloat("Speed", 0);	
 			
@@ -250,15 +251,16 @@ public class BotControlScript : MonoBehaviour
 			
 		}
 			
-			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
+//			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
 			
 			if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
 			{
 				
 				
 				AnimationController.enabled = false;
+				
 				KinectController.enabled = true;
-						Debug.Log("Animation!!!");
+						//Debug.Log("Animation!!!");
 				
 				rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
 				
@@ -266,6 +268,7 @@ public class BotControlScript : MonoBehaviour
 			else
 			{
 				AnimationController.enabled = true;
+				
 				KinectController.enabled = false;
 				
 			}
