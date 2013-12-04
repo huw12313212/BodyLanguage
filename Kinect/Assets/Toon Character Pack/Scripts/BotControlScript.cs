@@ -100,6 +100,43 @@ public class BotControlScript : MonoBehaviour
 	
 	AvatarController KinectController;
 	Animator AnimationController;
+	
+	
+	public bool wiimoteGetButtonA()
+	{
+		if(wiimote_count()>0)
+		{
+		return wiimote_getButtonA(0);
+		}
+		return false;
+	}
+	
+	public bool wiimoteGetButtonB()
+	{
+		if(wiimote_count()>0)
+		{
+		return wiimote_getButtonB(0);
+		}
+		return false;
+	}
+	
+		public bool wiimoteGetButtonLeft()
+	{
+		if(wiimote_count()>0)
+		{
+		return wiimote_getButtonLeft(0);
+		}
+		return false;
+	}
+	
+		public bool wiimoteGetButtonRight()
+	{
+		if(wiimote_count()>0)
+		{
+		return wiimote_getButtonRight(0);
+		}
+		return false;
+	}
 
 	void Start ()
 	{
@@ -108,12 +145,17 @@ public class BotControlScript : MonoBehaviour
 		col = gameObject.GetComponent<CapsuleCollider>();				
 		if(anim.layerCount ==2)
 			anim.SetLayerWeight(1, 1);
-		wiimote_start();
+		
+
+	
+		
 		 KinectController = GetComponent<AvatarController>();
 		AnimationController = GetComponent<Animator>();
 		
 		rigidbody.isKinematic = false;
 		rigidbody.useGravity = true;
+		
+			wiimote_start();
 		
 	}
 	
@@ -138,16 +180,16 @@ public class BotControlScript : MonoBehaviour
 		
 		bool moving = false;
 		
-		if(h==0)h= (wiimote_getNunchuckStickX(0))/127.0f;
+		//if(h==0)h= (wiimote_getNunchuckStickX(0))/127.0f;
 		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
 		
-		Debug.Log(""+wiimote_getNunchuckStickX(0));
+		//Debug.Log(""+wiimote_getNunchuckStickX(0));
 		
 		if(!jumping)
 		{
 			
 		
-		if(h>0.3f||wiimote_getButtonRight(0))
+		if(h>0.3f||wiimoteGetButtonRight())
 		{
 			offset.transform.rotation = Quaternion.Euler(0,90,0);
 			
@@ -158,7 +200,7 @@ public class BotControlScript : MonoBehaviour
 					moving = true;
 				
 			}
-			else if(wiimote_getButtonRight(0))
+			else if(wiimoteGetButtonRight())
 			{
 				anim.SetFloat("Speed", 0.7f);
 					rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
@@ -168,7 +210,7 @@ public class BotControlScript : MonoBehaviour
 
 			
 		}
-		else if(h<-0.3f||wiimote_getButtonLeft(0))
+		else if(h<-0.3f||wiimoteGetButtonLeft())
 		{
 			offset.transform.rotation = Quaternion.Euler(0,-90,0);
 			
@@ -178,7 +220,7 @@ public class BotControlScript : MonoBehaviour
 					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
 					moving =true;
 			}
-			else if(wiimote_getButtonLeft(0))
+			else if(wiimoteGetButtonLeft())
 			{
 				anim.SetFloat("Speed", 0.7f);
 					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
@@ -196,7 +238,7 @@ public class BotControlScript : MonoBehaviour
 
 		}
 		
-		if(Input.GetButton("ButtonA")||wiimote_getButtonB(0)||jumping)
+		if(Input.GetButton("ButtonA")||wiimoteGetButtonB()||jumping)
 		{
 			anim.SetBool("Jump", true);
 			
