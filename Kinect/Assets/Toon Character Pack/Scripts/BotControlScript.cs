@@ -180,15 +180,10 @@ public class BotControlScript : MonoBehaviour
 		
 		bool moving = false;
 		
-		//if(h==0)h= (wiimote_getNunchuckStickX(0))/127.0f;
-		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
-		
-		//Debug.Log(""+wiimote_getNunchuckStickX(0));
 		
 		if(!jumping)
 		{
 			
-		
 		if(h>0.3f||wiimoteGetButtonRight())
 		{
 			offset.transform.rotation = Quaternion.Euler(0,90,0);
