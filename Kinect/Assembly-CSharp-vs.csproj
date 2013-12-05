@@ -47,6 +47,7 @@
      <Compile Include="Assets\CameraManager.cs" />
      <Compile Include="Assets\Campfire Pack\Script\SwitchView.cs" />
      <Compile Include="Assets\CharacterPoseConnect.cs" />
+     <Compile Include="Assets\ForInstantiate.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
@@ -178,6 +179,8 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITiledSprite.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
+     <Compile Include="Assets\Network\NetworkManager.cs" />
+     <Compile Include="Assets\Network\Player.cs" />
      <Compile Include="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />

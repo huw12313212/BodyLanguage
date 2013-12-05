@@ -114,7 +114,7 @@ public class AvatarController : MonoBehaviour
 		
 		int i = 0;
 		
-		Debug.Log("hello:" + i);
+		//Debug.Log("hello:" + i);
 		// Update Head, Neck, Spine, and Hips normally.
 		TransformBone(UserID, KinectWrapper.SkeletonJoint.HIPS, 1, flipJoint);
 		TransformBone(UserID, KinectWrapper.SkeletonJoint.SPINE, 2, flipJoint);

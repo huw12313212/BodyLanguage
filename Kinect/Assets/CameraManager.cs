@@ -38,7 +38,7 @@ public class CameraManager : MonoBehaviour {
 		transform.position = new Vector3(transform.position.x,YOffset*camera.orthographicSize,transform.position.z);
 		
 		
-		Debug.Log("player Dif"+PlayerDif.magnitude+ " camera size"+ camera.orthographicSize );
+		//Debug.Log("player Dif"+PlayerDif.magnitude+ " camera size"+ camera.orthographicSize );
 		
 		
 		

@@ -93,7 +93,7 @@ public class KinectManager : MonoBehaviour
 	private uint Player2ID;
 	
 	// Lists of AvatarControllers that will let the models get updated.
-	private List<AvatarController> Player1Controllers;
+	public List<AvatarController> Player1Controllers;
 	private List<AvatarController> Player2Controllers;
 	
 	// User Map vars.
