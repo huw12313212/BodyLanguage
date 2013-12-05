@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 
 Project("{B66BDD21-EFA7-E976-63DC-28AD2CADC6A5}") = "Kinect", "Assembly-CSharp.csproj", "{3E79A016-6F9D-7350-DD82-C1B45322F447}"
 EndProject
+Project("{B66BDD21-EFA7-E976-63DC-28AD2CADC6A5}") = "Kinect", "Assembly-CSharp-Editor.csproj", "{8925B305-A609-1549-B31E-C93FD2D3D730}"
+EndProject
 Project("{B66BDD21-EFA7-E976-63DC-28AD2CADC6A5}") = "Kinect", "Assembly-UnityScript.unityproj", "{5454AADD-FFE1-B62D-A1C1-E3EE812D33B2}"
 EndProject
 Global
@@ -15,6 +17,10 @@ Global
 		{3E79A016-6F9D-7350-DD82-C1B45322F447}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3E79A016-6F9D-7350-DD82-C1B45322F447}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3E79A016-6F9D-7350-DD82-C1B45322F447}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8925B305-A609-1549-B31E-C93FD2D3D730}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8925B305-A609-1549-B31E-C93FD2D3D730}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8925B305-A609-1549-B31E-C93FD2D3D730}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8925B305-A609-1549-B31E-C93FD2D3D730}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5454AADD-FFE1-B62D-A1C1-E3EE812D33B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5454AADD-FFE1-B62D-A1C1-E3EE812D33B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5454AADD-FFE1-B62D-A1C1-E3EE812D33B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -23,7 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																	GlobalSection(MonoDevelopProperties) = preSolution
+																																																										GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
