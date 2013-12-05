@@ -14,7 +14,9 @@ public class ForInstantiate : MonoBehaviour {
 		
 		kinectManager = avatars[0];
 		
-		kinectManager.Player1Controllers.Add(GetComponent<AvatarController>());
+		
+		if(networkView.isMine)
+			kinectManager.Player1Controllers.Add(GetComponent<AvatarController>());
 		
 		
 	
@@ -29,7 +31,18 @@ public class ForInstantiate : MonoBehaviour {
 		
 		if(i==30)
 		{
-			GetComponent<BotControlScript>().enabled = true;
+			BotControlScript script = GetComponent<BotControlScript>();
+			
+			if(networkView.isMine)
+			{
+				script.enabled = true;
+				
+			}
+			else
+			{
+				script.enabled = false;
+				rigidbody.useGravity = false;
+			}
 			
 			//Debug.Log("helllllllllll");
 		}

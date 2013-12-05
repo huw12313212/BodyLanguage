@@ -245,6 +245,10 @@ public class BotControlScript : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
+		
+		if(networkView.isMine)
+		{
+		
 		float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
 		
 		bool moving = false;
@@ -462,6 +466,12 @@ public class BotControlScript : MonoBehaviour
 		if(layer2CurrentState.nameHash == waveState)
 		{
 			anim.SetBool("Wave", false);
+		}
+		}
+		else
+		{
+			KinectController.enabled = false;
+			AnimationController.enabled = false;
 		}
 	}
 }
