@@ -180,15 +180,10 @@ public class BotControlScript : MonoBehaviour
 		
 		bool moving = false;
 		
-		//if(h==0)h= (wiimote_getNunchuckStickX(0))/127.0f;
-		//float v = Input.GetAxis("Vertical");				// setup v variables as our vertical input axis
-		
-		//Debug.Log(""+wiimote_getNunchuckStickX(0));
 		
 		if(!jumping)
 		{
 			
-		
 		if(h>0.3f||wiimoteGetButtonRight())
 		{
 			offset.transform.rotation = Quaternion.Euler(0,90,0);
@@ -232,6 +227,7 @@ public class BotControlScript : MonoBehaviour
 		}
 		else
 		{
+				if(offset!=null)
 			offset.transform.rotation = Quaternion.Euler(0,180,0);
 			anim.SetFloat("Speed", 0);	
 			
@@ -250,15 +246,16 @@ public class BotControlScript : MonoBehaviour
 			
 		}
 			
-			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
+//			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
 			
 			if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
 			{
 				
 				
 				AnimationController.enabled = false;
+				
 				KinectController.enabled = true;
-						Debug.Log("Animation!!!");
+						//Debug.Log("Animation!!!");
 				
 				rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
 				
@@ -266,6 +263,7 @@ public class BotControlScript : MonoBehaviour
 			else
 			{
 				AnimationController.enabled = true;
+				
 				KinectController.enabled = false;
 				
 			}

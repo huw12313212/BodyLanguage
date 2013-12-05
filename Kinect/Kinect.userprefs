@@ -1,10 +1,17 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+<<<<<<< HEAD
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\NGUI\Scripts\Internal\UpdateManager.cs">
     <Files>
       <File FileName="Assets\NGUI\Scripts\Internal\UpdateManager.cs" Line="15" Column="42" />
       <File FileName="Assets\NGUI\Scripts\UI\UIRoot.cs" Line="43" Column="11" />
       <File FileName="Assets\MessageHint.cs" Line="18" Column="3" />
+=======
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\CameraManager.cs">
+    <Files>
+      <File FileName="Assets\CameraManager.cs" Line="71" Column="4" />
+      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="1" Column="1" />
+>>>>>>> ec5f152ff25f8f7847756f083d1f8940e0a197d6
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
