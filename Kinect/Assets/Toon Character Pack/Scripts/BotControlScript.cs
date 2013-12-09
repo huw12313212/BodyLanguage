@@ -10,12 +10,13 @@ using System.Runtime.InteropServices;
 
 public class BotControlScript : MonoBehaviour
 {
-	
-	 private float lastSynchronizationTime = 0f;
+	public NodeManager nodeManager;
+
+/*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
     private Vector3 syncStartPosition = Vector3.zero;
-    private Vector3 syncEndPosition = Vector3.zero;
+    private Vector3 syncEndPosition = Vector3.zero;*/
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
@@ -23,29 +24,71 @@ public class BotControlScript : MonoBehaviour
         Vector3 syncVelocity = Vector3.zero;
         if (stream.isWriting)
         {
-            syncPosition = rigidbody.position;
+           /* syncPosition = rigidbody.position;
             stream.Serialize(ref syncPosition);
 
             syncVelocity = rigidbody.velocity;
-            stream.Serialize(ref syncVelocity);
+            stream.Serialize(ref syncVelocity);*/
+
+
+			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
+			{
+				GameObject targetNode = nodeManager.syncList[i];
+				networkData data = nodeManager.dataList[i];
+
+
+				data.syncPosition = targetNode.transform.position;
+				stream.Serialize(ref data.syncPosition);
+
+				data.syncVelocity = new Vector3(0,0,0);
+				stream.Serialize(ref data.syncVelocity);
+
+
+			}
+
+
         }
         else
         {
+			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
+			{
+				GameObject targetNode = nodeManager.syncList[i];
+				networkData data = nodeManager.dataList[i];
+				
+				stream.Serialize(ref data.syncPosition);
+				stream.Serialize(ref data.syncVelocity);
+
+				data.syncTime =0f;
+				data.syncDelay = Time.time - data.lastSynchronizationTime;
+				data.lastSynchronizationTime = Time.time;
+
+				data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
+				data.syncStartPosition = targetNode.transform.position;
+				
+			}
+
+			/*
             stream.Serialize(ref syncPosition);
             stream.Serialize(ref syncVelocity);
+
 
             syncTime = 0f;
             syncDelay = Time.time - lastSynchronizationTime;
             lastSynchronizationTime = Time.time;
 
             syncEndPosition = syncPosition + syncVelocity * syncDelay;
-            syncStartPosition = rigidbody.position;
+            syncStartPosition = rigidbody.position;*/
         }
     }
 
     void Awake()
     {
-        lastSynchronizationTime = Time.time;
+		for (int i = 0; i < nodeManager.syncList.Count; i++) {
+						GameObject targetNode = nodeManager.syncList [i];
+						networkData data = nodeManager.dataList [i];
+
+						data.lastSynchronizationTime = Time.time;
+				}
     }
 
     void Update()
@@ -68,9 +111,17 @@ public class BotControlScript : MonoBehaviour
 
     private void SyncedMovement()
     {
-        syncTime += Time.deltaTime;
 
-        rigidbody.position = Vector3.Lerp(syncStartPosition, syncEndPosition, syncTime / syncDelay);
+		for(int i = 0 ; i < nodeManager.syncList.Count;i++)
+		{
+			GameObject targetNode = nodeManager.syncList[i];
+			networkData data = nodeManager.dataList[i];
+
+			data.syncTime += Time.deltaTime;
+			
+			targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, data.syncTime / data.syncDelay);
+
+		}
     }
 
 

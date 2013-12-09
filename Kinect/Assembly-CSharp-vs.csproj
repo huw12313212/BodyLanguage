@@ -182,6 +182,7 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
      <Compile Include="Assets\Network\NetworkManager.cs" />
+     <Compile Include="Assets\Network\NodeManager.cs" />
      <Compile Include="Assets\Network\Player.cs" />
      <Compile Include="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
