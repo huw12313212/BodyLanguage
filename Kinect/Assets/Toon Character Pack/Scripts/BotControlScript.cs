@@ -58,14 +58,14 @@ public class BotControlScript : MonoBehaviour
 				stream.Serialize(ref data.syncPosition);
 				stream.Serialize(ref data.syncVelocity);
 
-				targetNode.transform.position = data.syncPosition;
-				/*
+				//targetNode.transform.position = data.syncPosition;
+
 				data.syncTime =0f;
 				data.syncDelay = Time.time - data.lastSynchronizationTime;
 				data.lastSynchronizationTime = Time.time;
 
 				data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
-				data.syncStartPosition = targetNode.transform.position;*/
+				data.syncStartPosition = targetNode.transform.position;
 				
 			}
 
@@ -101,7 +101,7 @@ public class BotControlScript : MonoBehaviour
         }
         else
         {
-           // SyncedMovement();
+           SyncedMovement();
         }
     }
 
