@@ -26,7 +26,7 @@ public class BotControlScript : MonoBehaviour
             syncPosition = rigidbody.position;
             stream.Serialize(ref syncPosition);
 
-            syncPosition = rigidbody.velocity;
+            syncVelocity = rigidbody.velocity;
             stream.Serialize(ref syncVelocity);
         }
         else
@@ -222,7 +222,7 @@ public class BotControlScript : MonoBehaviour
 		AnimationController = GetComponent<Animator>();
 		
 		rigidbody.isKinematic = false;
-		rigidbody.useGravity = true;
+		//rigidbody.useGravity = true;
 		
 			wiimote_start();
 		

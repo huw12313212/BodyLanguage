@@ -41,7 +41,7 @@ public class ForInstantiate : MonoBehaviour {
 			else
 			{
 				script.enabled = true;
-				rigidbody.useGravity = false;
+				gameObject.rigidbody.useGravity = false;//.useGravity = false;
 			}
 			
 			//Debug.Log("helllllllllll");
