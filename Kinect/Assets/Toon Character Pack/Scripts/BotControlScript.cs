@@ -36,14 +36,17 @@ public class BotControlScript : MonoBehaviour
 				GameObject targetNode = nodeManager.syncList[i];
 				networkData data = nodeManager.dataList[i];
 
-
+				//position
 				data.syncPosition = targetNode.transform.position;
 				stream.Serialize(ref data.syncPosition);
 
+				//velocity
 				data.syncVelocity = new Vector3(0,0,0);
 				stream.Serialize(ref data.syncVelocity);
 
-
+				//rotate
+				data.syncRotation = targetNode.transform.rotation;
+				stream.Serialize(ref data.syncRotation);
 			}
 
 
@@ -57,7 +60,7 @@ public class BotControlScript : MonoBehaviour
 				
 				stream.Serialize(ref data.syncPosition);
 				stream.Serialize(ref data.syncVelocity);
-
+				stream.Serialize(ref data.syncRotation);
 				//targetNode.transform.position = data.syncPosition;
 
 				data.syncTime =0f;
@@ -66,7 +69,9 @@ public class BotControlScript : MonoBehaviour
 
 				data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
 				data.syncStartPosition = targetNode.transform.position;
-				
+
+				data.syncStartRotation = targetNode.transform.rotation;
+				data.syncEndRotation = data.syncRotation;
 			}
 
 			/*
@@ -120,8 +125,12 @@ public class BotControlScript : MonoBehaviour
 			networkData data = nodeManager.dataList[i];
 
 			data.syncTime += Time.deltaTime;
-			
+
+			//position
 			targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, data.syncTime / data.syncDelay);
+
+			//rotate
+			targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
 
 		}
     }

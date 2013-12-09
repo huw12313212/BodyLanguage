@@ -10,11 +10,11 @@ public class networkData
 	public float syncTime = 0f;
 	public Vector3 syncStartPosition = Vector3.zero;
 	public Vector3 syncEndPosition = Vector3.zero;
-	public Vector3 syncStartRotation = Vector3.zero;
-	public Vector3 syncEndRotation = Vector3.zero;
+	public Quaternion syncStartRotation = Quaternion.Euler(Vector3.zero);
+	public Quaternion syncEndRotation = Quaternion.Euler(Vector3.zero);
 	public Vector3 syncPosition = Vector3.zero;
 	public Vector3 syncVelocity = Vector3.zero;
-
+	public Quaternion syncRotation = Quaternion.Euler(Vector3.zero);
 
 }
 
