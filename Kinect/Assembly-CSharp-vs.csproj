@@ -185,6 +185,7 @@
      <Compile Include="Assets\Network\NodeManager.cs" />
      <Compile Include="Assets\Network\Player.cs" />
      <Compile Include="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" />
+     <Compile Include="Assets\PlayerScripts\cameraDummyFollowPlayer.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />

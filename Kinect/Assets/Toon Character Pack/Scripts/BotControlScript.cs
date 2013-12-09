@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
 
+
 // Require these components when using this script
 [RequireComponent(typeof (Animator))]
 [RequireComponent(typeof (CapsuleCollider))]
@@ -11,7 +12,6 @@ using System.Runtime.InteropServices;
 public class BotControlScript : MonoBehaviour
 {
 	public NodeManager nodeManager;
-
 /*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -43,7 +43,7 @@ public class BotControlScript : MonoBehaviour
 				//velocity
 				data.syncVelocity = new Vector3(0,0,0);
 				stream.Serialize(ref data.syncVelocity);
-
+			
 				//rotate
 				data.syncRotation = targetNode.transform.rotation;
 				stream.Serialize(ref data.syncRotation);
@@ -61,15 +61,17 @@ public class BotControlScript : MonoBehaviour
 				stream.Serialize(ref data.syncPosition);
 				stream.Serialize(ref data.syncVelocity);
 				stream.Serialize(ref data.syncRotation);
-				//targetNode.transform.position = data.syncPosition;
 
-				data.syncTime =0f;
+				//sync
+				data.syncTime =0.0f;
 				data.syncDelay = Time.time - data.lastSynchronizationTime;
 				data.lastSynchronizationTime = Time.time;
 
+				//position
 				data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
 				data.syncStartPosition = targetNode.transform.position;
 
+				//rotation
 				data.syncStartRotation = targetNode.transform.rotation;
 				data.syncEndRotation = data.syncRotation;
 			}
@@ -276,18 +278,28 @@ public class BotControlScript : MonoBehaviour
 		col = gameObject.GetComponent<CapsuleCollider>();				
 		if(anim.layerCount ==2)
 			anim.SetLayerWeight(1, 1);
-		
 
-	
-		
-		 KinectController = GetComponent<AvatarController>();
+		KinectController = GetComponent<AvatarController>();
 		AnimationController = GetComponent<Animator>();
 		
 		rigidbody.isKinematic = false;
 		//rigidbody.useGravity = true;
+
+		//enable camera dummy follow script
+		GameObject cameraDummyObject = GameObject.FindGameObjectWithTag("cameraDummy");
 		
-			wiimote_start();
+		//enable script
+		cameraDummyFollowPlayer cameraFollowScript = cameraDummyObject.GetComponent<cameraDummyFollowPlayer>();
 		
+		if(networkView.isMine)
+		{
+			cameraFollowScript.enabled = true;
+			cameraFollowScript.setPlayer(gameObject);
+		}
+
+		//wii 
+		wiimote_start();
+
 	}
 	
 	bool grounded = false;
@@ -307,7 +319,7 @@ public class BotControlScript : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		
+
 		if(networkView.isMine)
 		{
 		
@@ -362,7 +374,7 @@ public class BotControlScript : MonoBehaviour
 		}
 		else
 		{
-				if(offset!=null)
+			if(offset!=null)
 			offset.transform.rotation = Quaternion.Euler(0,180,0);
 			anim.SetFloat("Speed", 0);	
 			
@@ -375,7 +387,7 @@ public class BotControlScript : MonoBehaviour
 			
 
 			
-				jumping = true;
+			jumping = true;
 			Debug.Log("Jumping");
 			rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
 			

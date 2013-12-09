@@ -36,20 +36,13 @@ public class CameraManager : MonoBehaviour {
 		transform.position +=  speed * dif * Time.deltaTime;
 		
 		transform.position = new Vector3(transform.position.x,YOffset*camera.orthographicSize,transform.position.z);
-		
-		
-		//Debug.Log("player Dif"+PlayerDif.magnitude+ " camera size"+ camera.orthographicSize );
-		
-		
-		
-	
-	
-			if(PlayerDif.magnitude/2 < camera.orthographicSize + 0.5f)
-			{
+
+		if(PlayerDif.magnitude/2 < camera.orthographicSize + 0.5f)
+		{
 				float difRatio = camera.orthographicSize + 0.1f -PlayerDif.magnitude/2;
 				
 				camera.orthographicSize -= sizeChangeSpeed* Time.deltaTime *difRatio;
-			}
+		}
 			
 	
 			
