@@ -40,7 +40,7 @@ public class ForInstantiate : MonoBehaviour {
 			}
 			else
 			{
-				script.enabled = false;
+				script.enabled = true;
 				rigidbody.useGravity = false;
 			}
 			
