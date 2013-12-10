@@ -35,13 +35,22 @@ public class BotControlScript : MonoBehaviour
 			{
 				GameObject targetNode = nodeManager.syncList[i];
 				networkData data = nodeManager.dataList[i];
+				Rigidbody body = targetNode.GetComponent<Rigidbody>();
 
 				//position
 				data.syncPosition = targetNode.transform.position;
 				stream.Serialize(ref data.syncPosition);
 
+
+
 				//velocity
-				data.syncVelocity = new Vector3(0,0,0);
+
+				//check rigibody
+				if(body != null){
+					data.syncVelocity = body.velocity;
+				}else{
+					data.syncVelocity = new Vector3(0,0,0);	
+				}
 				stream.Serialize(ref data.syncVelocity);
 			
 				//rotate
