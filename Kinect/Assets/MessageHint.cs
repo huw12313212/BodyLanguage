@@ -15,7 +15,7 @@ public class MessageHint : MonoBehaviour {
 				Labels[2].text = message[2] + "";
 				Labels[3].text = message[3] + "";
 		
-		
+		Labels[2].text = "Press A";
 		
 		
 		
