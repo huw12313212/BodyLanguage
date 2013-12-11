@@ -12,6 +12,8 @@ using System.Runtime.InteropServices;
 public class BotControlScript : MonoBehaviour
 {
 	public NodeManager nodeManager;
+
+	public CameraManager cameraManager;
 /*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -295,16 +297,22 @@ public class BotControlScript : MonoBehaviour
 		//rigidbody.useGravity = true;
 
 		//enable camera dummy follow script
-		GameObject cameraDummyObject = GameObject.FindGameObjectWithTag("cameraDummy");
+		cameraManager = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraManager>();
 		
 		//enable script
-		cameraDummyFollowPlayer cameraFollowScript = cameraDummyObject.GetComponent<cameraDummyFollowPlayer>();
-		
-		if(networkView.isMine)
-		{
-			cameraFollowScript.enabled = true;
-			cameraFollowScript.setPlayer(gameObject);
-		}
+		//cameraManager = cameraDummyObject.GetComponent<cameraDummyFollowPlayer>();
+
+			if(cameraManager.Player1.name.Contains("Dummy"))
+			{
+				cameraManager.Player1 = gameObject;
+				cameraManager.Player2 = gameObject;
+			}
+			else
+			{
+				cameraManager.Player2 = gameObject;
+			}
+
+
 
 		//wii 
 		wiimote_start();

@@ -46,9 +46,12 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\ButtonClicked.cs" />
+     <Compile Include="Assets\ButtonManager.cs" />
      <Compile Include="Assets\CameraManager.cs" />
      <Compile Include="Assets\Campfire Pack\Script\SwitchView.cs" />
      <Compile Include="Assets\CharacterPoseConnect.cs" />
+     <Compile Include="Assets\CodePuzzleManager.cs" />
      <Compile Include="Assets\DialogTrigger.cs" />
      <Compile Include="Assets\ForInstantiate.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
