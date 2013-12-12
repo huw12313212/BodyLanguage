@@ -36,8 +36,8 @@ public class ButtonClicked : MonoBehaviour {
 
 			Debug.Log("Trigger Rumbo");
 		
-		tween.from = initialPosition;
-		tween.to = initialPosition + new Vector3(0,-0.12f,0);
+			tween.from = initialPosition;
+			tween.to = initialPosition + new Vector3(0,-0.12f,0);
 			tween.Reset();
 			tween.enabled = true;
 
@@ -53,8 +53,8 @@ public class ButtonClicked : MonoBehaviour {
 		{
 			Debug.Log("Exit Rumbo");
 
-		tween.from = targetObject.transform.localPosition;
-		tween.to = initialPosition;
+			tween.from = targetObject.transform.localPosition;
+			tween.to = initialPosition;
 			tween.Reset();
 			tween.enabled = true;
 		}

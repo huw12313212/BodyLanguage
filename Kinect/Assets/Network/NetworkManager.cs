@@ -70,7 +70,7 @@ public class NetworkManager : MonoBehaviour
 		
 		//check wether the server is built or not 
 		if (flagServer == false && flagClient == false) {
-			if (Time.time - startTime > 3.0f) {
+			if (Time.time - startTime > 1.5f) {
 				Debug.Log("update: "+hostList.Length);
 				Debug.Log("passed time gap!?qqqqq");
 				if (hostList.Length == 0) {
