@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class createPuzzle1Answer : MonoBehaviour {
+	public NetworkView networkView;
+
 	void OnTriggerEnter(Collider other) {
 		//Destroy(other.gameObject);
 		
@@ -14,7 +16,7 @@ public class createPuzzle1Answer : MonoBehaviour {
 			GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
 			GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
 			
-			if(globalSyncObject!=null)
+			if((globalSyncObject!=null) && (networkView.isMine))
 			{
 				Debug.Log("Create Random Num = ");
 				List<int> randomAnswer = new List<int>();

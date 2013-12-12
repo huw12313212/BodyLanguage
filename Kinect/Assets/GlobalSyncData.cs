@@ -15,19 +15,19 @@ public class GlobalSyncData : MonoBehaviour {
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
-		int syncTest = 0;
+		List<int> syncTemp = new List<int>();
 		
 		if (stream.isWriting)
 		{
-			//Debug.Log("Wirting! test = "+test);
-			//syncTest = test;
-			stream.Serialize(ref syncTest);			
+			Debug.Log("Wirting!");
+			syncTemp = puzzle1Answer;
+			stream.Serialize(ref syncTemp);			
 		}
 		else
 		{
-			//Debug.Log("Received! test = "+test);
-			stream.Serialize(ref syncTest);
-			//test = syncTest;
+			Debug.Log("Received!");
+			stream.Serialize(ref syncTemp);
+			syncTemp = puzzle1Answer;
 		}
 	}
 
