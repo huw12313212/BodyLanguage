@@ -15,7 +15,7 @@ public class GlobalSyncData : MonoBehaviour {
 
 	void Update()
 	{
-		Debug.Log("Puzzle 1 Answer = "+puzzle1Answer[0]+" "+puzzle1Answer[1]+" "+puzzle1Answer[2]);
+		if(puzzle1Answer.Count!=0) Debug.Log("Puzzle 1 Answer = "+puzzle1Answer[0]+" "+puzzle1Answer[1]+" "+puzzle1Answer[2]);
 	}
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
