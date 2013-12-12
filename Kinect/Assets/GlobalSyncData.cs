@@ -1,19 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GlobalSyncData : MonoBehaviour {
 
-	public int test;
+	public int puzzle1AnswerSize;
+	public List<int> puzzle1Answer;
 
 	// Use this for initialization
 	void Start () {
 		Debug.Log("Start!");
-		test = 0;
-	}
-
-	void Update()
-	{
-		//test++;
+		puzzle1AnswerSize = 3;
 	}
 
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
@@ -22,15 +19,21 @@ public class GlobalSyncData : MonoBehaviour {
 		
 		if (stream.isWriting)
 		{
-			Debug.Log("Wirting!");
-			syncTest = test;
+			//Debug.Log("Wirting! test = "+test);
+			//syncTest = test;
 			stream.Serialize(ref syncTest);			
 		}
 		else
 		{
-			Debug.Log("Received!");
+			//Debug.Log("Received! test = "+test);
 			stream.Serialize(ref syncTest);
-			test = syncTest;
+			//test = syncTest;
 		}
 	}
+
+	public void setPuzzle1Answer(List<int> answer)
+	{
+		if(answer!=null) puzzle1Answer = answer;
+	}
+
 }

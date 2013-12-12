@@ -11,6 +11,8 @@ public class ButtonManager : MonoBehaviour {
 
 	public void Code(int i)
 	{
+		Debug.Log ("Code :"+i);
+
 		//add input code to list
 		inputCode.Add(i);
 
