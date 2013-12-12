@@ -10,6 +10,7 @@ public class NetworkManager : MonoBehaviour
 	private HostData[] hostList;
 	private float startTime;
 	public GameObject playerPrefab;
+	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
 	
@@ -128,6 +129,6 @@ public class NetworkManager : MonoBehaviour
 	private void SpawnPlayer()
 	{
 		GameObject player = (GameObject)Network.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, 0);
-		
+		GameObject syncObject = (GameObject)Network.Instantiate(globalSyncObject, Vector3.zero, Quaternion.identity, 0);
 	}
 }
