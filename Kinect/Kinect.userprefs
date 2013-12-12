@@ -1,11 +1,16 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\ButtonManager.cs">
     <Files>
-      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="47" Column="5" />
-      <File FileName="Assets\ButtonClicked.cs" Line="22" Column="3" />
+      <File FileName="Assets\GlobalSyncData.cs" Line="18" Column="76" />
+      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="116" Column="31" />
+      <File FileName="Assets\ButtonClicked.cs" Line="47" Column="3" />
       <File FileName="Assets\NGUI\Scripts\Tweening\TweenPosition.cs" Line="1" Column="1" />
-      <File FileName="Assets\ButtonManager.cs" Line="30" Column="5" />
+      <File FileName="Assets\ButtonManager.cs" Line="26" Column="10" />
+      <File FileName="Assets\CodePuzzleManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\PuzzleDoorScript.cs" Line="10" Column="30" />
+      <File FileName="Assets\Network\NetworkManager.cs" Line="50" Column="58" />
+      <File FileName="Assets\createPuzzle1Answer.cs" Line="18" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

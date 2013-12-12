@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class ButtonManager : MonoBehaviour {
 	
-	public List<int> CodeList;
+	private List<int> CodeList;
 	public List<GameObject> controlObjectList;
 	private List<int> inputCode;
 	private bool puzzleSolve;
@@ -13,11 +13,21 @@ public class ButtonManager : MonoBehaviour {
 	{
 		Debug.Log ("Code :"+i);
 
+		//get Global data object
+		GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
+		GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+
+		//get answer
+		CodeList = globalSyncObject.puzzle1Answer;
+		
 		//add input code to list
 		inputCode.Add(i);
 
+		//check
+		if(globalSyncObject == null) return;
+
 		//check input code size
-		if(inputCode.Count == CodeList.Count)
+		if(inputCode.Count == globalSyncObject.puzzle1AnswerSize)
 		{
 			//solve flag
 			puzzleSolve = true;

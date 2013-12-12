@@ -13,21 +13,40 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle1AnswerSize = 3;
 	}
 
+	void Update()
+	{
+		Debug.Log("Puzzle 1 Answer = "+puzzle1Answer[0]+" "+puzzle1Answer[1]+" "+puzzle1Answer[2]);
+	}
+
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
-		List<int> syncTemp = new List<int>();
+		List<int> syncTemp;
 		
 		if (stream.isWriting)
 		{
 			Debug.Log("Wirting!");
-			syncTemp = puzzle1Answer;
-			stream.Serialize(ref syncTemp);			
+			//syncTemp = puzzle1Answer;
+
+			/*
+			for(int i =0;i<syncTemp.Count;i++)
+			{
+				stream.Serialize(ref syncTemp[i]);
+			}
+			*/
+			//stream.Serialize(ref syncTemp);			
 		}
 		else
 		{
 			Debug.Log("Received!");
-			stream.Serialize(ref syncTemp);
-			syncTemp = puzzle1Answer;
+			//stream.Serialize(ref syncTemp);
+
+			/*
+			for(int i =0;i<syncTemp.Count;i++)
+			{
+				syncTemp[i] = puzzle1Answer[i];
+			}
+			*/
+			//syncTemp = puzzle1Answer;
 		}
 	}
 
@@ -36,4 +55,12 @@ public class GlobalSyncData : MonoBehaviour {
 		if(answer!=null) puzzle1Answer = answer;
 	}
 
+	[RPC]
+	void setPuzzle1RPC(int i1,int i2,int i3)
+	{
+		//if(answer!=null) puzzle1Answer = answer;
+		puzzle1Answer.Add(i1);
+		puzzle1Answer.Add(i2);
+		puzzle1Answer.Add(i3);
+	}
 }
