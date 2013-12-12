@@ -17,14 +17,15 @@ public class ButtonManager : MonoBehaviour {
 		GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
 		GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
 
-		//get answer
-		CodeList = globalSyncObject.puzzle1Answer;
-		
-		//add input code to list
-		inputCode.Add(i);
-
 		//check
 		if(globalSyncObject == null) return;
+		//get answer
+		CodeList = globalSyncObject.puzzle1Answer;
+		//check
+		if((CodeList == null) || (CodeList.Count == 0)) return;
+
+		//add input code to list
+		inputCode.Add(i);
 
 		//check input code size
 		if(inputCode.Count == globalSyncObject.puzzle1AnswerSize)
