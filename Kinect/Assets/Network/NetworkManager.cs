@@ -46,6 +46,8 @@ public class NetworkManager : MonoBehaviour
 	void OnServerInitialized()
 	{
 		SpawnPlayer();
+		//create sync object
+		GameObject syncObject = (GameObject)Network.Instantiate(globalSyncObject, Vector3.zero, Quaternion.identity, 0);
 		Debug.Log ("Initialized");
 	}
 	
@@ -129,6 +131,5 @@ public class NetworkManager : MonoBehaviour
 	private void SpawnPlayer()
 	{
 		GameObject player = (GameObject)Network.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, 0);
-		GameObject syncObject = (GameObject)Network.Instantiate(globalSyncObject, Vector3.zero, Quaternion.identity, 0);
 	}
 }
