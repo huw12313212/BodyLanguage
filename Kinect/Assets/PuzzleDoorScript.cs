@@ -13,5 +13,21 @@ public class PuzzleDoorScript : MonoBehaviour {
 		tween.Reset();
 		tween.enabled = true;
 	}
-	
+
+	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
+	{
+		Vector3 syncPosition = Vector3.zero;
+
+		if (stream.isWriting)
+		{
+			syncPosition = gameObject.transform.localPosition;
+            stream.Serialize(ref syncPosition);			
+		}
+		else
+		{
+
+            stream.Serialize(ref syncPosition);
+			gameObject.transform.localPosition = syncPosition;
+		}
+	}
 }
