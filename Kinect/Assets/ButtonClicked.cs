@@ -28,10 +28,15 @@ public class ButtonClicked : MonoBehaviour {
 	
 	}
 
+	public int clickCount = 0;
+
 	void OnTriggerEnter(Collider other) {
 		//Destroy(other.gameObject);
 
-		if(other.name.Contains("Rumbo"))
+
+		clickCount ++;
+		//if(other.name.Contains("Rumbo"))
+		if(clickCount==1)
 		{
 
 			Debug.Log("Trigger Rumbo");
@@ -49,7 +54,10 @@ public class ButtonClicked : MonoBehaviour {
 
 	void OnTriggerExit(Collider other) {
 		//Destroy(other.gameObject);
-		if(other.name.Contains("Rumbo"))
+
+		clickCount --;
+		//if(other.name.Contains("Rumbo"))
+		if(clickCount == 0)
 		{
 			Debug.Log("Exit Rumbo");
 

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class NetworkManager : MonoBehaviour
 {
-	private const string typeName = "BodyLanguageBL";
+	public string typeName = "BodyLanguageBL";
 	private const string gameName = "RoomName24";
 	
 	private bool isRefreshingHostList = false;
