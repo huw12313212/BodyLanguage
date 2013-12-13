@@ -1,9 +1,13 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Network\NetworkManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Puzzle2PanelSensor1.cs">
     <Files>
-      <File FileName="Assets\ButtonClicked.cs" Line="60" Column="21" />
-      <File FileName="Assets\Network\NetworkManager.cs" Line="136" Column="1" />
+      <File FileName="Assets\createPuzzle1Answer.cs" Line="11" Column="26" />
+      <File FileName="Assets\ButtonClicked.cs" Line="69" Column="3" />
+      <File FileName="Assets\Network\NetworkManager.cs" Line="93" Column="5" />
+      <File FileName="Assets\Puzzle2PanelSensor1.cs" Line="43" Column="19" />
+      <File FileName="Assets\Puzzle2Manager.cs" Line="24" Column="2" />
+      <File FileName="Assets\DialogTrigger.cs" Line="39" Column="3" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
