@@ -52,7 +52,7 @@ public class ButtonManager : MonoBehaviour {
 			}
 
 			//clear input code
-			inputCode.Clear();
+			inputCode.RemoveAt(0);
 		}
 
 
