@@ -13,7 +13,8 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle1AnswerSize = 3;
 
 
-
+		if(networkView.isMine)
+		{
 
 			Debug.Log("Create Random Num");
 			List<int> randomAnswer = new List<int>();
@@ -23,6 +24,7 @@ public class GlobalSyncData : MonoBehaviour {
 			}
 			
 			networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
+		}
 
 	}
 
@@ -72,6 +74,8 @@ public class GlobalSyncData : MonoBehaviour {
 	void setPuzzle1RPC(int i1,int i2,int i3)
 	{
 		//if(answer!=null) puzzle1Answer = answer;
+
+
 		puzzle1Answer.Add(i1);
 		puzzle1Answer.Add(i2);
 		puzzle1Answer.Add(i3);

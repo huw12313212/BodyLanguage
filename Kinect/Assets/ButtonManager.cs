@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class ButtonManager : MonoBehaviour {
 	
-	private List<int> CodeList;
+	public List<int> CodeList;
 	public List<GameObject> controlObjectList;
-	private List<int> inputCode;
+	public List<int> inputCode;
 	private bool puzzleSolve;
 
 	public void Code(int i)
