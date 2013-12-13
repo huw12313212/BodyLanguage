@@ -42,6 +42,8 @@ public class CameraManager : MonoBehaviour {
 				float difRatio = camera.orthographicSize + 0.1f -PlayerDif.magnitude/2;
 				
 				camera.orthographicSize -= sizeChangeSpeed* Time.deltaTime *difRatio;
+
+
 		}
 			
 	
@@ -56,6 +58,7 @@ public class CameraManager : MonoBehaviour {
 				float difRatio = PlayerDif.magnitude/2 - camera.orthographicSize - 0.1f;
 				
 				camera.orthographicSize += sizeChangeSpeed* Time.deltaTime * difRatio;
+
 			}
 			
 				//}
@@ -64,7 +67,8 @@ public class CameraManager : MonoBehaviour {
 			if(camera.orthographicSize<4)camera.orthographicSize = 4;
 			
 	
-		
+		float ratio = (float)camera.orthographicSize;
+		camera.transform.localScale = new Vector3(ratio,ratio,1);
 		
 		
 

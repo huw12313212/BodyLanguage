@@ -12,24 +12,9 @@ public class createPuzzle1Answer : MonoBehaviour {
 		{
 			Debug.Log("Trigger Item");
 
-			//get Global data object
-			GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
-			GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
-			
-			if((globalSyncObject!=null) && (networkView.isMine))
-			{
-				Debug.Log("Create Random Num");
-				List<int> randomAnswer = new List<int>();
-				for(int i = 0;i<globalSyncObject.puzzle1AnswerSize;i++)
-				{
-					randomAnswer.Add(Random.Range(0,3));
-				}
 
-				globalSyncObject.networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
-				//globalSyncObject.setPuzzle1Answer(randomAnswer);
-			}
 
-			Destroy(gameObject);
+			//Destroy(gameObject);
 		}
 		
 	}

@@ -11,6 +11,19 @@ public class GlobalSyncData : MonoBehaviour {
 	void Start () {
 		Debug.Log("Start!");
 		puzzle1AnswerSize = 3;
+
+
+
+
+			Debug.Log("Create Random Num");
+			List<int> randomAnswer = new List<int>();
+			for(int i = 0;i<puzzle1AnswerSize;i++)
+			{
+			randomAnswer.Add(Random.Range(0,puzzle1AnswerSize));
+			}
+			
+			networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
+
 	}
 
 	void Update()
