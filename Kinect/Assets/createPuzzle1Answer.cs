@@ -8,7 +8,7 @@ public class createPuzzle1Answer : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		//Destroy(other.gameObject);
 		
-		if(other.name.Contains("Rumbo"))
+		if(other.tag == "Player")
 		{
 			Debug.Log("Trigger Item");
 

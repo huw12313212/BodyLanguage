@@ -192,6 +192,8 @@
      <Compile Include="Assets\Packages\UniWii\Scripts\WiimoteTestController.cs" />
      <Compile Include="Assets\PlayerScripts\cameraDummyFollowPlayer.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
+     <Compile Include="Assets\Puzzle2Manager.cs" />
+     <Compile Include="Assets\Puzzle2PanelSensor1.cs" />
      <Compile Include="Assets\PuzzleDoorScript.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />
