@@ -195,6 +195,7 @@
      <Compile Include="Assets\Puzzle2Manager.cs" />
      <Compile Include="Assets\Puzzle2PanelSensor1.cs" />
      <Compile Include="Assets\PuzzleDoorScript.cs" />
+     <Compile Include="Assets\ShowPressB.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />
      <Compile Include="Assets\changeSceneLevel.cs" />

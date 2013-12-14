@@ -6,10 +6,10 @@ public class DialogTrigger : MonoBehaviour {
 	public GameObject AnchorA;
 	public GameObject Anchor;
 
-
 	public bool activeA = false;
-	public bool active = false;
+	//public bool active = false;
 	public bool isTrigger = false;
+	public string playerName = "carl";
 	// Use this for initialization
 	void Start () {
 
@@ -18,21 +18,23 @@ public class DialogTrigger : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		AnchorA.SetActive(activeA);
-		Anchor.SetActive(active);
+		//Anchor.SetActive(active);
 
 		//Debug.Log(activeA +""+ active +""+ isTrigger);
 
 		bool ButtonB = Input.GetButton("ButtonB");
 		if (isTrigger){	
+
+
 			if (ButtonB){
 				//Debug.Log("ButtonB");
-				activeA = false;
-				active = true;
+				activeA = true;
+				//active = true;
 			
 			}
 			else{
-				activeA = true;
-				active = false;
+				activeA = false;
+				//active = false;
 
 			}
 		}
@@ -44,6 +46,10 @@ public class DialogTrigger : MonoBehaviour {
 		Debug.Log("name:"+other.name);
 		isTrigger = true;
 
+		//trigger button B
+		other.gameObject.GetComponent<ShowPressB>().showButtonB();
+
+
 
 	}
 
@@ -51,6 +57,9 @@ public class DialogTrigger : MonoBehaviour {
 	void OnTriggerExit(Collider other) {
 		isTrigger = false;
 		activeA = false;
-		active = false;
+		//active = false;
+
+		//hide button B
+		other.gameObject.GetComponent<ShowPressB>().hideButtonB();
 	}
 }

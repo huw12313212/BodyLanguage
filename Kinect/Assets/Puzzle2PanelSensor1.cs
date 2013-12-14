@@ -13,6 +13,7 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 	private bool ButtonB = false;
 	private float addRotation;
 
+
 	// Use this for initializationth
 	void Start () {
 		//initial position
@@ -27,9 +28,10 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 		if (isTrigger){	
 			//get button down
 			ButtonB =  Input.GetButtonDown("ButtonB");
-
 			//click button b
+
 			if (ButtonB){
+
 
 				clickCount ++;
 
@@ -48,14 +50,21 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 
 	}
 	void OnTriggerEnter(Collider other) {
-
 		isTrigger = true;
+
+		//trigger the button B on the player
+		if(other.gameObject.tag == "Player")
+			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
 	}
 	
 	
 	void OnTriggerExit(Collider other) {
 
 		isTrigger = false;
+
+		//hide the button B on the player
+		if(other.gameObject.tag == "Player")
+			other.gameObject.GetComponent<ShowPressB> ().hideButtonB ();
 
 	}
 }
