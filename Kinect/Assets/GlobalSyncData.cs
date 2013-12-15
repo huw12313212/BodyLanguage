@@ -28,19 +28,28 @@ public class GlobalSyncData : MonoBehaviour {
 			{
 				randomAnswer.Add(Random.Range(0,puzzle1AnswerSize));
 			}
-			
+
+			//RPC sync data
 			networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
 
-			//clear  random answer
-			randomAnswer.Clear();
+			//zero flag
+			bool zeroFlag = true;
+			//check all zero or not
+			while(zeroFlag){
+				//clear  random answer
+				randomAnswer.Clear();
 
-			//puzzle 2
-			for(int i = 0;i<puzzle2AnswerSize;i++)
-			{
-				//range is [0,1] [0,2] [0,3]
-				randomAnswer.Add(Random.Range(0,i+2));
+				//puzzle 2
+				for(int i = 0;i<puzzle2AnswerSize;i++)
+				{
+					//range is [0,1] [0,2] [0,3]
+					int randomNum = Random.Range(0,i+2);
+					randomAnswer.Add(randomNum);
+					if(randomNum!=0) zeroFlag = false;
+				}
 			}
-			
+
+			//RPC sync data
 			networkView.RPC("setPuzzle2RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
 
 		}

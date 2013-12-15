@@ -8,12 +8,50 @@ public class Puzzle2Manager : MonoBehaviour {
 	public List<GameObject> controlObjectList;
 	private List<int> inputCode;
 	private bool puzzleSolve;
-	public int puzzle2AnswerSize;
 
 	public void Code(int index,int value)
 	{
-		Debug.Log ("Index :"+index+" value:"+value);
+		//get Global data object
+		GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
+		GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+		
+		//check
+		if(globalSyncObject == null) return;
+		//get answer
+		CodeList = globalSyncObject.puzzle2Answer;
+		//check
+		if((CodeList == null) || (CodeList.Count == 0)) return;
+		
+		//add input code to list
 		inputCode[index] = value;
+
+		//check input code size
+		if(inputCode.Count == globalSyncObject.puzzle2AnswerSize)
+		{
+			//solve flag
+			puzzleSolve = true;
+			
+			//check code
+			for(int count = 0;count <CodeList.Count;count++)
+			{
+				if(inputCode[count] != CodeList[count]) puzzleSolve = false;
+			}
+			
+			//check compare result
+			if(puzzleSolve == true)
+			{
+				//open control object
+				foreach (GameObject gameobj in controlObjectList)
+				{
+					//get control object script
+					PuzzleDoorScript script = gameobj.GetComponent<PuzzleDoorScript>();
+					if(script!=null) script.open();
+				}
+			}
+			
+			//clear input code
+			//inputCode.RemoveAt(0);
+		}
 	}
 
 	// Update is called once per frame
@@ -26,11 +64,10 @@ public class Puzzle2Manager : MonoBehaviour {
 	void Start () {
 		//init
 		inputCode = new List<int>();
-		inputCode.Add(-1);
-		inputCode.Add(-1);
-		inputCode.Add(-1);
+		inputCode.Add(0);
+		inputCode.Add(0);
+		inputCode.Add(0);
 		puzzleSolve = false;
-		puzzle2AnswerSize = 3;
 	}
 
 }

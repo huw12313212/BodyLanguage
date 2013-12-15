@@ -12,7 +12,6 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 	private int clickCount = 0;
 	private bool ButtonB = false;
 	private float addRotation;
-	public float initialRotationOffset;
 
 	// Use this for initializationth
 	void Start () {
@@ -39,7 +38,7 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 				//rotate game object
 				float rotationOffest = (addRotation*clickCount)%360;
 				tween.from = gameObject.transform.rotation.eulerAngles;
-				tween.to = initialRotation + (new Vector3(rotationOffest,90,90));
+				tween.to = initialRotation + (new Vector3(0,0,rotationOffest));
 				tween.Reset();
 				tween.enabled = true;
 				
