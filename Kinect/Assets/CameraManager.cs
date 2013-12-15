@@ -6,7 +6,10 @@ public class CameraManager : MonoBehaviour {
 	
 	public GameObject Player1;
 	public GameObject Player2;
-	
+
+	public static GameObject CurrentPlayer1;
+	public static BotControlScript CurrentPlayer1Controller;
+
 	public float threashHold = 0.3f;
 	
 	public float speed = 0f;

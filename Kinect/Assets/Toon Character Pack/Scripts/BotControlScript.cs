@@ -306,13 +306,18 @@ public class BotControlScript : MonoBehaviour
 			{
 				cameraManager.Player1 = gameObject;
 				cameraManager.Player2 = gameObject;
+
 			}
 			else
 			{
 				cameraManager.Player2 = gameObject;
 			}
 
-
+		if(this.networkView.isMine)
+		{
+			CameraManager.CurrentPlayer1 = gameObject;
+			CameraManager.CurrentPlayer1Controller = this;
+		}
 
 		//wii 
 		wiimote_start();
