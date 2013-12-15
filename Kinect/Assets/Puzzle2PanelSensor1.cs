@@ -12,7 +12,7 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 	private int clickCount = 0;
 	private bool ButtonB = false;
 	private float addRotation;
-
+	public float initialRotationOffset;
 
 	// Use this for initializationth
 	void Start () {
@@ -20,30 +20,33 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 		initialRotation = gameObject.transform.rotation.eulerAngles;
 		isTrigger = false;
 		addRotation = 360/partationNum;
+
 	}
 
 	// Update is called once per frame
 	void Update () {
 
 		if (isTrigger){	
+
 			//get button down
 			ButtonB =  Input.GetButtonDown("ButtonB");
 			//click button b
 
 			if (ButtonB){
-
-
+				//click count
 				clickCount ++;
 
 				//rotate game object
+				float rotationOffest = (addRotation*clickCount)%360;
 				tween.from = gameObject.transform.rotation.eulerAngles;
-				tween.to = initialRotation + (new Vector3((addRotation*clickCount)%360,90,90));
+				tween.to = initialRotation + (new Vector3(rotationOffest,90,90));
 				tween.Reset();
 				tween.enabled = true;
 				
 				//send data
 				//*** Have Bug
-				manager.Code(myIndex, Mathf.FloorToInt(gameObject.transform.rotation.eulerAngles.x/addRotation));
+				Debug.Log ("Answer = "+Mathf.FloorToInt((rotationOffest)/addRotation));
+				manager.Code(myIndex, Mathf.FloorToInt((rotationOffest)/addRotation));
 				
 			}
 		}
@@ -54,7 +57,8 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 
 		//trigger the button B on the player
 		if(other.gameObject.tag == "Player")
-			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+			other.gameObject.GetComponent<ShowPressB>().showButtonB();
+
 	}
 	
 	

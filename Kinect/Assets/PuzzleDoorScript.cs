@@ -7,6 +7,7 @@ public class PuzzleDoorScript : MonoBehaviour {
 
 	public void open()
 	{
+		//open door
 		Debug.Log("Open the door");
 		tween.from = gameObject.transform.localPosition;
 		tween.to = gameObject.transform.localPosition + new Vector3(0,-10.0f,0);

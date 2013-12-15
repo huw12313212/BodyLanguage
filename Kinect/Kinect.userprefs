@@ -1,14 +1,17 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Puzzle2PanelSensor1.cs">
     <Files>
+      <File FileName="Assets\createPuzzle1Answer.cs" Line="16" Column="4" />
       <File FileName="Assets\createPuzzle1Answer.cs" Line="14" Column="1" />
       <File FileName="Assets\ButtonClicked.cs" Line="1" Column="1" />
       <File FileName="Assets\Network\NetworkManager.cs" Line="1" Column="1" />
-      <File FileName="Assets\Puzzle2PanelSensor1.cs" Line="67" Column="4" />
-      <File FileName="Assets\DialogTrigger.cs" Line="62" Column="18" />
+      <File FileName="Assets\Puzzle2PanelSensor1.cs" Line="29" Column="19" />
+      <File FileName="Assets\DialogTrigger.cs" Line="51" Column="1" />
       <File FileName="Assets\ShowPressB.cs" Line="16" Column="28" />
-      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="366" Column="20" />
+      <File FileName="Assets\Toon Character Pack\Scripts\BotControlScript.cs" Line="358" Column="39" />
+      <File FileName="Assets\PuzzleDoorScript.cs" Line="10" Column="14" />
+      <File FileName="Assets\GlobalSyncData.cs" Line="37" Column="14" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
