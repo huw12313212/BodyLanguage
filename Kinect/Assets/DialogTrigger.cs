@@ -22,7 +22,9 @@ public class DialogTrigger : MonoBehaviour {
 
 		//Debug.Log(activeA +""+ active +""+ isTrigger);
 
-		bool ButtonB = Input.GetButton("ButtonB");
+		if(CameraManager.CurrentPlayer1Controller == null)return;
+
+		bool ButtonB = Input.GetButton("ButtonB") || CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
 		if (isTrigger){	
 
 
