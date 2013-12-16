@@ -200,6 +200,13 @@
      <Compile Include="Assets\Puzzle2PanelSensor1.cs" />
      <Compile Include="Assets\Puzzle3InputTextScript.cs" />
      <Compile Include="Assets\PuzzleDoorScript.cs" />
+     <Compile Include="Assets\SLK\Example\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\AnimateSpriteSheet.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\BillboardLaub.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\Door.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\DoorManager.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\FpsCounter.cs" />
+     <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\OTween.cs" />
      <Compile Include="Assets\ShowPressB.cs" />
      <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <Compile Include="Assets\TeleporterEntrance.cs" />
@@ -218,6 +225,7 @@
      <None Include="Assets\PNG\texturePacker.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
+     <None Include="Assets\SLK\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (AlphaClip) .shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
