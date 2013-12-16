@@ -57,7 +57,7 @@ public class Puzzle2Manager : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log ("Input :"+inputCode[0]+" "+inputCode[1]+" "+inputCode[1]);
+//		Debug.Log ("Input :"+inputCode[0]+" "+inputCode[1]+" "+inputCode[1]);
 	}
 
 	// Use this for initialization
