@@ -1,9 +1,11 @@
 ﻿<Properties>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\LadderClicked.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\InputTextManager.cs">
     <Files>
-      <File FileName="Assets\ButtonClicked.cs" Line="71" Column="1" />
-      <File FileName="Assets\LadderClicked.cs" Line="31" Column="21" />
+      <File FileName="Assets\Puzzle3InputTextScript.cs" Line="27" Column="28" />
+      <File FileName="Assets\Puzzle2PanelSensor1.cs" Line="2" Column="26" />
+      <File FileName="Assets\InputTextManager.cs" Line="15" Column="13" />
+      <File FileName="Assets\Puzzle2Manager.cs" Line="3" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
