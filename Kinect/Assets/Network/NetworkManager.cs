@@ -10,6 +10,7 @@ public class NetworkManager : MonoBehaviour
 	private HostData[] hostList;
 	private float startTime;
 	public GameObject playerPrefab;
+	public GameObject playerPrefab2;
 	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
@@ -123,7 +124,7 @@ public class NetworkManager : MonoBehaviour
 	void OnConnectedToServer()
 	{
 		Debug.Log ("connected to server QQ");
-		SpawnPlayer();
+		SpawnPlayer2();
 		
 	}
 	
@@ -131,5 +132,10 @@ public class NetworkManager : MonoBehaviour
 	private void SpawnPlayer()
 	{
 		GameObject player = (GameObject)Network.Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, 0);
+	}
+
+	private void SpawnPlayer2()
+	{
+		GameObject player = (GameObject)Network.Instantiate(playerPrefab2, Vector3.zero, Quaternion.identity, 0);
 	}
 }
