@@ -29,10 +29,7 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																																																																																																																	GlobalSection(MonoDevelopProperties) = preSolution
-=======
-																																																					GlobalSection(MonoDevelopProperties) = preSolution
->>>>>>> ec5f152ff25f8f7847756f083d1f8940e0a197d6
+	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Assembly-CSharp.csproj
 		Policies = $0
 		$0.TextStylePolicy = $1
@@ -50,5 +47,4 @@ Global
 		$3.inheritsScope = text/plain
 		$3.scope = text/plain
 	EndGlobalSection
-
 EndGlobal
