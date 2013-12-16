@@ -201,6 +201,9 @@
      <Compile Include="Assets\Puzzle3InputTextScript.cs" />
      <Compile Include="Assets\PuzzleDoorScript.cs" />
      <Compile Include="Assets\ShowPressB.cs" />
+     <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
+     <Compile Include="Assets\TeleporterEntrance.cs" />
+     <Compile Include="Assets\TeleporterExit.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />
      <Compile Include="Assets\changeSceneLevel.cs" />

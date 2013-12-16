@@ -1,11 +1,9 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\InputTextManager.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\TeleporterEntrance.cs">
     <Files>
-      <File FileName="Assets\Puzzle3InputTextScript.cs" Line="27" Column="28" />
-      <File FileName="Assets\Puzzle2PanelSensor1.cs" Line="2" Column="26" />
-      <File FileName="Assets\InputTextManager.cs" Line="15" Column="13" />
-      <File FileName="Assets\Puzzle2Manager.cs" Line="3" Column="1" />
+      <File FileName="Assets\TeleporterEntrance.cs" Line="23" Column="78" />
+      <File FileName="Assets\ButtonClicked.cs" Line="33" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
