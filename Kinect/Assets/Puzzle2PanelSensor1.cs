@@ -65,22 +65,26 @@ public class Puzzle2PanelSensor1 : MonoBehaviour {
 		
 	}
 	void OnTriggerEnter(Collider other) {
-		isTrigger = true;
+
 		
 		//trigger the button B on the player
-		if(other.gameObject.tag == "Player" && other.gameObject.networkView.isMine)
-			other.gameObject.GetComponent<ShowPressB>().showButtonB();
+		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
+			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+			isTrigger = true;
+		}
 		
 	}
 	
 	
 	void OnTriggerExit(Collider other) {
 		
-		isTrigger = false;
+
 		
 		//hide the button B on the player
-		if(other.gameObject.tag == "Player" && other.gameObject.networkView.isMine)
+		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
+			isTrigger = false;
 			other.gameObject.GetComponent<ShowPressB> ().hideButtonB ();
+		}
 		
 	}
 	void detectNumber(){
