@@ -3,6 +3,9 @@ using System.Collections;
 
 public class TeleporterExit : MonoBehaviour {
 
+
+
+	public bool played = false;
 	public ParticleSystem explosion;
 	// Use this for initialization
 	void Start () {
@@ -15,6 +18,11 @@ public class TeleporterExit : MonoBehaviour {
 	}
 
 	void OnTriggerEnter(Collider other) {
-		explosion.Play();	
+
+		if(!played)
+		{
+			played = true;
+			explosion.Play();	
+		}
 	}
 }

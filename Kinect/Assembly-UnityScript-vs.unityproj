@@ -53,6 +53,7 @@
      <Compile Include="Assets\SLK\Example\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonCamera.js" />
      <Compile Include="Assets\SLK\Example\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" />
      <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\TurnAndMove.js" />
+     <Compile Include="Assets\Teleporter\Standard Assets\Particles\Legacy Particles\TimedObjectDestructor.js" />
      <Compile Include="Assets\Toon Character Pack\Scripts\ClearRagdolls.js" />
      <Compile Include="Assets\Toon Character Pack\Scripts\DecaptitatedHead.js" />
      <Compile Include="Assets\Toon Character Pack\Scripts\GameObjectSpawner_Characters.js" />
@@ -69,6 +70,7 @@
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
      <None Include="Assets\SLK\ReadMe.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (AlphaClip) .shader" />
+     <None Include="Assets\Teleporter\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
