@@ -6,6 +6,8 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 	private bool ButtonB = false;
 	public GameObject inputTextGroup;
 	public TextMesh textMesh;
+
+	public GameObject colli;
 	// Use this for initialization
 	void Start () {
 		isTrigger = false;
@@ -35,27 +37,39 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 				//sync puzzle 3 data
 				if(globalSyncObject != null) globalSyncObject.triggerPuzzle3Input(textMesh.text);
 
+				if(colli != null)
+					colli.GetComponent<ShowPressB>().hideButtonB();
 				//textManager.Code(textMesh.text);
 			}
+			/*else{
+				if(colli != null)
+					colli.GetComponent<ShowPressB>().showButtonB();
+			}*/
 		}
 	}
 
 	//trigger enter
 	void OnTriggerEnter(Collider other) {
-		isTrigger = true;
+
 		
 		//trigger the button B on the player
-		if(other.gameObject.tag == "Player")
-			other.gameObject.GetComponent<ShowPressB>().showButtonB();
+		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
+			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+			isTrigger = true;
+			colli = other.gameObject;
+		}
 	}
 
 	void OnTriggerExit(Collider other) {
 		
-		isTrigger = false;
+
 		
 		//hide the button B on the player
-		if(other.gameObject.tag == "Player")
+		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
 			other.gameObject.GetComponent<ShowPressB> ().hideButtonB ();
+			isTrigger = false;
+			colli = null;
+		}
 		
 	}
 
