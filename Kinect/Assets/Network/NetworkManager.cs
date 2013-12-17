@@ -14,6 +14,8 @@ public class NetworkManager : MonoBehaviour
 	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
+
+
 	
 	/*void OnGUI()
     {

@@ -57,6 +57,7 @@
      <Compile Include="Assets\GlobalSyncData.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
      <Compile Include="Assets\InputTextManager.cs" />
+     <Compile Include="Assets\InsideSensor.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsFilter.cs" />
