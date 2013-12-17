@@ -341,7 +341,6 @@ public class BotControlScript : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-
 		if(networkView.isMine)
 		{
 		

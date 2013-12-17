@@ -11,7 +11,7 @@ public class DialogTrigger : MonoBehaviour {
 	public bool activeA = false;
 	//public bool active = false;
 	public bool isTrigger = false;
-	public string playerName = "carl";
+	//public string playerName = "carl";
 	// Use this for initialization
 	void Start () {
 
