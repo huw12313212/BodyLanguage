@@ -9,6 +9,7 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 	public Puzzle2Manager manager;
 	public int partationNum;
 	private bool isTrigger;
+	public GameObject colli;
 	//public int clickCount = 0;
 	private bool ButtonB = false;
 	private float addRotation;
@@ -50,9 +51,20 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 
 				//sync puzzle 1 data
 				if(globalSyncObject != null) globalSyncObject.triggerPuzzle2Input(myIndex,currentInput);
+
+
+				if(colli != null){
+					Debug.Log("Not nullllllllllllllll :"+colli.GetComponent<ShowPressB>());
+					colli.GetComponent<ShowPressB>().hideButtonB();
+				}
+
 				//manager.Code(myIndex, Mathf.FloorToInt(currentInput));
 				
 			}
+			/*lse{
+				if(colli != null)
+					colli.GetComponent<ShowPressB>().showButtonB();
+			}*/
 		}
 		
 	}
@@ -60,8 +72,11 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		//trigger the button B on the player
 		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
-			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+			Debug.Log("call call call");
 			isTrigger = true;
+			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+
+			colli = other.gameObject;
 		}
 		
 	}
@@ -72,6 +87,7 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 		if (other.gameObject.tag == "Player" && other.gameObject.networkView.isMine) {
 			isTrigger = false;
 			other.gameObject.GetComponent<ShowPressB> ().hideButtonB ();
+			colli = null;
 		}
 		
 	}

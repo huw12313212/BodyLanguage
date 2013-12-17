@@ -6,6 +6,8 @@ public class DialogTrigger : MonoBehaviour {
 	public GameObject AnchorA;
 	public GameObject Anchor;
 
+	public GameObject colli;
+
 	public bool activeA = false;
 	//public bool active = false;
 	public bool isTrigger = false;
@@ -31,11 +33,15 @@ public class DialogTrigger : MonoBehaviour {
 			if (ButtonB){
 				//Debug.Log("ButtonB");
 				activeA = true;
+				if(colli != null)
+					colli.GetComponent<ShowPressB>().hideButtonB();
 				//active = true;
 			
 			}
 			else{
 				activeA = false;
+				if(colli != null)
+					colli.GetComponent<ShowPressB>().showButtonB();
 				//active = false;
 
 			}
@@ -50,7 +56,7 @@ public class DialogTrigger : MonoBehaviour {
 
 		//trigger button B
 		other.gameObject.GetComponent<ShowPressB>().showButtonB();
-
+		colli = other.gameObject;
 
 
 	}
@@ -63,5 +69,6 @@ public class DialogTrigger : MonoBehaviour {
 
 		//hide button B
 		other.gameObject.GetComponent<ShowPressB>().hideButtonB();
+		colli = null;
 	}
 }
