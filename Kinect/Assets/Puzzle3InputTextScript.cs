@@ -14,6 +14,9 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
+		//update rotation
+
+
 		if (isTrigger){	
 			
 			//get button down
@@ -23,8 +26,16 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 			if (ButtonB){
 				//get text manager
 				InputTextManager textManager = inputTextGroup.GetComponent<InputTextManager>();
-				//add text
-				textManager.AddInputText(textMesh.text);
+
+				//add text 
+				//get global object
+				GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
+				GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+
+				//sync puzzle 3 data
+				if(globalSyncObject != null) globalSyncObject.triggerPuzzle3Input(textMesh.text);
+
+				//textManager.Code(textMesh.text);
 			}
 		}
 	}

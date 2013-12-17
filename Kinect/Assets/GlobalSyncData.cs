@@ -3,18 +3,21 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class GlobalSyncData : MonoBehaviour {
-	
+
+	//answer size
 	public int puzzle1AnswerSize;
 	public int puzzle2AnswerSize;
 	public int puzzle3AnswerSize;
+	//answer
 	public List<int> puzzle1Answer;
 	public List<int> puzzle2Answer;
 	public List<string> puzzle3Answer;
 	public List<string> puzzle3AnswerStringSet;
 	
-	public GameObject puzzle2Turntable1;
-	public GameObject puzzle2Turntable2;
-	public GameObject puzzle2Turntable3;
+	//puzzle manager
+	private GameObject puzzle1Manager;
+	private GameObject puzzle2Manager;
+	private GameObject puzzle3Manager;
 	
 	// Use this for initialization
 	void Start () {
@@ -28,11 +31,12 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle1Answer = new List<int>();
 		puzzle2Answer = new List<int>();
 		puzzle3Answer = new List<string>();
-		
-		puzzle2Turntable1 = GameObject.Find ("Puzzle 2 Sensor 1");
-		puzzle2Turntable2 = GameObject.Find ("Puzzle 2 Sensor 2");
-		puzzle2Turntable3 = GameObject.Find ("Puzzle 2 Sensor 3");
-		
+
+		//get puzzle manager
+		puzzle1Manager = GameObject.Find ("Puzzle 1 Manager");
+		puzzle2Manager = GameObject.Find ("Puzzle 2 Manager");
+		puzzle3Manager = GameObject.Find ("Puzzle 3 Manager");
+
 		//init puzzle answer
 		//if(networkView.isMine)
 		//{
@@ -93,25 +97,6 @@ public class GlobalSyncData : MonoBehaviour {
 	
 	void Update()
 	{
-		
-		if (puzzle2Turntable1 != null) {
-			Puzzle2PanelSensor1 turnTable1 = puzzle2Turntable1.GetComponent<Puzzle2PanelSensor1>();
-			if(turnTable1.isTrigger && turnTable1.ButtonB){
-				networkView.RPC("updatePanelRotation",RPCMode.AllBuffered,1, turnTable1.addRotation, turnTable1.clickCount, turnTable1.initialRotation); 
-			}
-		}
-		if (puzzle2Turntable2 != null) {
-			Puzzle2PanelSensor1 turnTable2 = puzzle2Turntable2.GetComponent<Puzzle2PanelSensor1>();
-			if(turnTable2.isTrigger && turnTable2.ButtonB){
-				networkView.RPC("updatePanelRotation",RPCMode.AllBuffered,2, turnTable2.addRotation, turnTable2.clickCount, turnTable2.initialRotation); 
-			}
-		}
-		if (puzzle2Turntable3 != null) {
-			Puzzle2PanelSensor1 turnTable3 = puzzle2Turntable3.GetComponent<Puzzle2PanelSensor1>();
-			if(turnTable3.isTrigger && turnTable3.ButtonB){
-				networkView.RPC("updatePanelRotation",RPCMode.AllBuffered,3, turnTable3.addRotation, turnTable3.clickCount, turnTable3.initialRotation); 
-			}
-		}
 		//update
 	}
 	
@@ -146,12 +131,7 @@ public class GlobalSyncData : MonoBehaviour {
 			//syncTemp = puzzle1Answer;
 		}
 	}
-	
-	public void setPuzzle1Answer(List<int> answer)
-	{
-		if(answer!=null) puzzle1Answer = answer;
-	}
-	
+
 	
 	[RPC]
 	void setPuzzle1RPC(int i1,int i2,int i3)
@@ -183,29 +163,25 @@ public class GlobalSyncData : MonoBehaviour {
 		
 		puzzle3Answer.Add(puzzle3AnswerStringSet[i1]);
 	}
-	
-	[RPC] 
-	void updatePanelRotation(int order, float addRotation, int clickCount, Vector3 initialRotation){
-		TweenRotation tween = null;
-		float rotationOffset = 0;
-		if (order == 1) {
-			tween = puzzle2Turntable1.GetComponent<TweenRotation>();
-			rotationOffset = (addRotation*clickCount)%360;
-			tween.from = puzzle2Turntable1.transform.rotation.eulerAngles;
-		} else if (order == 2) {
-			tween = puzzle2Turntable2.GetComponent<TweenRotation>();
-			rotationOffset = (addRotation*clickCount)%360;
-			tween.from = puzzle2Turntable2.transform.rotation.eulerAngles;
-		} else {
-			tween = puzzle2Turntable3.GetComponent<TweenRotation>();
-			rotationOffset = (addRotation*clickCount)%360;
-			tween.from = puzzle2Turntable3.transform.rotation.eulerAngles;		
-		}
-		
-		if (tween != null) {
-			tween.to = initialRotation + (new Vector3(0,0,rotationOffset));
-			tween.Reset();
-			tween.enabled = true;
-		}
+
+	//puzzle 1 
+	public void triggerPuzzle1Input(int data)
+	{
+		NetworkView networkView =  puzzle1Manager.GetComponent<NetworkView>();
+		if(networkView != null) networkView.RPC("Code",RPCMode.AllBuffered,data);
+	}
+
+	//puzzle 2
+	public void triggerPuzzle2Input(int index,int value)
+	{
+		NetworkView networkView =  puzzle2Manager.GetComponent<NetworkView>();
+		if(networkView != null) networkView.RPC("Code",RPCMode.AllBuffered,index,value);
+	}
+
+	//puzzle 3 
+	public void triggerPuzzle3Input(string data)
+	{
+		NetworkView networkView =  puzzle3Manager.GetComponent<NetworkView>();
+		if(networkView != null) networkView.RPC("Code",RPCMode.AllBuffered,data);
 	}
 }
