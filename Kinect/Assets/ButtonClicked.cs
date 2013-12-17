@@ -35,7 +35,7 @@ public class ButtonClicked : MonoBehaviour {
 
 
 		clickCount ++;
-		//if(other.name.Contains("Rumbo"))
+	
 		if(clickCount==1)
 		{
 
@@ -46,13 +46,15 @@ public class ButtonClicked : MonoBehaviour {
 			tween.Reset();
 			tween.enabled = true;
 
-			//get global object
-			GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
-			GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+			if(other.networkView.isMine){
+				//get global object
+				GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
+				GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
 
-			//sync puzzle 1 data
-			if(globalSyncObject != null) globalSyncObject.triggerPuzzle1Input(myData);
-			//manager.Code(myData);
+				//sync puzzle 1 data
+				if(globalSyncObject != null) globalSyncObject.triggerPuzzle1Input(myData);
+				//manager.Code(myData);
+			}
 		}
 
 	}
