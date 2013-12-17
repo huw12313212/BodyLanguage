@@ -6,9 +6,11 @@ public class Puzzle2Manager : MonoBehaviour {
 	
 	private List<int> CodeList;
 	public List<GameObject> controlObjectList;
-	private List<int> inputCode;
+	public List<GameObject> controlPanelSensorList;
+	public List<int> inputCode;
 	private bool puzzleSolve;
 
+	[RPC]
 	public void Code(int index,int value)
 	{
 		//get Global data object
@@ -24,6 +26,9 @@ public class Puzzle2Manager : MonoBehaviour {
 		
 		//add input code to list
 		inputCode[index] = value;
+
+		//update rotation
+		updatePanelRotation(index);
 
 		//check input code size
 		if(inputCode.Count == globalSyncObject.puzzle2AnswerSize)
@@ -70,4 +75,11 @@ public class Puzzle2Manager : MonoBehaviour {
 		puzzleSolve = false;
 	}
 
+	void updatePanelRotation(int index){
+		//get sensor
+		Puzzle2PanelSensor sensor = controlPanelSensorList[index].GetComponent<Puzzle2PanelSensor>();
+		//update rotation
+		sensor.UpdatePanelRotation();
+	}
+	
 }

@@ -14,7 +14,8 @@ public class InputTextManager : MonoBehaviour {
 		currentAnswerIndex = 0;
 	}
 
-	public void AddInputText(string str)
+	[RPC]
+	public void Code(string str)
 	{
 		//set text
 		if(currentInputCount<textList.Count)

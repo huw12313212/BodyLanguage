@@ -198,7 +198,7 @@
      <Compile Include="Assets\PlayerScripts\cameraDummyFollowPlayer.cs" />
      <Compile Include="Assets\PointMan\PointManController.cs" />
      <Compile Include="Assets\Puzzle2Manager.cs" />
-     <Compile Include="Assets\Puzzle2PanelSensor1.cs" />
+     <Compile Include="Assets\Puzzle2PanelSensor.cs" />
      <Compile Include="Assets\Puzzle3InputTextScript.cs" />
      <Compile Include="Assets\PuzzleDoorScript.cs" />
      <Compile Include="Assets\Rotate.cs" />

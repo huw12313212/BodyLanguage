@@ -9,6 +9,7 @@ public class ButtonManager : MonoBehaviour {
 	public List<int> inputCode;
 	private bool puzzleSolve;
 
+	[RPC]
 	public void Code(int i)
 	{
 		Debug.Log ("Code :"+i);
