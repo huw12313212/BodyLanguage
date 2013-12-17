@@ -34,8 +34,8 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle2Turntable3 = GameObject.Find ("Puzzle 2 Sensor 3");
 		
 		//init puzzle answer
-		if(networkView.isMine)
-		{
+		//if(networkView.isMine)
+		//{
 			Debug.Log("Init Global Sync data");
 			//puzzle 1
 			Debug.Log("Create Random Num");
@@ -87,7 +87,7 @@ public class GlobalSyncData : MonoBehaviour {
 			//RPC sync data
 			networkView.RPC("setPuzzle3RPC",RPCMode.AllBuffered,randomAnswer[0]);
 			
-		}
+		//}
 		
 	}
 	
