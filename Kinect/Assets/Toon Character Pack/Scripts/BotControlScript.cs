@@ -328,7 +328,7 @@ public class BotControlScript : MonoBehaviour
 	
 	void OnCollisionEnter (Collision col)
     {
-		if(col.collider.name == "Terrain")
+		if(col.collider.name == "Terrain" || col.collider.name =="DoorMovable_Short_01")
 		{
 			
 			grounded = true;
