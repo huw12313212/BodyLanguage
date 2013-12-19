@@ -16,7 +16,23 @@ public class TeleporterEntrance : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		//check no one on top
+		GameObject[] objectArray = GameObject.FindGameObjectsWithTag("Player");
+
+		foreach(GameObject player in objectArray)
+		{
+			BotControlScript script = player.GetComponent<BotControlScript>();
+			if(script!=null)
+			{
+				if(script.onTop == true) 
+				{
+					Played = true;
+					DoorEffect.SetActive(false);
+				}
+			}
+		}
+
 	}
 
 	void OnTriggerEnter(Collider other) {

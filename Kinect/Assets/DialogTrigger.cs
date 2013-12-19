@@ -31,11 +31,12 @@ public class DialogTrigger : MonoBehaviour {
 
 
 			if (ButtonB){
-				if(colli == gameObject)
-					activeA = true;
 				if(colli != null)
+				{
 					colli.GetComponent<ShowPressB>().hideButtonB();
-				//active = true;
+					if(colli.networkView.isMine) activeA = true;
+				}
+					//active = true;
 			
 			}
 			else{
