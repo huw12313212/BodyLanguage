@@ -31,8 +31,8 @@ public class DialogTrigger : MonoBehaviour {
 
 
 			if (ButtonB){
-				//Debug.Log("ButtonB");
-				activeA = true;
+				if(colli == gameObject)
+					activeA = true;
 				if(colli != null)
 					colli.GetComponent<ShowPressB>().hideButtonB();
 				//active = true;
