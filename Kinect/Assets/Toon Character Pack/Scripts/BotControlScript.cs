@@ -14,6 +14,8 @@ public class BotControlScript : MonoBehaviour
 	public NodeManager nodeManager;
 
 	public CameraManager cameraManager;
+
+	public bool onTop;
 /*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -24,8 +26,13 @@ public class BotControlScript : MonoBehaviour
     {
         Vector3 syncPosition = Vector3.zero;
         Vector3 syncVelocity = Vector3.zero;
+		bool syncOnTop = false;
         if (stream.isWriting)
         {
+			//sync 
+			syncOnTop = onTop;
+			stream.Serialize(ref syncOnTop);
+
            /* syncPosition = rigidbody.position;
             stream.Serialize(ref syncPosition);
 
@@ -64,6 +71,10 @@ public class BotControlScript : MonoBehaviour
         }
         else
         {
+			//sync 
+			stream.Serialize(ref syncOnTop);
+			onTop = syncOnTop;
+
 			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
 			{
 				GameObject targetNode = nodeManager.syncList[i];
@@ -284,6 +295,9 @@ public class BotControlScript : MonoBehaviour
 
 	void Start ()
 	{
+		//init 
+		onTop = false;
+
 		// initialising reference variables
 		anim = gameObject.GetComponent<Animator>();					  
 		col = gameObject.GetComponent<CapsuleCollider>();				
