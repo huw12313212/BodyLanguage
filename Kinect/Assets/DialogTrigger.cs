@@ -55,8 +55,10 @@ public class DialogTrigger : MonoBehaviour {
 		isTrigger = true;
 
 		//trigger button B
-		other.gameObject.GetComponent<ShowPressB>().showButtonB();
-		colli = other.gameObject;
+		if (other.gameObject.networkView.isMine && other.gameObject.tag == "Player") {
+			other.gameObject.GetComponent<ShowPressB> ().showButtonB ();
+			colli = other.gameObject;
+		}
 
 
 	}
@@ -68,7 +70,9 @@ public class DialogTrigger : MonoBehaviour {
 		//active = false;
 
 		//hide button B
-		other.gameObject.GetComponent<ShowPressB>().hideButtonB();
-		colli = null;
+		if (other.gameObject.networkView.isMine && other.gameObject.tag == "Player") {
+			other.gameObject.GetComponent<ShowPressB> ().hideButtonB ();
+			colli = null;
+		}
 	}
 }
