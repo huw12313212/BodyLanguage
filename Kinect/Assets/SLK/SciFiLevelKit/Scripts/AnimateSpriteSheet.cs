@@ -26,8 +26,9 @@ class AnimateSpriteSheet : MonoBehaviour
  
         Vector2 size = new Vector2(1f / Columns, 1f / Rows);
         renderer.sharedMaterial.SetTextureScale("_MainTex", size);
+
+
     }
- 
     void OnEnable()
     {
         StartCoroutine(UpdateTiling());
