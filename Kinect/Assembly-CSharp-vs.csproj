@@ -72,6 +72,7 @@
      <Compile Include="Assets\LadderClicked.cs" />
      <Compile Include="Assets\LadderScript.cs" />
      <Compile Include="Assets\Level2HintMessage.cs" />
+     <Compile Include="Assets\Level3HintMessage.cs" />
      <Compile Include="Assets\MessageHint.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
@@ -217,6 +218,7 @@
      <Compile Include="Assets\TeleporterExit.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\AnimTriggers.cs" />
      <Compile Include="Assets\Toon Character Pack\Scripts\BotControlScript.cs" />
+     <Compile Include="Assets\TreeGrowing.cs" />
      <Compile Include="Assets\changeSceneLevel.cs" />
      <Compile Include="Assets\createPuzzle1Answer.cs" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Depth Cutout.shader" />
@@ -260,6 +262,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
      <None Include="Assets\Toon Character Pack\Shaders\Unlit-Alpha.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
+     <None Include="Assets\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
  <Reference Include="UniWii">
  <HintPath>Assets\Plugins\UniWii.dll</HintPath>
  </Reference>
