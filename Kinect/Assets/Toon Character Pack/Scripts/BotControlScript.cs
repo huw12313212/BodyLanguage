@@ -320,7 +320,6 @@ public class BotControlScript : MonoBehaviour
 			{
 				cameraManager.Player1 = gameObject;
 				cameraManager.Player2 = gameObject;
-
 			}
 			else
 			{
@@ -342,6 +341,7 @@ public class BotControlScript : MonoBehaviour
 	
 	void OnCollisionEnter (Collision col)
     {
+		Debug.Log("Coll name:" + col.collider.name);
 		if(col.collider.name == "Terrain" || col.collider.name =="DoorMovable_Short_01")
 		{
 			
