@@ -99,6 +99,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (SoftClip).shader" />
      <None Include="Assets\Toon Character Pack\Shaders\Unlit-Alpha.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
+     <None Include="Assets\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
  <Reference Include="UniWii">
  <HintPath>Assets\Plugins\UniWii.dll</HintPath>
  </Reference>
