@@ -358,155 +358,149 @@ public class BotControlScript : MonoBehaviour
 		if(networkView.isMine)
 		{
 		
-		float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
+			float h = Input.GetAxis("Horizontal");				// setup h variable as our horizontal input axis
 		
-		bool moving = false;
+			bool moving = false;
 		
 		
-		if(!jumping)
-		{
-			
-		if(h>0.3f||wiimoteGetButtonRight())
-		{
-			offset.transform.rotation = Quaternion.Euler(0,90,0);
-			
-			if(h>0.3f)
+			if(!jumping)
 			{
-				anim.SetFloat("Speed", (h-0.3f)*0.7f);
-					rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
-					moving = true;
-				
-			}
-			else if(wiimoteGetButtonRight())
-			{
-				anim.SetFloat("Speed", 0.7f);
-					rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
-					moving = true;
-			}
 			
-
+				if(h>0.3f||wiimoteGetButtonRight())
+				{
+					offset.transform.rotation = Quaternion.Euler(0,90,0);
 			
-		}
-		else if(h<-0.3f||wiimoteGetButtonLeft())
-		{
-			offset.transform.rotation = Quaternion.Euler(0,-90,0);
-			
-			if(h<-0.3f)
-			{
-			anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
-					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
-					moving =true;
-			}
-			else if(wiimoteGetButtonLeft())
-			{
-				anim.SetFloat("Speed", 0.7f);
-					rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
-					moving = true;
-			}
-				
-			
-
-		}
-		else
-		{
-			if(offset!=null)
-			offset.transform.rotation = Quaternion.Euler(0,180,0);
-			anim.SetFloat("Speed", 0);	
-			
-
-		}
+					if(h>0.3f)
+					{
+						anim.SetFloat("Speed", (h-0.3f)*0.7f);
+						rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
+						moving = true;
+					}
+					else if(wiimoteGetButtonRight())
+					{
+						anim.SetFloat("Speed", 0.7f);
+						rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
+						moving = true;
+					}
+				}
+				else if(h < -0.3f||wiimoteGetButtonLeft())
+				{
+					offset.transform.rotation = Quaternion.Euler(0,-90,0);
+					if(h < -0.3f)
+					{
+						anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
+						rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
+						moving =true;
+					}
+					else if(wiimoteGetButtonLeft())
+					{
+						anim.SetFloat("Speed", 0.7f);
+						rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
+						moving = true;
+					}
+				}
+				else
+				{
+					if(offset!=null)
+						offset.transform.rotation = Quaternion.Euler(0,180,0);
+					anim.SetFloat("Speed", 0);	
+				}
 		
-		if(Input.GetButton("ButtonA")||wiimoteGetButtonB()||jumping)
-		{
-			anim.SetBool("Jump", true);
-			
-
-			
-			jumping = true;
-			Debug.Log("Jumping");
-			rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
-			
-		}
+				if(Input.GetButton("ButtonA")||wiimoteGetButtonB()||jumping)
+				{
+					anim.SetBool("Jump", true);
+					jumping = true;
+					Debug.Log("Jumping");
+					rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
+				}
 			
 //			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
 			
-			if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
-			{
-				
-				
-				AnimationController.enabled = false;
-				
-				KinectController.enabled = true;
+				if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
+				{
+					AnimationController.enabled = false;
+					KinectController.enabled = true;
 						//Debug.Log("Animation!!!");
-				
-				rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
-				
+					rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
+				}
+				else
+				{
+					AnimationController.enabled = true;
+					KinectController.enabled = false;
+				}
 			}
-			else
-			{
-				AnimationController.enabled = true;
-				
-				KinectController.enabled = false;
-				
+			else{
+				//detect changing direction when the user is jumping! 
+				if( (h < -0.3f || wiimoteGetButtonLeft()) && rigidbody.velocity.x > 0){
+					offset.transform.rotation = Quaternion.Euler(0,-90,0);
+					if(h < -0.3f)
+					{
+						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+					}
+					else if(wiimoteGetButtonLeft())
+					{
+						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x),rigidbody.velocity.y,0);
+					}
+				}
+				else if((h > 0.3f||wiimoteGetButtonRight()) && rigidbody.velocity.x < 0)
+				{
+					offset.transform.rotation = Quaternion.Euler(0,90,0);
+					
+					if(h > 0.3f)
+					{
+						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+					}
+					else if(wiimoteGetButtonRight())
+					{
+						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+					}
+				}
 			}
-			
-		
-			
-		}
 		
 		//Debug.Log("Gounded"+anim.GetBool("Grounded"));
 
 								// set our animator's float parameter 'Speed' equal to the vertical input axis				
-		anim.SetFloat("Direction", 0); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		
+			anim.SetFloat("Direction", 0); 						// set our animator's float parameter 'Direction' equal to the horizontal input axis		
 		
 		
-		anim.speed = animSpeed;								// set the speed of our animator to the public variable 'animSpeed'
+			anim.speed = animSpeed;								// set the speed of our animator to the public variable 'animSpeed'
 		
 		
 		
-		currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// set our currentState variable to the current state of the Base Layer (0) of animation
+			currentBaseState = anim.GetCurrentAnimatorStateInfo(0);	// set our currentState variable to the current state of the Base Layer (0) of animation
 		
-		if(anim.layerCount ==2)		
-			layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);	// set our layer2CurrentState variable to the current state of the second Layer (1) of animation
+			if(anim.layerCount ==2)		
+				layer2CurrentState = anim.GetCurrentAnimatorStateInfo(1);	// set our layer2CurrentState variable to the current state of the second Layer (1) of animation
 		
 				
 		// STANDARD JUMPING
 		
 		// if we are currently in a state called Locomotion, then allow Jump input (Space) to set the Jump bool parameter in the Animator to true
-		if (currentBaseState.nameHash == locoState)
-		{	
-			if(Input.GetButtonDown("Jump"))
-			{
-				anim.SetBool("Jump", true);
-				//anim.SetBool("Grounded", false);
-				
-				grounded = false;
-				anim.SetBool("Grounded", grounded);
-		
+			if (currentBaseState.nameHash == locoState)
+			{	
+				if(Input.GetButtonDown("Jump"))
+				{
+					anim.SetBool("Jump", true);
+					//anim.SetBool("Grounded", false);
+					grounded = false;
+					anim.SetBool("Grounded", grounded);
+				}
+				if(!anim.IsInTransition(0))
+				{
+				}
 			}
-			
-			if(!anim.IsInTransition(0))
-			{
-				
-			}
-		}
-		
-
 		
 		// if we are in the jumping state... 
-		else if(currentBaseState.nameHash == jumpState)
-		{
+			else if(currentBaseState.nameHash == jumpState)
+			{
 			//  ..and not still in transition..
-			if(!anim.IsInTransition(0))
-			{				
-				// reset the Jump bool so we can jump again, and so that the state does not loop 
-				anim.SetBool("Jump", false);
-				
-				
-				grounded = false;
-				anim.SetBool("Grounded", grounded);
-				
-			}
+				if(!anim.IsInTransition(0))
+				{				
+					// reset the Jump bool so we can jump again, and so that the state does not loop 
+					anim.SetBool("Jump", false);
+					grounded = false;
+					anim.SetBool("Grounded", grounded);
+				}
 			//anim.SetBool("Grounded", false);
 				
 			
@@ -529,53 +523,53 @@ public class BotControlScript : MonoBehaviour
 				}
 			}
 			*/
-		}
+			}
 		
 		
 		// JUMP DOWN AND ROLL 
 		
 		// if we are jumping down, set our Collider's Y position to the float curve from the animation clip - 
 		// this is a slight lowering so that the collider hits the floor as the character extends his legs
-		else if (currentBaseState.nameHash == jumpDownState)
-		{
-			col.center = new Vector3(0, anim.GetFloat("ColliderY"), 0);
-		}
+			else if (currentBaseState.nameHash == jumpDownState)
+			{
+				col.center = new Vector3(0, anim.GetFloat("ColliderY"), 0);
+			}
 		
 		// if we are falling, set our Grounded boolean to true when our character's root 
 		// position is less that 0.6, this allows us to transition from fall into roll and run
 		// we then set the Collider's Height equal to the float curve from the animation clip
-		else if (currentBaseState.nameHash == fallState)
-		{
-			col.height = anim.GetFloat("ColliderHeight");
-		}
+			else if (currentBaseState.nameHash == fallState)
+			{
+				col.height = anim.GetFloat("ColliderHeight");
+			}
 		
 		// if we are in the roll state and not in transition, set Collider Height to the float curve from the animation clip 
 		// this ensures we are in a short spherical capsule height during the roll, so we can smash through the lower
 		// boxes, and then extends the collider as we come out of the roll
 		// we also moderate the Y position of the collider using another of these curves on line 128
-		else if (currentBaseState.nameHash == rollState)
-		{
-			if(!anim.IsInTransition(0))
+			else if (currentBaseState.nameHash == rollState)
 			{
-				col.center = new Vector3(0, anim.GetFloat("ColliderY"), 0);
+				if(!anim.IsInTransition(0))
+				{
+					col.center = new Vector3(0, anim.GetFloat("ColliderY"), 0);
 				
+				}
 			}
-		}
 		// IDLE
 		
 		// check if we are at idle, if so, let us Wave!
-		else if (currentBaseState.nameHash == idleState)
-		{
-			if(Input.GetButtonUp("Jump"))
+			else if (currentBaseState.nameHash == idleState)
 			{
-				anim.SetBool("Wave", true);
+				if(Input.GetButtonUp("Jump"))
+				{
+					anim.SetBool("Wave", true);
+				}
 			}
-		}
 		// if we enter the waving state, reset the bool to let us wave again in future
-		if(layer2CurrentState.nameHash == waveState)
-		{
-			anim.SetBool("Wave", false);
-		}
+			if(layer2CurrentState.nameHash == waveState)
+			{
+				anim.SetBool("Wave", false);
+			}
 		}
 		else
 		{
