@@ -72,6 +72,7 @@
      <Compile Include="Assets\LadderClicked.cs" />
      <Compile Include="Assets\LadderScript.cs" />
      <Compile Include="Assets\Level2HintMessage.cs" />
+     <Compile Include="Assets\Level3HintMessage.cs" />
      <Compile Include="Assets\MessageHint.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
