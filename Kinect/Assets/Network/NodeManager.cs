@@ -22,6 +22,8 @@ public class NodeManager : MonoBehaviour {
 	
 	public List<GameObject> syncList = new List<GameObject>();
 	public List<networkData> dataList = new List<networkData>();
+
+	public float HugTime = 0;
 	//public int i = 0;
 	// Use this for initialization
 	void Start () {
@@ -34,6 +36,22 @@ public class NodeManager : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+
+		string name = gameObject.name;
+
+		//Debug.Log(name+"left"+syncList[14].transform.position+" right"+syncList[21].transform.position);
+
+		if(syncList[14].transform.position.y>1.0&&
+		   syncList[14].transform.position.y<=1.6&&
+		   syncList[21].transform.position.y>1.0&&
+		   syncList[21].transform.position.y<=1.6)
+		{
+			HugTime += Time.deltaTime;
+		}
+		else
+		{
+			HugTime = 0;
+		}
+
 	}
 }
