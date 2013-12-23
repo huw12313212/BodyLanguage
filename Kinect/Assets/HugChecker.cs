@@ -17,17 +17,26 @@ public class HugChecker : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
+
+		if(other.gameObject.tag == "Player")
+		{
 		touchCount++;
+		}
 
 	}
 	
 	void OnTriggerExit(Collider other) {
+		if(other.gameObject.tag == "Player")
+		{
 		touchCount--;
+		}
 	}
 
 	public int touchCount = 0;
 
 	void Update () {
+
+		//Debug.Log("fuck....");
 		if(touchCount == 2)
 		{
 			//CameraManager cameraManager = mainCamera.GetComponent<CameraManager>();

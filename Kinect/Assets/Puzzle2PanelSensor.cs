@@ -28,7 +28,7 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 		if (isTrigger){	
 			
 			//get button down
-			ButtonB =  Input.GetButtonDown("ButtonB");
+			ButtonB =  Input.GetButtonDown("ButtonB")||CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
 			//click button b
 			
 			if (ButtonB){
