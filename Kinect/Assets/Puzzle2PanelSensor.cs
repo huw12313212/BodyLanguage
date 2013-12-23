@@ -21,6 +21,8 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 		isTrigger = false;
 		addRotation = 360/partationNum;
 	}
+
+	bool previousWiiA = false;
 	
 	// Update is called once per frame
 	void Update () {
@@ -28,8 +30,10 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 		if (isTrigger){	
 			
 			//get button down
-			ButtonB =  Input.GetButtonDown("ButtonB")||CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
+			ButtonB =  Input.GetButtonDown("ButtonB")||(!previousWiiA&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA());
 			//click button b
+
+				previousWiiA = CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
 			
 			if (ButtonB){
 				//click count

@@ -12,7 +12,9 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 	void Start () {
 		isTrigger = false;
 	}
-	
+
+	bool PreviousWii = false;
+
 	// Update is called once per frame
 	void Update () {
 
@@ -20,11 +22,12 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 
 
 		if (isTrigger){	
-			
+
 			//get button down
-			ButtonB =  Input.GetButtonDown("ButtonB");
+			ButtonB =  Input.GetButtonDown("ButtonB")||(!PreviousWii&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA());
 			//click button b
-			
+			PreviousWii = CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
+
 			if (ButtonB){
 				//get text manager
 				InputTextManager textManager = inputTextGroup.GetComponent<InputTextManager>();
