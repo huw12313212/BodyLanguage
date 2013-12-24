@@ -17,14 +17,16 @@ public class TreeGrowing : MonoBehaviour {
 				particleSystemList[i].SetActive(true);
 			}
 
-			networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
+			//networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
 		}
 	}
 
+	/*
 	[RPC]
 	void setGrowRPC()
 	{
 		grow = true;
 	}
+	*/
 
 }
