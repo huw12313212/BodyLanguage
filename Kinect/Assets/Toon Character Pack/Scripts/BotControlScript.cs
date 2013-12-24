@@ -347,6 +347,7 @@ public class BotControlScript : MonoBehaviour
 			
 			grounded = true;
 			anim.SetBool("Grounded", grounded);
+			anim.SetBool("Jump", false);
 			
 			jumping = false;
 			Debug.Log("Grounded");
