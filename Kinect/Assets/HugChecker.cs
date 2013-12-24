@@ -50,12 +50,14 @@ public class HugChecker : MonoBehaviour {
 				NodeManager nodeManager1 = player1.GetComponent<NodeManager>();
 				NodeManager nodeManager2 = player2.GetComponent<NodeManager>();
 				
-				if(nodeManager1.HugTime > 3&&nodeManager2.HugTime>3)
+				if(nodeManager1.HugTime > 2.0f && nodeManager2.HugTime > 2.0f)
 				{
 					grow.grow = true;
+
 				}
 
 			}
 		}
 	}
+	
 }
