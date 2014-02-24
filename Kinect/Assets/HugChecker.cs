@@ -58,7 +58,7 @@ public class HugChecker : MonoBehaviour {
 		*/
 
 		//Debug.Log("fuck....");
-		else if(touchCount == 2)
+		if(touchCount == 2)
 		{
 			//CameraManager cameraManager = mainCamera.GetComponent<CameraManager>();
 			GameObject player1 = cameraManager.Player1;
