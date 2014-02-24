@@ -94,7 +94,13 @@ public class GlobalSyncData : MonoBehaviour {
 		//}
 		
 	}
-	
+
+	//sync all client tree
+	public void syncWorldTree()
+	{
+		networkView.RPC("setTreeGrowRPC",RPCMode.AllBuffered);
+	}
+
 	void Update()
 	{
 		//update
@@ -162,6 +168,17 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle3Answer.Clear();
 		
 		puzzle3Answer.Add(puzzle3AnswerStringSet[i1]);
+	}
+
+	//Tree grow
+	[RPC]
+	void setTreeGrowRPC()
+	{
+		Debug.Log("Sync Tree Growing!");
+		//sync all grow variable
+		GameObject worldTree = GameObject.FindGameObjectWithTag("WorldTree");
+		TreeGrowing treeGrowingScript = worldTree.GetComponent<TreeGrowing>();
+		treeGrowingScript.grow = true;
 	}
 
 	//puzzle 1 

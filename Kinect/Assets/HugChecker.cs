@@ -36,8 +36,29 @@ public class HugChecker : MonoBehaviour {
 
 	void Update () {
 
+		/* For single player test
+		if(touchCount == 1)
+		{
+			GameObject player1 = cameraManager.Player1;
+			if(player1 != null)
+			{
+				NodeManager nodeManager1 = player1.GetComponent<NodeManager>();
+
+				if(nodeManager1.HugTime > 2.0f)
+				{
+					if(grow.grow != true)
+					{
+						GlobalSyncData sync = GameObject.FindGameObjectWithTag("GlobalSyncObject").GetComponent<GlobalSyncData>();
+						sync.syncWorldTree();
+					}
+				}
+				
+			}
+		}
+		*/
+
 		//Debug.Log("fuck....");
-		if(touchCount == 2)
+		else if(touchCount == 2)
 		{
 			//CameraManager cameraManager = mainCamera.GetComponent<CameraManager>();
 			GameObject player1 = cameraManager.Player1;
@@ -52,8 +73,11 @@ public class HugChecker : MonoBehaviour {
 				
 				if(nodeManager1.HugTime > 2.0f && nodeManager2.HugTime > 2.0f)
 				{
-					grow.grow = true;
-
+					if(grow.grow != true)
+					{
+						GlobalSyncData sync = GameObject.FindGameObjectWithTag("GlobalSyncObject").GetComponent<GlobalSyncData>();
+						sync.syncWorldTree();
+					}
 				}
 
 			}

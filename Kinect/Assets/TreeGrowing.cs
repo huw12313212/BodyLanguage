@@ -6,11 +6,17 @@ public class TreeGrowing : MonoBehaviour {
 	public List<GameObject> particleSystemList;
 	public TweenScale tween;
 
+	public bool growed = false;
+
 	public bool grow
 	{
 		set
 		{
+			//for test
+			Debug.Log("WorldTree's Grow set to "+value);
+
 			tween.enabled  = value;
+			growed = value;
 
 			for(int i = 0;i<particleSystemList.Count;i++)
 			{
@@ -19,14 +25,11 @@ public class TreeGrowing : MonoBehaviour {
 
 			//networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
 		}
-	}
 
-	/*
-	[RPC]
-	void setGrowRPC()
-	{
-		grow = true;
+		get
+		{
+			return growed;
+		}
 	}
-	*/
-
+	
 }
