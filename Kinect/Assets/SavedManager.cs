@@ -6,7 +6,9 @@ using System;
 
 public class SavedManager : MonoBehaviour {
 	public List<GameObject> savedObjectArray;
-
+	private bool playerInit = false;
+	private JSONObject allData;
+	//private GameObject player;
 
 	public void Save()
 	{
@@ -75,6 +77,20 @@ public class SavedManager : MonoBehaviour {
 			SavedTable.AddField("AnswersData",objectJsonTemp);
 		}
 
+		//add player data
+		GameObject player = CameraManager.CurrentPlayer1;
+		if(player!=null)
+		{
+			JSONObject playerJsonTemp = new JSONObject();
+
+			playerJsonTemp.AddField("x",player.transform.position.x);
+			playerJsonTemp.AddField("y",player.transform.position.y);
+			playerJsonTemp.AddField("z",player.transform.position.z);
+
+			//add to saved Table
+			SavedTable.AddField("PlayerData",playerJsonTemp);
+		}
+
 		Debug.Log(savedObjectArrayJson.ToString());
 
 		//write to file
@@ -88,15 +104,19 @@ public class SavedManager : MonoBehaviour {
 	public void Load()
 	{
 		StreamReader _streamReader = new StreamReader("Assets/Resources/Save.txt");
+		//check file exist
+		if(_streamReader == null) return;
+
 		String allStrings =_streamReader.ReadToEnd();
 
-		JSONObject allData = new JSONObject(allStrings);
+		allData = new JSONObject(allStrings);
 
 		JSONObject arrayDataJsonObject = allData.GetField("ObjectsData");
-		JSONObject answerDataJsonObject = allData.GetField("AnswersData");
+		//JSONObject answerDataJsonObject = allData.GetField("AnswersData");
+		//JSONObject playerDataJsonObject = allData.GetField("PlayerData");
 
-		Debug.Log ("ObjectsData:"+arrayDataJsonObject.ToString());
-		Debug.Log ("AnswersData:"+answerDataJsonObject.ToString());
+		//Debug.Log ("ObjectsData:"+arrayDataJsonObject.ToString());
+		//Debug.Log ("AnswersData:"+answerDataJsonObject.ToString());
 
 		//set loaded data to objects
 		int count = 0;
@@ -135,6 +155,8 @@ public class SavedManager : MonoBehaviour {
 			//gameObject.transform = transform;
 			count++;
 		}
+
+
 	}
 
 	public void Clear()
@@ -147,10 +169,52 @@ public class SavedManager : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		Load();
+
+	}
+
+	void initPlayerData()
+	{
+		if(allData!=null)
+		{
+			JSONObject playerDataJsonObject = allData.GetField("PlayerData");
+
+			//no player data
+			if(playerDataJsonObject == null)
+			{
+				playerInit = true;
+				return;
+			}
+
+			GameObject player = CameraManager.CurrentPlayer1;
+
+
+			if(player!=null)
+			{
+				//get player transform
+				Transform transform = player.transform;
+				//set position
+
+				Vector3 position = new Vector3();
+				
+				position.x = (float)playerDataJsonObject.GetField("x").n;
+				position.y = (float)playerDataJsonObject.GetField("y").n;
+				position.z = (float)playerDataJsonObject.GetField("z").n;
+				transform.position = position;
+
+				//Debug.Log ("Robot pos:"+CameraManager.CurrentPlayer1.transform.position.ToString());
+
+				playerInit = true;
+			}
+		}
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		if(playerInit!=true)
+		{
+			initPlayerData();
+		}
 	}
 }
