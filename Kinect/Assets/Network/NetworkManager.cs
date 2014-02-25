@@ -14,7 +14,8 @@ public class NetworkManager : MonoBehaviour
 	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
-	
+
+	public CameraManager cameraManager;
 	/*void OnGUI()
     {
         if (!Network.isClient && !Network.isServer)
@@ -151,11 +152,17 @@ public class NetworkManager : MonoBehaviour
 				Debug.Log("Lost connection to the server");
 		else
 			Debug.Log("Successfully diconnected from the server");
+
+		//destory player
+		Network.Destroy(CameraManager.CurrentPlayer1.GetComponent<NetworkView>().viewID);
 	}
 
 	void OnPlayerDisconnected(NetworkPlayer player)
 	{
-		Debug.Log("Player connection disconnected "+player.ipAddress);		
+		Debug.Log("Player connection disconnected "+player.ipAddress);	
+
+		Network.Destroy(cameraManager.Player2.GetComponent<NetworkView>().viewID);
+
 	} 
 
 
