@@ -87,6 +87,10 @@ public class SavedManager : MonoBehaviour {
 			playerJsonTemp.AddField("y",player.transform.position.y);
 			playerJsonTemp.AddField("z",player.transform.position.z);
 
+			//onTop
+			BotControlScript script = player.GetComponent<BotControlScript>();
+			playerJsonTemp.AddField("onTop",script.onTop);
+			
 			//add to saved Table
 			SavedTable.AddField("PlayerData",playerJsonTemp);
 		}
@@ -103,10 +107,11 @@ public class SavedManager : MonoBehaviour {
 
 	public void Load()
 	{
-		StreamReader _streamReader = new StreamReader("Assets/Resources/Save.txt");
 		//check file exist
-		if(_streamReader == null) return;
-
+		if(!File.Exists("Assets/Resources/Save.txt")) return;
+		//read file
+		StreamReader _streamReader = new StreamReader("Assets/Resources/Save.txt");
+	
 		String allStrings =_streamReader.ReadToEnd();
 
 		allData = new JSONObject(allStrings);
@@ -200,6 +205,10 @@ public class SavedManager : MonoBehaviour {
 				position.y = (float)playerDataJsonObject.GetField("y").n;
 				position.z = (float)playerDataJsonObject.GetField("z").n;
 				transform.position = position;
+
+				//onTop
+				BotControlScript script = player.GetComponent<BotControlScript>();
+				script.onTop = playerDataJsonObject.GetField("onTop").b;
 
 				//Debug.Log ("Robot pos:"+CameraManager.CurrentPlayer1.transform.position.ToString());
 
