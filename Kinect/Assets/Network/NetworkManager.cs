@@ -14,8 +14,6 @@ public class NetworkManager : MonoBehaviour
 	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
-
-
 	
 	/*void OnGUI()
     {
@@ -97,8 +95,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		//isRefreshingHostList = false;
 		
-		
-		
+
 	}
 	
 	private void RefreshHostList()
@@ -121,6 +118,7 @@ public class NetworkManager : MonoBehaviour
 	{
 		Network.Connect(hostData);
 		Debug.Log ("I connect to the server: " + hostData.gameName);
+		
 	}
 	
 	void OnConnectedToServer()
@@ -140,4 +138,25 @@ public class NetworkManager : MonoBehaviour
 	{
 		GameObject player = (GameObject)Network.Instantiate(playerPrefab2, Vector3.zero, Quaternion.identity, 0);
 	}
+
+	void OnDisconnectedFromServer(NetworkDisconnection info) {
+		//saved state to file
+		SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
+		savedManager.Save();
+
+		if (Network.isServer)
+			Debug.Log("Local server connection disconnected");
+		else
+			if (info == NetworkDisconnection.LostConnection)
+				Debug.Log("Lost connection to the server");
+		else
+			Debug.Log("Successfully diconnected from the server");
+	}
+
+	void OnPlayerDisconnected(NetworkPlayer player)
+	{
+		Debug.Log("Player connection disconnected "+player.ipAddress);		
+	} 
+
+
 }
