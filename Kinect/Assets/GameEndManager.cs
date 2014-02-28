@@ -12,13 +12,13 @@ public class GameEndManager : MonoBehaviour {
 			savedManager.Clear();
 		}
 
-		//set game duration time
-
+		//send game duration time
+		if(timer!=null) sendHttpRequest("gameDurationTime?="+timer.getDurationTime().ToString());
 	}
 
-	private void sendHttpRequest()
+	private void sendHttpRequest(string param)
 	{
-		WWW www = new WWW(serverURL);
+		WWW www = new WWW(serverURL+param);
 		StartCoroutine(WaitForRequest(www));
 	}
 
