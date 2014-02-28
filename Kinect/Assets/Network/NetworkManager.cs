@@ -77,7 +77,7 @@ public class NetworkManager : MonoBehaviour
 		if (flagServer == false && flagClient == false) {
 			if (Time.time - startTime > 1.5f) {
 				Debug.Log("update: "+hostList.Length);
-				Debug.Log("passed time gap!?qqqqq");
+				//Debug.Log("passed time gap!?qqqqq");
 				if (hostList.Length == 0) {
 					StartServer ();
 					flagServer = true;
@@ -151,7 +151,7 @@ public class NetworkManager : MonoBehaviour
 		}
 		else if (info == NetworkDisconnection.LostConnection)
 		{
-				Debug.Log("Lost connection to the servser");
+			Debug.Log("Lost connection to the servser");
 		}
 		else
 		{
