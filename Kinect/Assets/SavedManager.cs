@@ -10,6 +10,7 @@ public class SavedManager : MonoBehaviour {
 	private JSONObject allData;
 	//private GameObject player;
 	private bool clearFile = false;
+	public GameTimer timer;
 
 	public void Save()
 	{
@@ -98,7 +99,17 @@ public class SavedManager : MonoBehaviour {
 			SavedTable.AddField("PlayerData",playerJsonTemp);
 		}
 
-		Debug.Log(savedObjectArrayJson.ToString());
+		//save game during time
+		if(timer != null)
+		{
+			JSONObject timeJsonTemp = new JSONObject();
+			timeJsonTemp.AddField("durationTime",timer.getDurationTime());
+
+			//add to saved Table
+			SavedTable.AddField("TimeData",timeJsonTemp);
+		}
+
+		//Debug.Log(savedObjectArrayJson.ToString());
 
 		//write to file
 		StreamWriter _streamWriter = new StreamWriter("Assets/Resources/Save.txt",false);
@@ -120,6 +131,7 @@ public class SavedManager : MonoBehaviour {
 		allData = new JSONObject(allStrings);
 
 		JSONObject arrayDataJsonObject = allData.GetField("ObjectsData");
+		JSONObject timeDataJsonObject = allData.GetField("TimeData");
 		//JSONObject answerDataJsonObject = allData.GetField("AnswersData");
 		//JSONObject playerDataJsonObject = allData.GetField("PlayerData");
 
@@ -164,7 +176,10 @@ public class SavedManager : MonoBehaviour {
 			count++;
 		}
 
-
+		//load time data
+		if(timer!=null){
+			timer.setTime((float)timeDataJsonObject.GetField("durationTime").n);
+		}
 	}
 
 	public void Clear()
