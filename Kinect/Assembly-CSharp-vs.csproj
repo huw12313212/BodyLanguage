@@ -59,6 +59,7 @@
      <Compile Include="Assets\HugChecker.cs" />
      <Compile Include="Assets\InputTextManager.cs" />
      <Compile Include="Assets\InsideSensor.cs" />
+     <Compile Include="Assets\JSONObject.cs" />
      <Compile Include="Assets\KinectScripts\AvatarController.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsConstraint.cs" />
      <Compile Include="Assets\KinectScripts\Filters\BoneOrientationsFilter.cs" />
@@ -212,6 +213,7 @@
      <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\DoorManager.cs" />
      <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\FpsCounter.cs" />
      <Compile Include="Assets\SLK\SciFiLevelKit\Scripts\OTween.cs" />
+     <Compile Include="Assets\SavedManager.cs" />
      <Compile Include="Assets\ShowPressB.cs" />
      <Compile Include="Assets\SimpleParticlePack\Scripts\ParticleTester.cs" />
      <Compile Include="Assets\Teleporter\Scripts\CanTeleport.cs" />
@@ -238,6 +240,7 @@
      <None Include="Assets\PNG\texturePacker.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
+     <None Include="Assets\Resources\Save.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
