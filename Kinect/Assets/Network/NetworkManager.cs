@@ -145,8 +145,10 @@ public class NetworkManager : MonoBehaviour
 		savedManager.Save();
 
 		if (Network.isServer)
+		{
 			//server offline, server will calls
 			Debug.Log("Local server connection disconnected");
+		}
 		else if (info == NetworkDisconnection.LostConnection)
 		{
 				Debug.Log("Lost connection to the servser");
@@ -158,7 +160,7 @@ public class NetworkManager : MonoBehaviour
 			Debug.Log("Successfully diconnected from the server");
 
 			//destory player
-			Network.Destroy(CameraManager.CurrentPlayer1.GetComponent<NetworkView>().viewID);
+			Network.Destroy(cameraManager.Player2.GetComponent<NetworkView>().viewID);
 		}
 
 	}
