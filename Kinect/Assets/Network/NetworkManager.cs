@@ -95,7 +95,6 @@ public class NetworkManager : MonoBehaviour
 			}
 		}
 		//isRefreshingHostList = false;
-		
 
 	}
 	
@@ -146,19 +145,27 @@ public class NetworkManager : MonoBehaviour
 		savedManager.Save();
 
 		if (Network.isServer)
+			//server offline, server will calls
 			Debug.Log("Local server connection disconnected");
+		else if (info == NetworkDisconnection.LostConnection)
+		{
+				Debug.Log("Lost connection to the servser");
+		}
 		else
-			if (info == NetworkDisconnection.LostConnection)
-				Debug.Log("Lost connection to the server");
-		else
+		{
+			//Server offline , client will call
+			//Client offline ,client will call
 			Debug.Log("Successfully diconnected from the server");
 
-		//destory player
-		Network.Destroy(CameraManager.CurrentPlayer1.GetComponent<NetworkView>().viewID);
+			//destory player
+			Network.Destroy(CameraManager.CurrentPlayer1.GetComponent<NetworkView>().viewID);
+		}
+
 	}
 
 	void OnPlayerDisconnected(NetworkPlayer player)
 	{
+		//client offline ,server will call
 		Debug.Log("Player connection disconnected "+player.ipAddress);	
 
 		Network.Destroy(cameraManager.Player2.GetComponent<NetworkView>().viewID);

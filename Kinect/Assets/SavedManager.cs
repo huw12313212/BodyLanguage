@@ -9,9 +9,12 @@ public class SavedManager : MonoBehaviour {
 	private bool playerInit = false;
 	private JSONObject allData;
 	//private GameObject player;
+	private bool clearFile = false;
 
 	public void Save()
 	{
+		//don't save
+		if(clearFile == true) return;
 
 		JSONObject SavedTable = new JSONObject();
 
@@ -166,8 +169,10 @@ public class SavedManager : MonoBehaviour {
 
 	public void Clear()
 	{
-		//not test already
-		File.Delete("Assets/Resources/Save.txt");
+		//delete file
+		if(File.Exists("Assets/Resources/Save.txt")){
+			File.Delete("Assets/Resources/Save.txt");
+		}
 	}
 
 
@@ -225,5 +230,14 @@ public class SavedManager : MonoBehaviour {
 		{
 			initPlayerData();
 		}
+
+		//delete saved file
+		if(Input.GetKeyDown(KeyCode.F10))
+		{
+			Debug.Log("[SYSTEM]Clear saved!");
+			Clear ();
+			clearFile = true;
+		}
+
 	}
 }
