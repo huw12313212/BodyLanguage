@@ -4,7 +4,7 @@ using System.Collections;
 public class TeleporterExit : MonoBehaviour {
 
 
-
+	public GameObject teleporterEntrance;
 	public bool played = false;
 	public ParticleSystem explosion;
 	// Use this for initialization
@@ -23,6 +23,7 @@ public class TeleporterExit : MonoBehaviour {
 		{
 			played = true;
 			explosion.Play();	
+			teleporterEntrance.SetActive(false);
 		}
 	}
 }

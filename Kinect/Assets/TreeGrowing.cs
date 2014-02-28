@@ -23,6 +23,10 @@ public class TreeGrowing : MonoBehaviour {
 				particleSystemList[i].SetActive(true);
 			}
 
+			//Stage clear,delete file
+			SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
+			if(savedManager!=null) savedManager.Clear();
+
 			//networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
 		}
 
