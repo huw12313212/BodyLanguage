@@ -54,6 +54,8 @@
      <Compile Include="Assets\CodePuzzleManager.cs" />
      <Compile Include="Assets\DialogTrigger.cs" />
      <Compile Include="Assets\ForInstantiate.cs" />
+     <Compile Include="Assets\GameEndManager.cs" />
+     <Compile Include="Assets\GameTimer.cs" />
      <Compile Include="Assets\GlobalSyncData.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
      <Compile Include="Assets\HugChecker.cs" />
@@ -240,9 +242,9 @@
      <None Include="Assets\PNG\texturePacker.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
+     <None Include="Assets\Resources\Save.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
-     <None Include="Assets\Resources\Save.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
      <None Include="Assets\Toon Character Pack\Shaders\Toony-BasicOutline.shader" />

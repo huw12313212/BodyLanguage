@@ -54,6 +54,7 @@
      <Compile Include="Assets\CodePuzzleManager.cs" />
      <Compile Include="Assets\DialogTrigger.cs" />
      <Compile Include="Assets\ForInstantiate.cs" />
+     <Compile Include="Assets\GameEndManager.cs" />
      <Compile Include="Assets\GameTimer.cs" />
      <Compile Include="Assets\GlobalSyncData.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />

@@ -7,6 +7,7 @@ public class TreeGrowing : MonoBehaviour {
 	public TweenScale tween;
 
 	public bool growed = false;
+	public GameEndManager gameEneManager;
 
 	public bool grow
 	{
@@ -26,12 +27,9 @@ public class TreeGrowing : MonoBehaviour {
 			//Stage clear,delete file
 			if(value == true)
 			{
-				SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
-				if(savedManager!=null) {
-					savedManager.Clear();
-				}
+				gameEneManager.gameEnd();
 			}
-			//networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
+
 		}
 
 		get
