@@ -173,6 +173,8 @@ public class SavedManager : MonoBehaviour {
 		if(File.Exists("Assets/Resources/Save.txt")){
 			File.Delete("Assets/Resources/Save.txt");
 		}
+
+		clearFile = true;
 	}
 
 
@@ -236,7 +238,7 @@ public class SavedManager : MonoBehaviour {
 		{
 			Debug.Log("[SYSTEM]Clear saved!");
 			Clear ();
-			clearFile = true;
+			//clearFile = true;
 		}
 
 	}

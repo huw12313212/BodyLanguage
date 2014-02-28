@@ -24,9 +24,13 @@ public class TreeGrowing : MonoBehaviour {
 			}
 
 			//Stage clear,delete file
-			SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
-			if(savedManager!=null) savedManager.Clear();
-
+			if(value == true)
+			{
+				SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
+				if(savedManager!=null) {
+					savedManager.Clear();
+				}
+			}
 			//networkView.RPC("setGrowRPC",RPCMode.AllBuffered);
 		}
 
