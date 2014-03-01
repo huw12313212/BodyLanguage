@@ -54,7 +54,7 @@
      <Compile Include="Assets\CodePuzzleManager.cs" />
      <Compile Include="Assets\DialogTrigger.cs" />
      <Compile Include="Assets\ForInstantiate.cs" />
-     <Compile Include="Assets\GameEndManager.cs" />
+     <Compile Include="Assets\GameEndManagerScript.cs" />
      <Compile Include="Assets\GameTimer.cs" />
      <Compile Include="Assets\GlobalSyncData.cs" />
      <Compile Include="Assets\HelloWorld1.cs" />
@@ -75,6 +75,7 @@
      <Compile Include="Assets\KinectScripts\KinectWrapper.cs" />
      <Compile Include="Assets\LadderClicked.cs" />
      <Compile Include="Assets\LadderScript.cs" />
+     <Compile Include="Assets\LeaderBoardManager.cs" />
      <Compile Include="Assets\Level2HintMessage.cs" />
      <Compile Include="Assets\Level3HintMessage.cs" />
      <Compile Include="Assets\MessageHint.cs" />
@@ -242,7 +243,6 @@
      <None Include="Assets\PNG\texturePacker.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Header.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (AlphaClip).shader" />
-     <None Include="Assets\Resources\Save.txt" />
      <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />

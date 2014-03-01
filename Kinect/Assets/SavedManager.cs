@@ -184,11 +184,14 @@ public class SavedManager : MonoBehaviour {
 
 	public void Clear()
 	{
+		Debug.Log("[SYSTEM]Clear saved!");
+
 		//delete file
 		if(File.Exists("Assets/Resources/Save.txt")){
 			File.Delete("Assets/Resources/Save.txt");
 		}
 
+		//set flag
 		clearFile = true;
 	}
 
@@ -251,7 +254,6 @@ public class SavedManager : MonoBehaviour {
 		//delete saved file
 		if(Input.GetKeyDown(KeyCode.F10))
 		{
-			Debug.Log("[SYSTEM]Clear saved!");
 			Clear ();
 			//clearFile = true;
 		}

@@ -181,6 +181,19 @@ public class GlobalSyncData : MonoBehaviour {
 		treeGrowingScript.grow = true;
 	}
 
+	[RPC]
+	void getAndShowLeaderList()
+	{
+		//Global Sync Object
+		GameEndManagerScript gameEndManager = GameObject.FindGameObjectWithTag("GameEndManager").GetComponent<GameEndManagerScript>();
+		gameEndManager.sendHttpRequest("orderlist",GameEndManagerScript.requsetMode.getLeaderList);
+	}
+
+	public void getAndShowLeaderListRPC()
+	{
+		networkView.RPC("getAndShowLeaderList",RPCMode.AllBuffered);
+	}
+
 	//puzzle 1 
 	public void triggerPuzzle1Input(int data)
 	{

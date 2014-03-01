@@ -7,7 +7,7 @@ public class TreeGrowing : MonoBehaviour {
 	public TweenScale tween;
 
 	public bool growed = false;
-	public GameEndManager gameEneManager;
+	public GameEndManagerScript gameEneManager;
 
 	public bool grow
 	{
