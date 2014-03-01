@@ -14,6 +14,7 @@ public class NetworkManager : MonoBehaviour
 	public GameObject globalSyncObject;
 	bool flagServer = false;
 	bool flagClient = false;
+	public GameTimer timer;
 
 	public CameraManager cameraManager;
 	/*void OnGUI()
@@ -161,6 +162,9 @@ public class NetworkManager : MonoBehaviour
 
 			//destory player
 			Network.Destroy(cameraManager.Player2.GetComponent<NetworkView>().viewID);
+
+			//stop timer
+			timer.stop();
 		}
 
 	}
@@ -172,6 +176,8 @@ public class NetworkManager : MonoBehaviour
 
 		Network.Destroy(cameraManager.Player2.GetComponent<NetworkView>().viewID);
 
+		//stop timer
+		timer.stop();
 	} 
 
 

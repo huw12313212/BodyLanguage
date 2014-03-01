@@ -3,6 +3,7 @@ using System.Collections;
 
 public class GameTimer : MonoBehaviour {
 	public float gameDurationTime;
+	private bool stopCount = false;
 	// Use this for initialization
 	void Start () {
 		gameDurationTime = 0;
@@ -10,7 +11,7 @@ public class GameTimer : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		gameDurationTime += Time.deltaTime;
+		if(stopCount == false) gameDurationTime += Time.deltaTime;
 	}
 
 	public float getDurationTime(){
@@ -20,5 +21,10 @@ public class GameTimer : MonoBehaviour {
 	public void setTime(float time)
 	{
 		gameDurationTime = time;
+	}
+
+	public void stop()
+	{
+		stopCount = true;
 	}
 }

@@ -14,6 +14,9 @@ public class GameEndManagerScript : MonoBehaviour {
 
 	public void gameEnd()
 	{
+		//stop timer
+		timer.stop();
+
 		//delete file
 		SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
 		if(savedManager!=null) {
@@ -21,15 +24,12 @@ public class GameEndManagerScript : MonoBehaviour {
 		}
 
 		//send game duration time to server
-		//CameraManager.CurrentPlayer1.name = "RobotPlayer(Clone)";
 		if(Network.isServer)
 		{
 			//if(timer!=null) sendHttpRequest("sendGameDurationTime?time="+timer.getDurationTime(),requsetMode.insertGameTime);
 			if(timer!=null) sendHttpRequest("orderlist",requsetMode.insertGameTime);
 		}
 
-		//send game duration time
-		//if(timer!=null) sendHttpRequest("gameDurationTime?="+timer.getDurationTime().ToString());
 	}
 
 	public void sendHttpRequest(string param,requsetMode mode)
@@ -52,7 +52,6 @@ public class GameEndManagerScript : MonoBehaviour {
 			GlobalSyncData globalSyncData = GameObject.FindGameObjectWithTag("GlobalSyncObject").GetComponent<GlobalSyncData>();
 			globalSyncData.getAndShowLeaderListRPC();
 
-			//if(timer!=null) sendHttpRequest("orderlist",requsetMode.getLeaderList);
 
 		} else {
 			Debug.Log("WWW Error: "+ www.error);
@@ -66,7 +65,7 @@ public class GameEndManagerScript : MonoBehaviour {
 		// check for errors
 		if (www.error == null)
 		{
-			//JSONObject responseJSONObject = new JSONObject(www.data.Replace("\n","").Replace("\r","").Replace("\r\n",""));
+			//Get response JSON
 			JSONObject responseJSONObject = new JSONObject(www.data.Replace(" ","").Replace("_"," "));
 			Debug.Log("Response WWW: " + www.data);
 			Debug.Log("Response JSON: " + responseJSONObject);
@@ -77,6 +76,21 @@ public class GameEndManagerScript : MonoBehaviour {
 		} else {
 			Debug.Log("WWW Error: "+ www.error);
 		}   
+	}
+
+	void Update () {
+
+		//Fast Game End
+		if(Input.GetKeyDown(KeyCode.F12))
+		{
+			//tree grow
+			GlobalSyncData sync = GameObject.FindGameObjectWithTag("GlobalSyncObject").GetComponent<GlobalSyncData>();
+			sync.syncWorldTree();
+
+			//game end
+			gameEnd ();
+		}
+		
 	}
 
 }
