@@ -66,7 +66,6 @@ public class JSONObject  {
 		str = str.Replace("\r", "");
 		str = str.Replace("\\", "");
 		str = str.Replace(": ", ":");
-		
 		this.init(str, 0, str.Length);
 	}
 	
