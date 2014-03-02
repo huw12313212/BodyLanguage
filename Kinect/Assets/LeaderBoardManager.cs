@@ -40,7 +40,7 @@ public class LeaderBoardManager : MonoBehaviour {
 
 				string timeStr = string.Format("{0:00}:{1:00}:{2:00}s",timeSpan.Hours,timeSpan.Minutes, timeSpan.Seconds);
 
-				label.text = " "+i+"."+name1 +" and "+name2+"\n                               "+timeStr;
+				label.text = " "+(i+1)+"."+name1 +" and "+name2+"\n                               "+timeStr;
 			}
 
 		}

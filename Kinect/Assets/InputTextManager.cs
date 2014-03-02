@@ -17,6 +17,15 @@ public class InputTextManager : MonoBehaviour {
 	[RPC]
 	public void Code(string str)
 	{
+		//delete 1 char
+		if(str == "delete"){
+			if(currentInputCount>0) currentInputCount--;
+			TextMesh textMesh = textList[currentInputCount].GetComponent<TextMesh>();
+			textMesh.text = "";
+
+			return;
+		}
+
 		//set text
 		if(currentInputCount<textList.Count)
 		{

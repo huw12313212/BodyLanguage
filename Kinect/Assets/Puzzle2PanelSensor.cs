@@ -11,7 +11,7 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 	private bool isTrigger;
 	public GameObject colli;
 	//public int clickCount = 0;
-	private bool ButtonB = false;
+	private bool ButtonA = false;
 	private float addRotation;
 
 	// Use this for initializationth
@@ -30,15 +30,15 @@ public class Puzzle2PanelSensor : MonoBehaviour {
 		if (isTrigger){	
 			
 			//get button down
-			ButtonB =  Input.GetButtonDown("ButtonB")||(!previousWiiA&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA());
+			ButtonA =  Input.GetButtonDown("ButtonA")||(!previousWiiA&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA());
 			//click button b
 
 				previousWiiA = CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
 			
-			if (ButtonB){
+			if (ButtonA){
 				//click count
 				//clickCount ++;
-				Debug.Log ("Click Button B");
+				Debug.Log ("Click Button A");
 				int currentInput = (manager.inputCode[myIndex] + 1)%(partationNum);
 				//float rotationOffest = (addRotation*currentInput)%360;
 				//tween.from = gameObject.transform.rotation.eulerAngles;

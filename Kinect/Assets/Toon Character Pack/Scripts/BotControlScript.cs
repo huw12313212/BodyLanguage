@@ -407,7 +407,7 @@ public class BotControlScript : MonoBehaviour
 					anim.SetFloat("Speed", 0);	
 				}
 		
-				if(Input.GetButton("ButtonA")||wiimoteGetButtonB()||jumping)
+				if(Input.GetButton("ButtonB")||wiimoteGetButtonB()||jumping)
 				{
 					anim.SetBool("Jump", true);
 					jumping = true;

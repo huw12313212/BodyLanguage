@@ -104,7 +104,7 @@ public class GameEndManagerScript : MonoBehaviour {
 			sync.syncWorldTree();
 
 			//game end
-			gameEnd ();
+			//gameEnd ();
 		}
 		
 	}
