@@ -27,7 +27,7 @@ public class GameEndManagerScript : MonoBehaviour {
 		if(Network.isServer)
 		{
 			//if(timer!=null) sendHttpRequest("sendGameDurationTime?time="+timer.getDurationTime(),requsetMode.insertGameTime);
-			if(timer!=null) sendHttpRequest("orderlist",requsetMode.insertGameTime);
+			if(timer!=null) sendHttpRequest("addRecord",requsetMode.insertGameTime);
 		}
 
 	}
@@ -35,9 +35,25 @@ public class GameEndManagerScript : MonoBehaviour {
 	public void sendHttpRequest(string param,requsetMode mode)
 	{
 		string url = serverURL+param;
-		WWW www = new WWW(url);
-		if(mode == requsetMode.getLeaderList) StartCoroutine(WaitForGetLeaderListRequest(www));
-		else if (mode == requsetMode.insertGameTime) StartCoroutine(WaitForInsertTimeRequest(www));
+		//WWW www = new WWW(url);
+		if(mode == requsetMode.getLeaderList)
+		{
+			//GET
+			WWW www = new WWW(url);
+			StartCoroutine(WaitForGetLeaderListRequest(www));
+		}
+		else if (mode == requsetMode.insertGameTime) 
+		{
+			//POST
+			var form = new WWWForm();
+			form.AddField("username1", "you");
+			form.AddField("username2", "you");
+			form.AddField("exeTime", timer.getDurationTime().ToString());
+
+			WWW www = new WWW(url,form.data,form.headers);
+
+			StartCoroutine(WaitForInsertTimeRequest(www));
+		}
 	}
 
 	IEnumerator WaitForInsertTimeRequest(WWW www)

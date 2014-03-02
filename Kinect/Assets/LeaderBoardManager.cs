@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class LeaderBoardManager : MonoBehaviour {
 	public List<GameObject> leaderLabelArray;
@@ -34,8 +35,12 @@ public class LeaderBoardManager : MonoBehaviour {
 				string name1 = itemData["username1"].str;
 				string name2 = itemData["username2"].str;
 				float time =  (float)itemData["exeTime"].n;
-				
-				label.text = " "+i+"."+name1 +" and "+name2+"\n                                    "+time.ToString();
+
+				TimeSpan timeSpan = TimeSpan.FromSeconds(time);
+
+				string timeStr = string.Format("{0:00}:{1:00}:{2:00}s",timeSpan.Hours,timeSpan.Minutes, timeSpan.Seconds);
+
+				label.text = " "+i+"."+name1 +" and "+name2+"\n                               "+timeStr;
 			}
 
 		}
