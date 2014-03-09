@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -126,7 +127,7 @@ public class NetworkManager : MonoBehaviour
 	{
 		Debug.Log ("connected to server QQ");
 		SpawnPlayer2();
-		
+
 	}
 	
 	
@@ -180,5 +181,23 @@ public class NetworkManager : MonoBehaviour
 		timer.stop();
 	} 
 
+	void OnPlayerConnected(NetworkPlayer player){
+
+		//send self position
+		Vector3 currentPlayerPosition = CameraManager.CurrentPlayer1.transform.position;
+		Quaternion currentPlayerRotation = CameraManager.CurrentPlayer1.transform.rotation;
+		if(currentPlayerPosition!=null){
+			Debug.Log ("Send Server Player Data!");
+			networkView.RPC("sendServerPlayerData",RPCMode.Others,currentPlayerPosition,currentPlayerRotation);
+		}
+	}
+
+	[RPC]
+	void sendServerPlayerData(Vector3 playerPosition,Quaternion playerRotation){
+		Debug.Log ("Receive Server Player Data!");
+		//player 1 list
+		cameraManager.Player1.transform.position = playerPosition;
+		cameraManager.Player1.transform.rotation = playerRotation;
+	}
 
 }

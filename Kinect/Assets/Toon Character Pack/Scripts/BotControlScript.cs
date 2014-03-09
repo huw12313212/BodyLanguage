@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Runtime.InteropServices;
-
+using System.Collections.Generic;
 
 // Require these components when using this script
 [RequireComponent(typeof (Animator))]
@@ -23,6 +23,22 @@ public class BotControlScript : MonoBehaviour
     private float syncTime = 0f;
     private Vector3 syncStartPosition = Vector3.zero;
     private Vector3 syncEndPosition = Vector3.zero;*/
+
+	/*
+	public void sendNodeDataToOthers(){
+
+		//get position
+		NetworkView networkView = gameObject.GetComponent<NetworkView>();
+		if(networkView.isMine){
+			Debug.Log ("Is Mine! Send Data");
+			//networkView.RPC("getInitialData", RPCMode.Others,nodeManager.syncList);
+		}
+		else{
+			Debug.Log ("Is Not Mine! Get Data");
+		}
+
+	}
+	*/
 
     void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
     {
@@ -106,15 +122,15 @@ public class BotControlScript : MonoBehaviour
 					data.syncEndPosition = data.syncPosition + (data.syncVelocity * data.syncDelay);
 
 					//check value
-					if((data.syncEndPosition.x == 0))
+					if((data.syncEndPosition.x == 0) || (float.IsNaN(data.syncEndPosition.x)))
 					{
 						data.syncEndPosition.x = data.syncStartPosition.x;
 					}
-					if((data.syncEndPosition.y == 0))
+					if((data.syncEndPosition.y == 0) || (float.IsNaN(data.syncEndPosition.y)))
 					{
 						data.syncEndPosition.y = data.syncStartPosition.y;
 					}
-					if((data.syncEndPosition.z == 0))
+					if((data.syncEndPosition.z == 0) || (float.IsNaN(data.syncEndPosition.z)))
 					{
 						data.syncEndPosition.z = data.syncStartPosition.z;
 					}
@@ -128,15 +144,15 @@ public class BotControlScript : MonoBehaviour
 				data.syncEndRotation = data.syncRotation;
 
 				//check value
-				if((data.syncEndRotation.x == 0))
+				if((data.syncEndRotation.x == 0) || (float.IsNaN(data.syncEndRotation.x)))
 				{
 					data.syncEndRotation.x = data.syncStartRotation.x;
 				}
-				if((data.syncEndRotation.y == 0))
+				if((data.syncEndRotation.y == 0) || (float.IsNaN(data.syncEndRotation.y)))
 				{
 					data.syncEndRotation.y = data.syncStartRotation.y;
 				}
-				if((data.syncEndRotation.z == 0))
+				if((data.syncEndRotation.z == 0) || (float.IsNaN(data.syncEndRotation.z)))
 				{
 					data.syncEndRotation.z = data.syncStartRotation.z;
 				}
@@ -151,9 +167,13 @@ public class BotControlScript : MonoBehaviour
     {
 		for (int i = 0; i < nodeManager.syncList.Count; i++) {
 						GameObject targetNode = nodeManager.syncList [i];
-						networkData data = nodeManager.dataList [i];
+						
+						//check
+						if(i<nodeManager.dataList.Count){ 
+							networkData data = nodeManager.dataList[i];
+							data.lastSynchronizationTime = Time.time;
 
-						data.lastSynchronizationTime = Time.time;
+						}
 				}
     }
 
@@ -186,8 +206,9 @@ public class BotControlScript : MonoBehaviour
 			data.syncTime += Time.deltaTime;
 
 
-			//make lerp smooth
+			//make lerp smooth,set lower bound and upper bound
 			if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
+			else if(data.syncDelay>2.0f) data.syncDelay = 2.0f;
 
 			//only sync root position
 			if(i == rootIndex)
@@ -199,6 +220,7 @@ public class BotControlScript : MonoBehaviour
 			targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
 
 		}
+
     }
 
 
@@ -377,6 +399,8 @@ public class BotControlScript : MonoBehaviour
 		//wii 
 		wiimote_start();
 
+		//sync self position
+		//sendNodeDataToOthers();
 	}
 	
 	bool grounded = false;
@@ -635,4 +659,26 @@ public class BotControlScript : MonoBehaviour
 			AnimationController.enabled = false;
 		}
 	}
+
+	/*
+	[RPC]
+	void getInitialData(List<GameObject> syncList){
+		Debug.Log("Get Initial Data!");
+		//get local sync list
+		List<GameObject> localSyncList = nodeManager.syncList;
+
+		int count = 0;
+		//set position
+		foreach(GameObject objectTemp in syncList){
+			//set data
+			if(count<localSyncList.Count)
+			{
+				localSyncList[count].transform.position = objectTemp.transform.position;
+				localSyncList[count].transform.localRotation = objectTemp.transform.localRotation;
+			}
+
+			count++;
+		}
+	}
+	*/
 }

@@ -101,6 +101,7 @@
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
      <None Include="Assets\PNG\resources.txt" />
      <None Include="Assets\Ornamental Flower Set\Shaders\Transparent-BumpSpecNoCull.shader" />
+     <None Include="Assets\Resources\Save.txt" />
  <Reference Include="UniWii">
  <HintPath>Assets\Plugins\UniWii.dll</HintPath>
  </Reference>
