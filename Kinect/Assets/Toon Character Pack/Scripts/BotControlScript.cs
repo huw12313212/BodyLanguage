@@ -111,6 +111,12 @@ public class BotControlScript : MonoBehaviour
 				//sync
 				data.syncTime = 0.0f;
 				data.syncDelay = Time.time - data.lastSynchronizationTime;
+
+				//make lerp smooth,set lower bound and upper bound
+				if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
+				else if(data.syncDelay>1.5f) data.syncDelay = 1.5f;
+
+
 				data.lastSynchronizationTime = Time.time;
 
 				//Debug.Log ("Time - Time:"+Time.time+" last syncTime:"+data.lastSynchronizationTime+" Delay:"+data.syncDelay);
@@ -208,11 +214,6 @@ public class BotControlScript : MonoBehaviour
 			networkData data = nodeManager.dataList[i];
 
 			data.syncTime += Time.deltaTime;
-
-
-			//make lerp smooth,set lower bound and upper bound
-			if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
-			else if(data.syncDelay>1.5f) data.syncDelay = 1.5f;
 
 			//only sync root position
 			if(i == rootIndex)
