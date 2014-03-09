@@ -18,6 +18,9 @@ public class NetworkManager : MonoBehaviour
 	public GameTimer timer;
 
 	public CameraManager cameraManager;
+	public Vector3 serverPlayerInitialPosition = Vector3.zero;
+	public Quaternion serverPlayerInitialRotation = Quaternion.identity;
+
 	/*void OnGUI()
     {
         if (!Network.isClient && !Network.isServer)
@@ -194,10 +197,12 @@ public class NetworkManager : MonoBehaviour
 
 	[RPC]
 	void sendServerPlayerData(Vector3 playerPosition,Quaternion playerRotation){
-		Debug.Log ("Receive Server Player Data!");
+		Debug.Log ("Receive Server Player Data!"+playerPosition);
+
 		//player 1 list
-		cameraManager.Player1.transform.position = playerPosition;
-		cameraManager.Player1.transform.rotation = playerRotation;
+		serverPlayerInitialPosition = playerPosition;
+		serverPlayerInitialRotation = playerRotation;
+
 	}
 
 }

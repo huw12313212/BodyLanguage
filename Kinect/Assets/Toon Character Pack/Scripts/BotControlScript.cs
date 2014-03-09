@@ -18,6 +18,7 @@ public class BotControlScript : MonoBehaviour
 	public bool onTop;
 
 	public int rootIndex = 23;
+
 	/*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -98,6 +99,9 @@ public class BotControlScript : MonoBehaviour
 			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
 			{
 				GameObject targetNode = nodeManager.syncList[i];
+				//check
+				if(i>nodeManager.dataList.Count) return;
+
 				networkData data = nodeManager.dataList[i];
 				
 				stream.Serialize(ref data.syncPosition);
@@ -208,16 +212,18 @@ public class BotControlScript : MonoBehaviour
 
 			//make lerp smooth,set lower bound and upper bound
 			if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
-			else if(data.syncDelay>2.0f) data.syncDelay = 2.0f;
+			else if(data.syncDelay>1.5f) data.syncDelay = 1.5f;
 
 			//only sync root position
 			if(i == rootIndex)
 			{
-				targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, (data.syncTime/data.syncDelay));
+				//check for initial value
+				if((data.syncEndPosition.x!=0) || (data.syncEndPosition.y!=0) || (data.syncEndPosition.z!=0)) targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, (data.syncTime/data.syncDelay));
 			}
 
 			//rotate
-			targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
+			//cehck initial state or not
+			if((data.syncEndRotation.x !=0) || (data.syncEndRotation.y !=0) || (data.syncEndRotation.z !=0)) targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
 
 		}
 
@@ -401,6 +407,21 @@ public class BotControlScript : MonoBehaviour
 
 		//sync self position
 		//sendNodeDataToOthers();
+
+		//if client need to get server player's data
+		if(Network.isClient){
+			//if this is mine
+			if(!networkView.isMine){
+
+				Debug.Log("Set Server player's data!");
+				//server's player
+				NetworkManager networkManager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<NetworkManager>();
+				gameObject.transform.position = networkManager.serverPlayerInitialPosition;
+				gameObject.transform.rotation = networkManager.serverPlayerInitialRotation;
+
+				//Debug.Log("Set Server player data! Pos:"+gameObject.transform.position);
+			}
+		}
 	}
 	
 	bool grounded = false;
