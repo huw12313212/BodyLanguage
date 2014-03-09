@@ -108,7 +108,7 @@ public class GlobalSyncData : MonoBehaviour {
 	
 	void OnSerializeNetworkView(BitStream stream, NetworkMessageInfo info)
 	{
-		List<int> syncTemp;
+		//List<int> syncTemp;
 		
 		if (stream.isWriting)
 		{

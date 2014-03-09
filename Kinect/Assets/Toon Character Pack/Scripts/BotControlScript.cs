@@ -18,7 +18,7 @@ public class BotControlScript : MonoBehaviour
 	public bool onTop;
 
 	public int rootIndex = 23;
-/*	 private float lastSynchronizationTime = 0f;
+	/*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
     private Vector3 syncStartPosition = Vector3.zero;
@@ -49,24 +49,20 @@ public class BotControlScript : MonoBehaviour
 
 
 				//position
-				if(i==rootIndex)
-				{
-					//only sync root position
-					data.syncPosition = targetNode.transform.position;
-					stream.Serialize(ref data.syncPosition);
+				data.syncPosition = targetNode.transform.position;
+				stream.Serialize(ref data.syncPosition);
 
-					Rigidbody body = targetNode.GetComponent<Rigidbody>();
+				Rigidbody body = targetNode.GetComponent<Rigidbody>();
 
-					//velocity
+				//velocity
 					
-					//check rigibody
-					if(body != null){
-						data.syncVelocity = body.velocity;
-					}else{
-						data.syncVelocity = new Vector3(0,0,0);	
-					}
-					stream.Serialize(ref data.syncVelocity);
+				//check rigibody
+				if(body != null){
+					data.syncVelocity = body.velocity;
+				}else{
+					data.syncVelocity = new Vector3(0,0,0);	
 				}
+				stream.Serialize(ref data.syncVelocity);
 
 			
 				//rotate
@@ -123,6 +119,8 @@ public class BotControlScript : MonoBehaviour
 						data.syncEndPosition.z = data.syncStartPosition.z;
 					}
 
+					//Debug.Log ("Receive: syncPosition"+data.syncPosition+" endPosition:"+data.syncEndPosition);
+
 				}
 
 				//rotation
@@ -163,7 +161,7 @@ public class BotControlScript : MonoBehaviour
     {
         if (networkView.isMine)
         {
-            InputMovement();
+            //InputMovement();
         }
         else
         {
@@ -186,6 +184,7 @@ public class BotControlScript : MonoBehaviour
 			networkData data = nodeManager.dataList[i];
 
 			data.syncTime += Time.deltaTime;
+
 
 			//make lerp smooth
 			if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
@@ -393,15 +392,16 @@ public class BotControlScript : MonoBehaviour
 			grounded = true;
 			anim.SetBool("Grounded", grounded);
 
-			//Debug.Log("Grounded");
+			Debug.Log("Grounded");
+
+			//test
+			anim.SetFloat("Speed", 0.1f);
 		}
 	}
 	
 	void FixedUpdate ()
 	{
-		//test
-		//Debug.Log("Animation Jump:"+anim.GetBool("Jump")+" Grounded:"+anim.GetBool("Grounded")+" Speed:"+anim.GetFloat("Speed"));
-
+	
 		if(networkView.isMine)
 		{
 		
@@ -455,8 +455,8 @@ public class BotControlScript : MonoBehaviour
 		
 				if(Input.GetButton("ButtonB")||wiimoteGetButtonB()||jumping)
 				{
-					anim.SetBool("Jump", true);
 					jumping = true;
+					anim.SetBool("Jump", jumping);
 
 					grounded = false;
 					anim.SetBool("Grounded", grounded);
@@ -467,12 +467,18 @@ public class BotControlScript : MonoBehaviour
 			
 //			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
 			
-				if(!moving&&!jumping&&grounded && !anim.IsInTransition(0))
+				if((!moving)&&(!jumping)&&(grounded) && (!anim.IsInTransition(0)))
 				{
-					AnimationController.enabled = false;
-					KinectController.enabled = true;
+					//if idle
+					if(anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+					{
+						//**bug for under ground
+						AnimationController.enabled = false;
+
+						KinectController.enabled = true;
 						//Debug.Log("Animation!!!");
-					rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
+						rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
+					}
 				}
 				else
 				{
@@ -547,7 +553,7 @@ public class BotControlScript : MonoBehaviour
 			{
 			//  ..and not still in transition..
 				if(!anim.IsInTransition(0))
-				{				
+				{			
 					// reset the Jump bool so we can jump again, and so that the state does not loop 
 					//anim.SetBool("Jump", false);
 					//grounded = false;
