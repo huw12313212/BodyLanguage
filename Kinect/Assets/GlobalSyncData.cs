@@ -112,7 +112,7 @@ public class GlobalSyncData : MonoBehaviour {
 		
 		if (stream.isWriting)
 		{
-			Debug.Log("Wirting!");
+			//Debug.Log("Wirting!");
 			//syncTemp = puzzle1Answer;
 			
 			/*
@@ -125,7 +125,7 @@ public class GlobalSyncData : MonoBehaviour {
 		}
 		else
 		{
-			Debug.Log("Received!");
+			//Debug.Log("Received!");
 			//stream.Serialize(ref syncTemp);
 			
 			/*

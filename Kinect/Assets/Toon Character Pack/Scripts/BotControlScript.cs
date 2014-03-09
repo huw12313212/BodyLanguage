@@ -50,8 +50,6 @@ public class BotControlScript : MonoBehaviour
 				data.syncPosition = targetNode.transform.position;
 				stream.Serialize(ref data.syncPosition);
 
-
-
 				//velocity
 
 				//check rigibody
@@ -71,6 +69,7 @@ public class BotControlScript : MonoBehaviour
         }
         else
         {
+			//receive
 			//sync 
 			stream.Serialize(ref syncOnTop);
 			onTop = syncOnTop;
@@ -151,11 +150,42 @@ public class BotControlScript : MonoBehaviour
 			data.syncTime += Time.deltaTime;
 
 			//position
+			//check value
+			if((!float.IsNaN(data.syncEndPosition.x)))
+			{
+				data.syncEndPosition.x = data.syncStartPosition.x;
+			}
+			if((!float.IsNaN(data.syncEndPosition.y)))
+			{
+				data.syncEndPosition.y = data.syncStartPosition.y;
+			}
+			if((!float.IsNaN(data.syncEndPosition.z)))
+			{
+				data.syncEndPosition.z = data.syncStartPosition.z;
+			}
+
 			targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, data.syncTime / data.syncDelay);
+
+
+			//check value
+			if((!float.IsNaN(data.syncEndRotation.x)))
+			{
+				data.syncEndRotation.x = data.syncStartRotation.x;
+			}
+			if((!float.IsNaN(data.syncEndRotation.y)))
+			{
+				data.syncEndRotation.y = data.syncStartRotation.y;
+			}
+			if((!float.IsNaN(data.syncEndRotation.z)))
+			{
+				data.syncEndRotation.z = data.syncStartRotation.z;
+			}
 
 			//rotate
 			targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
 
+			//test
+			//Debug.Log ("syncTime:"+data.syncTime+" syncDelayTime:"+data.syncDelay+" ration:"+data.syncTime / data.syncDelay);
 		}
     }
 
@@ -344,18 +374,21 @@ public class BotControlScript : MonoBehaviour
 		Debug.Log("Coll name:" + col.collider.name);
 		if(col.collider.name == "Terrain" || col.collider.name =="DoorMovable_Short_01")
 		{
-			
+			jumping = false;
+			anim.SetBool("Jump", jumping);
+
 			grounded = true;
 			anim.SetBool("Grounded", grounded);
-			anim.SetBool("Jump", false);
-			
-			jumping = false;
-			Debug.Log("Grounded");
+
+			//Debug.Log("Grounded");
 		}
 	}
 	
 	void FixedUpdate ()
 	{
+		//test
+		//Debug.Log("Animation Jump:"+anim.GetBool("Jump")+" Grounded:"+anim.GetBool("Grounded")+" Speed:"+anim.GetFloat("Speed"));
+
 		if(networkView.isMine)
 		{
 		
@@ -411,8 +444,12 @@ public class BotControlScript : MonoBehaviour
 				{
 					anim.SetBool("Jump", true);
 					jumping = true;
+
+					grounded = false;
+					anim.SetBool("Grounded", grounded);
 					Debug.Log("Jumping");
 					rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
+
 				}
 			
 //			Debug.Log("move:"+moving+"jump:"+jumping+"Grounded:"+anim.GetBool("Grounded"));
@@ -479,9 +516,10 @@ public class BotControlScript : MonoBehaviour
 		// if we are currently in a state called Locomotion, then allow Jump input (Space) to set the Jump bool parameter in the Animator to true
 			if (currentBaseState.nameHash == locoState)
 			{	
-				if(Input.GetButtonDown("Jump"))
+				if((Input.GetButtonDown("Jump")) || (Input.GetButton("ButtonB")))
 				{
-					anim.SetBool("Jump", true);
+					jumping = true;
+					anim.SetBool("Jump", jumping);
 					//anim.SetBool("Grounded", false);
 					grounded = false;
 					anim.SetBool("Grounded", grounded);
@@ -498,9 +536,9 @@ public class BotControlScript : MonoBehaviour
 				if(!anim.IsInTransition(0))
 				{				
 					// reset the Jump bool so we can jump again, and so that the state does not loop 
-					anim.SetBool("Jump", false);
-					grounded = false;
-					anim.SetBool("Grounded", grounded);
+					//anim.SetBool("Jump", false);
+					//grounded = false;
+					//anim.SetBool("Grounded", grounded);
 				}
 			//anim.SetBool("Grounded", false);
 				

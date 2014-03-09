@@ -84,7 +84,7 @@ public class NetworkManager : MonoBehaviour
 					flagServer = true;
 				} 
 				else {
-					Debug.Log ("I am the client,,,,,,,");
+					Debug.Log ("I am the client.");
 					for (int i = 0; i < hostList.Length; i++) {
 						if (hostList [i].gameName == gameName) {
 							JoinServer (hostList[i]);
