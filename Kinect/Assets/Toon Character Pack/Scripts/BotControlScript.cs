@@ -107,7 +107,7 @@ public class BotControlScript : MonoBehaviour
 				if(i == rootIndex)
 				{
 					//end position
-					data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
+					data.syncEndPosition = data.syncPosition + (data.syncVelocity * data.syncDelay);
 
 					//check value
 					if((data.syncEndPosition.x == 0))
@@ -187,12 +187,13 @@ public class BotControlScript : MonoBehaviour
 
 			data.syncTime += Time.deltaTime;
 
+			//make lerp smooth
+			if(data.syncDelay<0.1f) data.syncDelay = 0.1f;
+
 			//only sync root position
 			if(i == rootIndex)
 			{
 				targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, (data.syncTime/data.syncDelay));
-				//targetNode.transform.position = data.syncEndPosition;
-				//Debug.Log ("Time - Sync Time:"+data.syncTime+" Delay:"+data.syncDelay+" Ration:"+(data.syncTime/data.syncDelay));
 			}
 
 			//rotate
