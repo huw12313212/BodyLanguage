@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class networkData
 {
-	public float lastSynchronizationTime = 0f;
+	public float lastSynchronizationTime = Time.time;
 	public float syncDelay = 0f;
 	public float syncTime = 0f;
 	public Vector3 syncStartPosition = Vector3.zero;
@@ -20,14 +20,14 @@ public class networkData
 
 public class NodeManager : MonoBehaviour {
 	
-	public List<GameObject> syncList = new List<GameObject>();
+	public List<GameObject> syncList;
 	public List<networkData> dataList = new List<networkData>();
 
 	public float HugTime = 0;
 	//public int i = 0;
 	// Use this for initialization
 	void Start () {
-		
+
 		foreach(GameObject gameObject in syncList)
 		{
 			dataList.Add(new networkData());

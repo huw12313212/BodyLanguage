@@ -16,6 +16,8 @@ public class BotControlScript : MonoBehaviour
 	public CameraManager cameraManager;
 
 	public bool onTop;
+
+	public int rootIndex = 23;
 /*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -44,21 +46,28 @@ public class BotControlScript : MonoBehaviour
 			{
 				GameObject targetNode = nodeManager.syncList[i];
 				networkData data = nodeManager.dataList[i];
-				Rigidbody body = targetNode.GetComponent<Rigidbody>();
+
 
 				//position
-				data.syncPosition = targetNode.transform.position;
-				stream.Serialize(ref data.syncPosition);
+				if(i==rootIndex)
+				{
+					//only sync root position
+					data.syncPosition = targetNode.transform.position;
+					stream.Serialize(ref data.syncPosition);
 
-				//velocity
+					Rigidbody body = targetNode.GetComponent<Rigidbody>();
 
-				//check rigibody
-				if(body != null){
-					data.syncVelocity = body.velocity;
-				}else{
-					data.syncVelocity = new Vector3(0,0,0);	
+					//velocity
+					
+					//check rigibody
+					if(body != null){
+						data.syncVelocity = body.velocity;
+					}else{
+						data.syncVelocity = new Vector3(0,0,0);	
+					}
+					stream.Serialize(ref data.syncVelocity);
 				}
-				stream.Serialize(ref data.syncVelocity);
+
 			
 				//rotate
 				data.syncRotation = targetNode.transform.rotation;
@@ -84,30 +93,59 @@ public class BotControlScript : MonoBehaviour
 				stream.Serialize(ref data.syncRotation);
 
 				//sync
-				data.syncTime =0.0f;
+				data.syncTime = 0.0f;
 				data.syncDelay = Time.time - data.lastSynchronizationTime;
 				data.lastSynchronizationTime = Time.time;
 
+				//Debug.Log ("Time - Time:"+Time.time+" last syncTime:"+data.lastSynchronizationTime+" Delay:"+data.syncDelay);
+				//Debug.Log ("Time - Sync Time:"+data.syncTime+" Delay:"+data.syncDelay+" Ration:"+(data.syncTime/data.syncDelay));
+
 				//position
-				data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
 				data.syncStartPosition = targetNode.transform.position;
+
+				//only sync root
+				if(i == rootIndex)
+				{
+					//end position
+					data.syncEndPosition = data.syncPosition + data.syncVelocity * data.syncDelay;
+
+					//check value
+					if((data.syncEndPosition.x == 0))
+					{
+						data.syncEndPosition.x = data.syncStartPosition.x;
+					}
+					if((data.syncEndPosition.y == 0))
+					{
+						data.syncEndPosition.y = data.syncStartPosition.y;
+					}
+					if((data.syncEndPosition.z == 0))
+					{
+						data.syncEndPosition.z = data.syncStartPosition.z;
+					}
+
+				}
 
 				//rotation
 				data.syncStartRotation = targetNode.transform.rotation;
 				data.syncEndRotation = data.syncRotation;
+
+				//check value
+				if((data.syncEndRotation.x == 0))
+				{
+					data.syncEndRotation.x = data.syncStartRotation.x;
+				}
+				if((data.syncEndRotation.y == 0))
+				{
+					data.syncEndRotation.y = data.syncStartRotation.y;
+				}
+				if((data.syncEndRotation.z == 0))
+				{
+					data.syncEndRotation.z = data.syncStartRotation.z;
+				}
+
+
 			}
 
-			/*
-            stream.Serialize(ref syncPosition);
-            stream.Serialize(ref syncVelocity);
-
-
-            syncTime = 0f;
-            syncDelay = Time.time - lastSynchronizationTime;
-            lastSynchronizationTime = Time.time;
-
-            syncEndPosition = syncPosition + syncVelocity * syncDelay;
-            syncStartPosition = rigidbody.position;*/
         }
     }
 
@@ -149,43 +187,17 @@ public class BotControlScript : MonoBehaviour
 
 			data.syncTime += Time.deltaTime;
 
-			//position
-			//check value
-			if((!float.IsNaN(data.syncEndPosition.x)))
+			//only sync root position
+			if(i == rootIndex)
 			{
-				data.syncEndPosition.x = data.syncStartPosition.x;
-			}
-			if((!float.IsNaN(data.syncEndPosition.y)))
-			{
-				data.syncEndPosition.y = data.syncStartPosition.y;
-			}
-			if((!float.IsNaN(data.syncEndPosition.z)))
-			{
-				data.syncEndPosition.z = data.syncStartPosition.z;
-			}
-
-			targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, data.syncTime / data.syncDelay);
-
-
-			//check value
-			if((!float.IsNaN(data.syncEndRotation.x)))
-			{
-				data.syncEndRotation.x = data.syncStartRotation.x;
-			}
-			if((!float.IsNaN(data.syncEndRotation.y)))
-			{
-				data.syncEndRotation.y = data.syncStartRotation.y;
-			}
-			if((!float.IsNaN(data.syncEndRotation.z)))
-			{
-				data.syncEndRotation.z = data.syncStartRotation.z;
+				targetNode.transform.position = Vector3.Lerp(data.syncStartPosition, data.syncEndPosition, (data.syncTime/data.syncDelay));
+				//targetNode.transform.position = data.syncEndPosition;
+				//Debug.Log ("Time - Sync Time:"+data.syncTime+" Delay:"+data.syncDelay+" Ration:"+(data.syncTime/data.syncDelay));
 			}
 
 			//rotate
 			targetNode.transform.rotation = Quaternion.Lerp(data.syncStartRotation, data.syncEndRotation, data.syncTime / data.syncDelay);
 
-			//test
-			//Debug.Log ("syncTime:"+data.syncTime+" syncDelayTime:"+data.syncDelay+" ration:"+data.syncTime / data.syncDelay);
 		}
     }
 

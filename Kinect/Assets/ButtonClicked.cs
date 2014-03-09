@@ -17,8 +17,8 @@ public class ButtonClicked : MonoBehaviour {
 	void Start () {
 
 		initialPosition = targetObject.transform.localPosition;
-		Debug.Log("yo "+targetObject.transform.localPosition);
-		Debug.Log("yo "+initialPosition);
+		//Debug.Log("yo "+targetObject.transform.localPosition);
+		//Debug.Log("yo "+initialPosition);
 
 	}
 
