@@ -52,12 +52,13 @@ public class BotControlScript : MonoBehaviour
 			syncOnTop = onTop;
 			stream.Serialize(ref syncOnTop);
 
+			/*
             syncPosition = rigidbody.position;
             stream.Serialize(ref syncPosition);
 
             syncVelocity = rigidbody.velocity;
             stream.Serialize(ref syncVelocity);
-
+			*/
 
 			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
 			{
