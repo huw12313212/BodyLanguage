@@ -21,12 +21,13 @@ public class GlobalSyncData : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		Debug.Log("Start!");
+
+		Debug.Log("Sync Object Start!");
 		//answer size
 		puzzle1AnswerSize = 3;
 		puzzle2AnswerSize = 3;
 		puzzle3AnswerSize = 1;
-		
+			
 		//init
 		puzzle1Answer = new List<int>();
 		puzzle2Answer = new List<int>();
@@ -37,62 +38,73 @@ public class GlobalSyncData : MonoBehaviour {
 		puzzle2Manager = GameObject.Find ("Puzzle 2 Manager");
 		puzzle3Manager = GameObject.Find ("Puzzle 3 Manager");
 
-		//init puzzle answer
-		//if(networkView.isMine)
-		//{
-			Debug.Log("Init Global Sync data");
-			//puzzle 1
-			Debug.Log("Create Random Num");
-			List<int> randomAnswer = new List<int>();
-			for(int i = 0;i<puzzle1AnswerSize;i++)
-			{
-				//random answer
-				randomAnswer.Add(Random.Range(0,puzzle1AnswerSize));
-			}
-			
-			//RPC sync data
-			networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
-			
-			//puzzle 2
-			
-			//zero flag
-			bool zeroFlag = true;
-			//check all zero or not
-			while(zeroFlag){
+		if(Network.isClient)
+		{
+			//init puzzle answer
+			//if(networkView.isMine)
+			//{
+				Debug.Log("Init Global Sync data");
+				//puzzle 1
+				Debug.Log("Create Random Num");
+				List<int> randomAnswer = new List<int>();
+				for(int i = 0;i<puzzle1AnswerSize;i++)
+				{
+					//random answer
+					randomAnswer.Add(Random.Range(0,puzzle1AnswerSize));
+				}
+				
+				//RPC sync data
+				networkView.RPC("setPuzzle1RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
+				
+				//puzzle 2
+				
+				//zero flag
+				bool zeroFlag = true;
+				//check all zero or not
+				while(zeroFlag){
+					//clear  random answer
+					randomAnswer.Clear();
+					
+					//create random answer
+					for(int i = 0;i<puzzle2AnswerSize;i++)
+					{
+						//range is [0,1] [0,2] [0,3]
+						int randomNum = Random.Range(0,i+2);
+						randomAnswer.Add(randomNum);
+						if(randomNum!=0) zeroFlag = false;
+					}
+				}
+				
+				//RPC sync data
+				networkView.RPC("setPuzzle2RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
+				
+				//check if puzzle answer is 0 ,need rotate panel
+				for(int i=0;i<puzzle2AnswerSize;i++)
+				{
+					//check if answer is 0
+					if(randomAnswer[i] == 0){
+						triggerPuzzle2Input(i,1);
+					}
+				}
+
+				//puzzle 3
+				
 				//clear  random answer
 				randomAnswer.Clear();
 				
 				//create random answer
-				for(int i = 0;i<puzzle2AnswerSize;i++)
+				for(int i = 0;i<puzzle3AnswerSize;i++)
 				{
-					//range is [0,1] [0,2] [0,3]
-					int randomNum = Random.Range(0,i+2);
+					//range is [0,1,2]
+					int randomNum = Random.Range(0,3);
 					randomAnswer.Add(randomNum);
-					if(randomNum!=0) zeroFlag = false;
 				}
-			}
-			
-			//RPC sync data
-			networkView.RPC("setPuzzle2RPC",RPCMode.AllBuffered,randomAnswer[0],randomAnswer[1],randomAnswer[2]);
-			
-			//puzzle 3
-			
-			//clear  random answer
-			randomAnswer.Clear();
-			
-			//create random answer
-			for(int i = 0;i<puzzle3AnswerSize;i++)
-			{
-				//range is [0,1,2]
-				int randomNum = Random.Range(0,3);
-				randomAnswer.Add(randomNum);
-			}
-			
-			//RPC sync data
-			networkView.RPC("setPuzzle3RPC",RPCMode.AllBuffered,randomAnswer[0]);
-			
-		//}
-		
+				
+				//RPC sync data
+				networkView.RPC("setPuzzle3RPC",RPCMode.AllBuffered,randomAnswer[0]);
+				
+			//}
+		}
 	}
 
 	//sync all client tree
