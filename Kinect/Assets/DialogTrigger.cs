@@ -52,7 +52,7 @@ public class DialogTrigger : MonoBehaviour {
 	void OnTriggerEnter(Collider other) {
 		//Destroy(other.gameObject);
 
-		Debug.Log("name:"+other.name);
+		//Debug.Log("name:"+other.name);
 		isTrigger = true;
 
 		//trigger button B

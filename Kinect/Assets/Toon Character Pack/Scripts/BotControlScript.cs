@@ -92,6 +92,8 @@ public class BotControlScript : MonoBehaviour
         else
         {
 			//receive
+			//Debug.Log("Receive!");
+
 			//sync 
 			stream.Serialize(ref syncOnTop);
 			onTop = syncOnTop;
@@ -429,7 +431,7 @@ public class BotControlScript : MonoBehaviour
 	
 	void OnCollisionEnter (Collision col)
     {
-		Debug.Log("Coll name:" + col.collider.name);
+		//Debug.Log("Coll name:" + col.collider.name);
 		if(col.collider.name == "Terrain" || col.collider.name =="DoorMovable_Short_01")
 		{
 			jumping = false;
@@ -438,7 +440,7 @@ public class BotControlScript : MonoBehaviour
 			grounded = true;
 			anim.SetBool("Grounded", grounded);
 
-			Debug.Log("Grounded");
+			//Debug.Log("Grounded");
 
 			//test
 			anim.SetFloat("Speed", 0.1f);
