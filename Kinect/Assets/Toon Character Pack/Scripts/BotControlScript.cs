@@ -52,11 +52,11 @@ public class BotControlScript : MonoBehaviour
 			syncOnTop = onTop;
 			stream.Serialize(ref syncOnTop);
 
-           /* syncPosition = rigidbody.position;
+            syncPosition = rigidbody.position;
             stream.Serialize(ref syncPosition);
 
             syncVelocity = rigidbody.velocity;
-            stream.Serialize(ref syncVelocity);*/
+            stream.Serialize(ref syncVelocity);
 
 
 			for(int i = 0 ; i < nodeManager.syncList.Count;i++)
@@ -132,6 +132,7 @@ public class BotControlScript : MonoBehaviour
 				{
 					//end position
 					data.syncEndPosition = data.syncPosition + (data.syncVelocity * data.syncDelay);
+					//data.syncEndPosition = data.syncPosition ;
 
 					//check value
 					if((data.syncEndPosition.x == 0) || (float.IsNaN(data.syncEndPosition.x)))
@@ -152,6 +153,7 @@ public class BotControlScript : MonoBehaviour
 				}
 
 				//rotation
+
 				data.syncStartRotation = targetNode.transform.rotation;
 				data.syncEndRotation = data.syncRotation;
 
@@ -446,7 +448,9 @@ public class BotControlScript : MonoBehaviour
 			anim.SetFloat("Speed", 0.1f);
 		}
 	}
-	
+
+	Vector3 tempV3;
+
 	void FixedUpdate ()
 	{
 	
@@ -468,13 +472,22 @@ public class BotControlScript : MonoBehaviour
 					if(h>0.3f)
 					{
 						anim.SetFloat("Speed", (h-0.3f)*0.7f);
-						rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
+
+						tempV3.x = 0.7f*moveSpeed;
+						tempV3.y = rigidbody.velocity.y;
+						tempV3.z = 0;
+
+						rigidbody.velocity = tempV3;
 						moving = true;
 					}
 					else if(wiimoteGetButtonRight())
 					{
 						anim.SetFloat("Speed", 0.7f);
-						rigidbody.velocity = new Vector3(0.7f*moveSpeed,rigidbody.velocity.y,0);
+						tempV3.x = 0.7f*moveSpeed;
+						tempV3.y = rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
 						moving = true;
 					}
 				}
@@ -484,13 +497,21 @@ public class BotControlScript : MonoBehaviour
 					if(h < -0.3f)
 					{
 						anim.SetFloat("Speed", (-h-0.3f)*0.7f);	
-						rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
+						tempV3.x = -0.7f*moveSpeed;
+						tempV3.y = rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
 						moving =true;
 					}
 					else if(wiimoteGetButtonLeft())
 					{
-						anim.SetFloat("Speed", 0.7f);
-						rigidbody.velocity = new Vector3(-0.7f*moveSpeed,rigidbody.velocity.y,0);
+						anim.SetFloat("Speed", 0.7f);						
+						tempV3.x = -0.7f*moveSpeed;
+						tempV3.y = rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
 						moving = true;
 					}
 				}
@@ -509,7 +530,14 @@ public class BotControlScript : MonoBehaviour
 					grounded = false;
 					anim.SetBool("Grounded", grounded);
 					Debug.Log("Jumping");
-					rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
+
+					tempV3.x = rigidbody.velocity.x;
+					tempV3.y = 5;
+					tempV3.z = 0;
+					
+					rigidbody.velocity = tempV3;
+
+					//rigidbody.velocity = new Vector3(rigidbody.velocity.x,5,0);
 
 				}
 			
@@ -525,7 +553,14 @@ public class BotControlScript : MonoBehaviour
 
 						KinectController.enabled = true;
 						//Debug.Log("Animation!!!");
-						rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
+
+						tempV3.x = 0;
+						tempV3.y = rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
+
+						//rigidbody.velocity = new Vector3(0,rigidbody.velocity.y,0);
 					}
 				}
 				else
@@ -540,11 +575,25 @@ public class BotControlScript : MonoBehaviour
 					offset.transform.rotation = Quaternion.Euler(0,-90,0);
 					if(h < -0.3f)
 					{
-						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+						
+						tempV3.x = -(rigidbody.velocity.x);
+						tempV3.y =  rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
+
+						//rigidbody.velocity = new Vector3(,, 0);
 					}
 					else if(wiimoteGetButtonLeft())
 					{
-						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x),rigidbody.velocity.y,0);
+						tempV3.x = -(rigidbody.velocity.x);
+						tempV3.y =  rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
+
+
+						//rigidbody.velocity = new Vector3(-(rigidbody.velocity.x),rigidbody.velocity.y,0);
 					}
 				}
 				else if((h > 0.3f||wiimoteGetButtonRight()) && rigidbody.velocity.x < 0)
@@ -553,11 +602,25 @@ public class BotControlScript : MonoBehaviour
 					
 					if(h > 0.3f)
 					{
-						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+
+						tempV3.x = -(rigidbody.velocity.x);
+						tempV3.y =  rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
+
+
+						//rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
 					}
 					else if(wiimoteGetButtonRight())
 					{
-						rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
+						tempV3.x = -(rigidbody.velocity.x);
+						tempV3.y =  rigidbody.velocity.y;
+						tempV3.z = 0;
+						
+						rigidbody.velocity = tempV3;
+
+						//rigidbody.velocity = new Vector3(-(rigidbody.velocity.x), rigidbody.velocity.y, 0);
 					}
 				}
 			}

@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System;
 
 public class NetworkManager : MonoBehaviour
 {
@@ -20,6 +22,7 @@ public class NetworkManager : MonoBehaviour
 	public CameraManager cameraManager;
 	public Vector3 serverPlayerInitialPosition = Vector3.zero;
 	public Quaternion serverPlayerInitialRotation = Quaternion.identity;
+	static private int serverPort = 5566;
 
 	/*void OnGUI()
     {
@@ -46,7 +49,7 @@ public class NetworkManager : MonoBehaviour
 	}
 	private void StartServer()
 	{
-		Network.InitializeServer(5, 25002, !Network.HavePublicAddress());
+		Network.InitializeServer(5, serverPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
 	}
 	
@@ -61,13 +64,7 @@ public class NetworkManager : MonoBehaviour
 	
 	void Update()
 	{
-		
-		//if (isRefreshingHostList && MasterServer.PollHostList().Length > 0)
-		//{
-		RefreshHostList();
-		hostList = MasterServer.PollHostList();
-		
-		
+
 		//check the room name of the game
 		/*if (hostList.Length > 0) {
 			string name = "";
@@ -80,11 +77,21 @@ public class NetworkManager : MonoBehaviour
 		
 		//check wether the server is built or not 
 		if (flagServer == false && flagClient == false) {
+
+			//if (isRefreshingHostList && MasterServer.PollHostList().Length > 0)
+			//{
+			RefreshHostList();
+			hostList = MasterServer.PollHostList();
+			
+			//check server config exist or not ,if exist ,connect directly
+			flagClient = LoadServerConfig();
+
 			if (Time.time - startTime > 1.5f) {
 				Debug.Log("update: "+hostList.Length);
 				//Debug.Log("passed time gap!?qqqqq");
 				if (hostList.Length == 0) {
 					StartServer ();
+					//JoinServer(null);
 					flagServer = true;
 				} 
 				else {
@@ -193,6 +200,27 @@ public class NetworkManager : MonoBehaviour
 			Debug.Log ("Send Server Player Data!");
 			networkView.RPC("sendServerPlayerData",RPCMode.Others,currentPlayerPosition,currentPlayerRotation);
 		}
+	}
+
+	bool LoadServerConfig(){
+
+		if(!File.Exists("Assets/Resources/ServerConfig.txt")) return false;
+		//read file
+		StreamReader _streamReader = new StreamReader("Assets/Resources/ServerConfig.txt");
+		
+		String allStrings =_streamReader.ReadToEnd();
+		
+		JSONObject allData = new JSONObject(allStrings);
+		
+		string serverIP = allData.GetField("serverIP").str;
+		int serverPort = (int)allData.GetField("serverPort").n;
+		Debug.Log("ServerIP:"+serverIP+" port:"+serverPort);
+
+		//connect
+		NetworkConnectionError error = Network.Connect(serverIP,serverPort);
+
+		if(error == NetworkConnectionError.NoError) return true;
+		else return false;
 	}
 
 	[RPC]
