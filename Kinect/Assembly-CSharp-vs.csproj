@@ -234,6 +234,7 @@
      <None Include="Assets\Toon Character Pack\Shaders\Projector Multiply.shader" />
      <None Include="Assets\NGUI\Examples\Models\Orc\Orc Skin.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo20.txt" />
+     <None Include="Assets\Resources\ServerConfig2.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo14.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Masked Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Wooden\Arimo18.txt" />
@@ -247,6 +248,7 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (AlphaClip).shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Fantasy\Fantasy Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Normal.txt" />
+     <None Include="Assets\Resources\Save.txt" />
      <None Include="Assets\Toon Character Pack\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed) (SoftClip).shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Premultiplied Colored (SoftClip).shader" />
@@ -260,7 +262,6 @@
      <None Include="Assets\NGUI\Examples\Other\English.txt" />
      <None Include="Assets\NGUI\Examples\Other\French.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Colored (Packed).shader" />
-     <None Include="Assets\Resources\ServerConfig.txt" />
      <None Include="Assets\Packages\UniWii\Visuals\3D Assets\wiimote_redux.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />

@@ -14,6 +14,7 @@ public class SavedManager : MonoBehaviour {
 
 	public void Save()
 	{
+		Debug.Log("[SYSTEM] Saved.");
 		//don't save
 		if(clearFile == true) return;
 
@@ -56,26 +57,31 @@ public class SavedManager : MonoBehaviour {
 
 		if(globalSyncData!=null){
 			JSONObject objectJsonTemp = new JSONObject();
-
-			//answer 1
 			int i=0;
-			for(i = 0;i<globalSyncData.puzzle1AnswerSize;i++)
-			{
-				objectJsonTemp.AddField("answer1-"+i.ToString(),globalSyncData.puzzle1Answer[i]);
+			//check
+			if(globalSyncData.puzzle1Answer.Count == globalSyncData.puzzle1AnswerSize){
+				//answer 1
+				for(i = 0;i<globalSyncData.puzzle1AnswerSize;i++)
+				{
+					objectJsonTemp.AddField("answer1-"+i.ToString(),globalSyncData.puzzle1Answer[i]);
+				}
 			}
 
-			//answer 2
-			for(i = 0;i<globalSyncData.puzzle2AnswerSize;i++)
-			{
-				objectJsonTemp.AddField("answer2-"+i.ToString(),globalSyncData.puzzle2Answer[i]);
+			if(globalSyncData.puzzle2Answer.Count == globalSyncData.puzzle2AnswerSize){
+				//answer 2
+				for(i = 0;i<globalSyncData.puzzle2AnswerSize;i++)
+				{
+					objectJsonTemp.AddField("answer2-"+i.ToString(),globalSyncData.puzzle2Answer[i]);
+				}
 			}
 
-			//answer 3
-			for(i = 0;i<globalSyncData.puzzle3AnswerSize;i++)
-			{
-				objectJsonTemp.AddField("answer3-"+i.ToString(),globalSyncData.puzzle3Answer[i]);
+			if(globalSyncData.puzzle3Answer.Count == globalSyncData.puzzle3AnswerSize){
+				//answer 3
+				for(i = 0;i<globalSyncData.puzzle3AnswerSize;i++)
+				{
+					objectJsonTemp.AddField("answer3-"+i.ToString(),globalSyncData.puzzle3Answer[i]);
+				}
 			}
-
 
 			//savedObjectArrayJson.Add(objectJsonTemp);
 			SavedTable.AddField("AnswersData",objectJsonTemp);

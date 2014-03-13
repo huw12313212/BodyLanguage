@@ -19,7 +19,7 @@ public class TeleporterExit : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other) {
 
-		if((!played))
+		if((!played) && (teleporterEntrance.activeSelf))
 		{
 			played = true;
 			explosion.Play();	
