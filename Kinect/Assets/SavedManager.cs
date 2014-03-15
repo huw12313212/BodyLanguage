@@ -8,6 +8,7 @@ public class SavedManager : MonoBehaviour {
 	public List<GameObject> savedObjectArray;
 	private bool playerInit = false;
 	private JSONObject allData;
+	private JSONObject puzzleData;
 	//private GameObject player;
 	private bool clearFile = false;
 	public GameTimer timer;
@@ -159,9 +160,11 @@ public class SavedManager : MonoBehaviour {
 		
 		String allStrings =_streamReader.ReadToEnd();
 		
-		allData = new JSONObject(allStrings);
+		puzzleData = new JSONObject(allStrings);
 
-		return (int)allData.GetField("puzzle3Count").n;
+		_streamReader.Close();
+
+		return (int)puzzleData.GetField("puzzle3Count").n;
 	}
 
 
@@ -237,6 +240,8 @@ public class SavedManager : MonoBehaviour {
 		if(timer!=null){
 			timer.setTime((float)timeDataJsonObject.GetField("durationTime").n);
 		}
+
+		_streamReader.Close();
 	}
 
 	public void Clear()

@@ -6,6 +6,7 @@ public class ButtonManager : MonoBehaviour {
 	
 	public List<int> CodeList;
 	public List<GameObject> controlObjectList;
+	public List<GameObject> buttonObjectList;
 	public List<int> inputCode;
 	private bool puzzleSolve;
 
@@ -17,6 +18,11 @@ public class ButtonManager : MonoBehaviour {
 		//get Global data object
 		GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
 		GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+
+		//let button i start animation
+		if(buttonObjectList[i]!=null){
+			buttonObjectList[i].GetComponent<ButtonClicked>().buttonClickAnim();
+		}
 
 		//check
 		if(globalSyncObject == null) return;

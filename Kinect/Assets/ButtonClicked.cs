@@ -23,7 +23,7 @@ public class ButtonClicked : MonoBehaviour {
 		initialPosition = targetObject.transform.localPosition;
 
 		//set tween finish function
-		tween.onFinished = onButtonClickFinish;
+		tween.onFinished = onButtonAnimFinish;
 	}
 
 
@@ -106,21 +106,10 @@ public class ButtonClicked : MonoBehaviour {
 
 	void buttonClick(Collider other)
 	{
-		//clickCount ++;
-		
+
 		if(!isClicked)
 		{
-			isClicked = true;
-
-			//play sound
-			if(musicHandler!=null) musicHandler.playButtonClickAudio();
-
-			//Debug.Log("Trigger Rumbo");
-			
-			tween.from = initialPosition;
-			tween.to = initialPosition + new Vector3(0,-0.15f,0);
-			tween.Reset();
-			tween.enabled = true;
+			//isClicked = true;
 
 			if(other.networkView.isMine){
 				//get global object
@@ -134,8 +123,21 @@ public class ButtonClicked : MonoBehaviour {
 		}
 	}
 
+	public void buttonClickAnim(){
 
-	void onButtonClickFinish(UITweener tweener){
+		Debug.Log("Click Anim");
+		//play sound
+		if(musicHandler!=null) musicHandler.playButtonClickAudio();
+		
+		//Debug.Log("Trigger Rumbo");
+		
+		tween.from = initialPosition;
+		tween.to = initialPosition + new Vector3(0,-0.15f,0);
+		tween.Reset();
+		tween.enabled = true;
+	}
+
+	void onButtonAnimFinish(UITweener tweener){
 		//Debug.Log("Exit Rumbo");
 		
 		tween.from = targetObject.transform.localPosition;
