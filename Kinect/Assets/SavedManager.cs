@@ -125,8 +125,59 @@ public class SavedManager : MonoBehaviour {
 
 	}
 
+	public void WritePuzzle3Count(int count)
+	{
+		Debug.Log("Puzzle 3 Saved.");
+
+		//add puzzle count
+		//get Global data object
+		GameObject globalObject = GameObject.FindGameObjectWithTag("GlobalSyncObject");
+		GlobalSyncData globalSyncObject = globalObject.GetComponent<GlobalSyncData>();
+
+		if(globalSyncObject!=null) count = (count+1)%(globalSyncObject.puzzle3AnswerStringSet.Count);
+		else count = (count+1)%3;
+
+		JSONObject SavedTable = new JSONObject();
+
+		SavedTable.AddField("puzzle3Count",count);
+
+		//write to file
+		StreamWriter _streamWriter = new StreamWriter("Assets/Resources/SavePuzzle3.txt",false);
+		
+		_streamWriter.Write(SavedTable.ToString());
+		_streamWriter.Close();
+		
+	}
+
+	public int LoadPuzzle3Count()
+	{
+		//check file exist
+		if(!File.Exists("Assets/Resources/SavePuzzle3.txt")) return 0;
+
+		//read file
+		StreamReader _streamReader = new StreamReader("Assets/Resources/SavePuzzle3.txt");
+		
+		String allStrings =_streamReader.ReadToEnd();
+		
+		allData = new JSONObject(allStrings);
+
+		return (int)allData.GetField("puzzle3Count").n;
+	}
+
+
 	public void Load()
 	{
+
+		if(!Directory.Exists("Assets"))
+		{
+			Directory.CreateDirectory("Assets");
+		}
+
+		if(!Directory.Exists("Assets/Resources/"))
+		{
+			Directory.CreateDirectory("Assets/Resources/");
+		}
+
 		//check file exist
 		if(!File.Exists("Assets/Resources/Save.txt")) return;
 		//read file
@@ -192,6 +243,7 @@ public class SavedManager : MonoBehaviour {
 	{
 		Debug.Log("[SYSTEM]Clear saved!");
 
+
 		//delete file
 		if(File.Exists("Assets/Resources/Save.txt")){
 			File.Delete("Assets/Resources/Save.txt");
@@ -199,6 +251,11 @@ public class SavedManager : MonoBehaviour {
 
 		//set flag
 		clearFile = true;
+
+		//add puzzle count 
+		//Global Sync Object
+		GlobalSyncData globalSyncData = GameObject.FindGameObjectWithTag("GlobalSyncObject").GetComponent<GlobalSyncData>();
+		if(globalSyncData!=null)WritePuzzle3Count(globalSyncData.getPuzzle3Index(0));
 	}
 
 

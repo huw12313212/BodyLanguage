@@ -19,6 +19,7 @@ public class BotControlScript : MonoBehaviour
 
 	public int rootIndex = 23;
 
+	public bool jumpEnable = false;
 	/*	 private float lastSynchronizationTime = 0f;
     private float syncDelay = 0f;
     private float syncTime = 0f;
@@ -430,7 +431,7 @@ public class BotControlScript : MonoBehaviour
 		}
 	}
 	
-	bool grounded = false;
+	bool grounded = true;
 	
 	void OnCollisionEnter (Collision col)
     {
@@ -523,7 +524,7 @@ public class BotControlScript : MonoBehaviour
 					anim.SetFloat("Speed", 0);	
 				}
 		
-				if(Input.GetButton("ButtonB")||wiimoteGetButtonB()||jumping)
+				if((Input.GetButton("ButtonB")||wiimoteGetButtonB()||jumping) && (jumpEnable))
 				{
 					jumping = true;
 					anim.SetBool("Jump", jumping);
@@ -647,7 +648,7 @@ public class BotControlScript : MonoBehaviour
 		// if we are currently in a state called Locomotion, then allow Jump input (Space) to set the Jump bool parameter in the Animator to true
 			if (currentBaseState.nameHash == locoState)
 			{	
-				if((Input.GetButtonDown("Jump")) || (Input.GetButton("ButtonB")))
+				if(((Input.GetButtonDown("Jump")) || (Input.GetButton("ButtonB"))) && (jumpEnable))
 				{
 					jumping = true;
 					anim.SetBool("Jump", jumping);

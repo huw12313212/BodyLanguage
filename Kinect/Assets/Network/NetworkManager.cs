@@ -154,7 +154,7 @@ public class NetworkManager : MonoBehaviour
 	void OnDisconnectedFromServer(NetworkDisconnection info) {
 		//saved state to file
 		SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
-		savedManager.Save();
+		if(savedManager!=null)savedManager.Save();
 
 		if (Network.isServer)
 		{

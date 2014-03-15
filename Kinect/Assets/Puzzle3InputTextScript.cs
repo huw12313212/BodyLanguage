@@ -15,6 +15,7 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 	}
 
 	bool PreviousWii = false;
+	bool PreviousWiiB = false;
 
 	// Update is called once per frame
 	void Update () {
@@ -26,10 +27,11 @@ public class Puzzle3InputTextScript : MonoBehaviour {
 
 			//get button down
 			ButtonA =  Input.GetButtonDown("ButtonA")||(!PreviousWii&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA());
-			ButtonB =  Input.GetButtonDown("ButtonB")||(!PreviousWii&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonB());
+			ButtonB =  Input.GetButtonDown("ButtonB")||(!PreviousWiiB&&CameraManager.CurrentPlayer1Controller.wiimoteGetButtonB());
 
 			//click button b
 			PreviousWii = CameraManager.CurrentPlayer1Controller.wiimoteGetButtonA();
+			PreviousWiiB = CameraManager.CurrentPlayer1Controller.wiimoteGetButtonB();
 
 			if (ButtonA){
 				//get text manager

@@ -5,9 +5,9 @@ using System.Collections.Generic;
 public class GlobalSyncData : MonoBehaviour {
 
 	//answer size
-	public int puzzle1AnswerSize;
-	public int puzzle2AnswerSize;
-	public int puzzle3AnswerSize;
+	public int puzzle1AnswerSize = 3;
+	public int puzzle2AnswerSize = 3;
+	public int puzzle3AnswerSize = 1;
 	//answer
 	public List<int> puzzle1Answer;
 	public List<int> puzzle2Answer;
@@ -96,7 +96,12 @@ public class GlobalSyncData : MonoBehaviour {
 				for(int i = 0;i<puzzle3AnswerSize;i++)
 				{
 					//range is [0,1,2]
-					int randomNum = Random.Range(0,3);
+					int randomNum = 0;
+					//get index from saved file
+					SavedManager savedManager = GameObject.FindGameObjectWithTag("SavedManager").GetComponent<SavedManager>();
+					if(savedManager!=null) randomNum = savedManager.LoadPuzzle3Count();
+					else randomNum = Random.Range(0,puzzle3AnswerStringSet.Count);
+
 					randomAnswer.Add(randomNum);
 				}
 				
@@ -225,5 +230,11 @@ public class GlobalSyncData : MonoBehaviour {
 	{
 		NetworkView networkView =  puzzle3Manager.GetComponent<NetworkView>();
 		if(networkView != null) networkView.RPC("Code",RPCMode.AllBuffered,data);
+	}
+
+	public int getPuzzle3Index(int index){
+		int result = 0;
+		if(puzzle3Answer.Count>0) result = (int)puzzle3AnswerStringSet.IndexOf(puzzle3Answer[index]);
+		return result;
 	}
 }
