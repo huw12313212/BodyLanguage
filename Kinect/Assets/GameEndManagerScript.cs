@@ -33,8 +33,12 @@ public class GameEndManagerScript : MonoBehaviour {
 	}
 
 	public void sendHttpRequest(string param,requsetMode mode)
-	{
+	{	
+		//get mongodb server
+		if(NetworkManager.mongoDBServer != "") serverURL = NetworkManager.mongoDBServer+"/";
 		string url = serverURL+param;
+
+		Debug.Log ("server url:"+url);
 		//WWW www = new WWW(url);
 		if(mode == requsetMode.getLeaderList)
 		{

@@ -19,6 +19,7 @@ public class NetworkManager : MonoBehaviour
 	bool flagClient = false;
 	public GameTimer timer;
 
+	static public string mongoDBServer = "";
 	public CameraManager cameraManager;
 	public Vector3 serverPlayerInitialPosition = Vector3.zero;
 	public Quaternion serverPlayerInitialRotation = Quaternion.identity;
@@ -51,6 +52,9 @@ public class NetworkManager : MonoBehaviour
 	{
 		Network.InitializeServer(5, serverPort, !Network.HavePublicAddress());
 		MasterServer.RegisterHost(typeName, gameName);
+
+		//load mongo server config
+		LoadMongoServerConfig();
 	}
 	
 	void OnServerInitialized()
@@ -213,6 +217,7 @@ public class NetworkManager : MonoBehaviour
 		JSONObject allData = new JSONObject(allStrings);
 		
 		string serverIP = allData.GetField("serverIP").str;
+		//mongoDBServer = allData.GetField("mongoServerIP").str;
 		int serverPort = (int)allData.GetField("serverPort").n;
 		Debug.Log("ServerIP:"+serverIP+" port:"+serverPort);
 
@@ -222,6 +227,23 @@ public class NetworkManager : MonoBehaviour
 		if(error == NetworkConnectionError.NoError) return true;
 		else return false;
 	}
+
+	bool LoadMongoServerConfig(){
+		
+		if(!File.Exists("Assets/Resources/MongoServerConfig.txt")) return false;
+		//read file
+		StreamReader _streamReader = new StreamReader("Assets/Resources/MongoServerConfig.txt");
+		
+		String allStrings =_streamReader.ReadToEnd();
+		
+		JSONObject allData = new JSONObject(allStrings);
+
+		mongoDBServer = allData.GetField("mongoServerIP").str;
+		Debug.Log("Mongo Server:"+mongoDBServer);
+
+		return true;
+	}
+
 
 	[RPC]
 	void sendServerPlayerData(Vector3 playerPosition,Quaternion playerRotation){
